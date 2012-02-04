@@ -1,4 +1,4 @@
-// Skeleton program for GLUT applications.
+/*// Skeleton program for GLUT applications.
 
 // Link with: opengl32.lib, glu32.lib, glut32.lib.
 #include <iostream>
@@ -146,4 +146,4 @@ void main (int argc, char **argv)
 
 	// Enter GLUT loop.
 	glutMainLoop();
-}
+}*/

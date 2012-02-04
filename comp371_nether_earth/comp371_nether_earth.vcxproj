@@ -11,7 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="SceneDriver.cpp" />
     <ClCompile Include="skeleton.cpp" />
+    <ClCompile Include="Tile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{44C2FB9F-9DD1-4A1E-BCF6-C735A036ECDD}</ProjectGuid>
