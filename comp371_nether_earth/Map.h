@@ -2,7 +2,7 @@
 class Map
 {
 private:
-	char grid[50][50];
+	char grid[50][50][3];
 
 public:
 	Map(void);

@@ -7,14 +7,14 @@ Map::Map(void)
 	{
 		for(int j = 0; j < 50; j++)
 		{
-			grid[i][j] = 't';
+			grid[i][j][0] = 't';
 		}
 	}
 }
 
 char Map::getChar(int i, int j)
 {
-	return grid[i][j];
+	return grid[i][j][0];
 }
 
 
