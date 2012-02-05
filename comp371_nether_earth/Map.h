@@ -8,5 +8,6 @@ public:
 	Map(void);
 	~Map(void);
 	char getChar(int i, int j);
+	char getChar(int i, int j,int k);
 };
 

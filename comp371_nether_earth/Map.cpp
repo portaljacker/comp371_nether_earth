@@ -17,6 +17,10 @@ char Map::getChar(int i, int j)
 	return grid[i][j][0];
 }
 
+char Map::getChar(int i, int j, int k)
+{
+	return grid[i][j][k];
+}
 
 Map::~Map(void)
 {
