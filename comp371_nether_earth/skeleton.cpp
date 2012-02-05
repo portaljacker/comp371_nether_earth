@@ -1,3 +1,12 @@
+//Comp371_w12 PA1
+//Prof. S. Mokhov
+//Team 4
+//Jordan V. 
+//Taras K. 6901204
+//Gianni T.
+//Sebastien S.
+//This is the sample program skeleton.cpp from class. It is not used but provides the basis for some of the code in the SceneDriver file.
+
 /*// Skeleton program for GLUT applications.
 
 // Link with: opengl32.lib, glu32.lib, glut32.lib.

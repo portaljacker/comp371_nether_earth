@@ -1,8 +1,20 @@
+//Comp371_w12 PA1
+//Prof. S. Mokhov
+//Team 4
+//Jordan V. 
+//Taras K. 6901204
+//Gianni T.
+//Sebastien S.
+//This is the Tile class header. This class can draw regular tiles or tiles with pits.
+
 #pragma once
 class Tile
 {
 private:
-	/*//vertices (ex: ttr = top-top-right)
+	/*
+	//vertices (ex: ttr = top-top-right) for input coordinates version of draw. Not used in this build
+
+
 	double ttrx;
 	double ttry;
 	double ttrz;
@@ -82,6 +94,8 @@ private:
 
 public:
 	void draw();
+	void drawHole();
+	void drawHoleEdge();
 	Tile();
 	//Tile(double p1, double p2, double p3, double p4, double p5, double p6, double p7, double p8);
 	~Tile(void);

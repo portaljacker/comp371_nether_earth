@@ -1,3 +1,12 @@
+//Comp371_w12 PA1
+//Prof. S. Mokhov
+//Team 4
+//Jordan V. 
+//Taras K. 6901204
+//Gianni T.
+//Sebastien S.
+//This is the main driver. It uses some functions from the sample skeleton.cpp program from class, such as camera control and related variables.
+
 #include <iostream>
 #include <GL/glut.h>
 #include <math.h>
@@ -7,6 +16,7 @@
 #include <iomanip>
 #include "Tile.h"
 #include "Map.h"
+#include "Rubble.h"
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -44,7 +54,7 @@ void display ()
 	glLoadIdentity();
 	gluLookAt(0.00, 0.00, 2.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
 
-	// Translate using Y mouse.
+	// Translate using Y mouse to middle of map.
 	distance = - (yMouse * (farPlane - nearPlane) + nearPlane);
 	glTranslatef(-25, 0, distance);
 	glRotatef(45, 1, 0, 0);
@@ -53,19 +63,153 @@ void display ()
 	//Hold A or D to rotate.
 	glRotatef(alpha, 0, 1, 0);
 
+	//Objects for drawing.
 	Tile t1 = Tile();
 	Map m1 = Map();
+	Rubble r1 = Rubble();
 
+	//Main rendering loop.
 	for(int i = 0; i < 50; i++)
 	{
 		for(int j = 0; j < 50; j++)
 		{
-			if(m1.getChar(i, j) == 't')
+			//Draw standard tile.
+			if(m1.getChar(i, j, 0) == 't')
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				glBegin(GL_QUADS);
 				t1.draw();
+				glEnd();
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw standard tile and small rubble pile.
+			else if(m1.getChar(i, j, 0) == 's')
+			{
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glBegin(GL_QUADS);
+				t1.draw();
+				glEnd();
+				glFlush();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				r1.drawSmall();
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw standard tile and medium rubble pile.
+			else if(m1.getChar(i, j, 0) == 'm')
+			{
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glBegin(GL_QUADS);
+				t1.draw();
+				glEnd();
+				glFlush();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				r1.drawMedium();
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw standard tile and large rubble pile.
+			else if(m1.getChar(i, j, 0) == 'l')
+			{
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glBegin(GL_QUADS);
+				t1.draw();
+				glEnd();
+				glFlush();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				r1.drawLarge();
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw tile with pit.
+			else if(m1.getChar(i, j, 0) == 'h') //h = horizontal pit
+			{
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glRotatef(90, 0, 1, 0); //rotate to horizontal position
+				glBegin(GL_QUADS);
+				t1.drawHole();
+				glEnd();
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw tile with pit.
+			else if(m1.getChar(i, j, 0) == 'v') //v = vertical pit
+			{
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glBegin(GL_QUADS);
+				t1.drawHole();
+				glEnd();
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw tile with pit edge.
+			else if(m1.getChar(i, j, 0) == 'e') //e = east edge
+			{
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glRotatef(-90, 0, 1, 0); //rotate to proper position
+				glBegin(GL_QUADS);
+				t1.drawHoleEdge();
+				glEnd();
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw tile with pit edge.
+			else if(m1.getChar(i, j, 0) == 'w') //w = west edge
+			{
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glRotatef(90, 0, 1, 0); //rotate to proper position
+				glBegin(GL_QUADS);
+				t1.drawHoleEdge();
+				glEnd();
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw tile with pit edge.
+			else if(m1.getChar(i, j, 0) == 'n') //n = north edge
+			{
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glBegin(GL_QUADS);
+				t1.drawHoleEdge();
+				glEnd();
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw tile with pit edge.
+			else if(m1.getChar(i, j, 0) == 'd') //d = south edge
+			{
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glRotatef(180, 0, 1, 0); //rotate to proper position
+				glBegin(GL_QUADS);
+				t1.drawHoleEdge();
 				glEnd();
 				glFlush();
 				glPopMatrix();
@@ -88,14 +232,14 @@ void handleKeypress(unsigned char key, int x, int y)
 		case 27: //Escape key
 			exit(0);
 
-		case 97:
+		case 97: //a key
 			alpha += STEP;
 			if (alpha > ALL_ROUND)
 				alpha -= ALL_ROUND;
 
 			glutPostRedisplay();
 			break;
-		case 100:
+		case 100: //d key
 			alpha += STEP2;
 			if (alpha > ALL_ROUND)
 				alpha -= ALL_ROUND;
