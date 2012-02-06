@@ -45,6 +45,9 @@
     <ClCompile Include="Grav.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="eBrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -69,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Grav.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eBrain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

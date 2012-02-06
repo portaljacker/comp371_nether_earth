@@ -23,6 +23,7 @@
 #include "Bipod.h"
 #include "Grav.h"
 #include "Tracks.h"
+#include "eBrain.h"
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -79,6 +80,7 @@ void display ()
 	Bipod b2 = Bipod();
 	Grav g1 = Grav();
 	Tracks t2 = Tracks();
+	eBrain e1 = eBrain();
 
 	//Main rendering loop.
 	for(int i = 0; i < 50; i++)
@@ -293,7 +295,6 @@ void display ()
 			else if(m1.getChar(i,j,1) == 'g') {
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				//glScalef(0.5, 0.0, 0.0);
 				glTranslatef(0.0, 0.15, 0.0);
 				g1.draw();
 				glFlush();
@@ -303,9 +304,16 @@ void display ()
 			else if(m1.getChar(i,j,1) == 't') {
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				//glScalef(0.5, 0.0, 0.0);
 				glTranslatef(0.0, 0.15, 0.0);
 				t2.draw();
+				glFlush();
+				glPopMatrix();
+			}
+
+			else if(m1.getChar(i,j,1) == 'e') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				e1.draw();
 				glFlush();
 				glPopMatrix();
 			}

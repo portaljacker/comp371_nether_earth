@@ -14,6 +14,7 @@
     <ClCompile Include="Bipod.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="eBrain.cpp" />
     <ClCompile Include="Grav.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Rubble.cpp" />
@@ -26,6 +27,7 @@
     <ClInclude Include="Bipod.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="eBrain.h" />
     <ClInclude Include="Grav.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Rubble.h" />
