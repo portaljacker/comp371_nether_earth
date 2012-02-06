@@ -20,6 +20,9 @@
 #include "Rubble.h"
 #include "Block.h"
 #include "Controller.h"
+#include "Bipod.h"
+#include "Grav.h"
+#include "Tracks.h"
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -73,6 +76,9 @@ void display ()
 	Rubble r1 = Rubble();
 	Block b1 = Block();
 	Controller c1 = Controller();
+	Bipod b2 = Bipod();
+	Grav g1 = Grav();
+	Tracks t2 = Tracks();
 
 	//Main rendering loop.
 	for(int i = 0; i < 50; i++)
@@ -271,6 +277,35 @@ void display ()
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				b1.drawD();
+				glFlush();
+				glPopMatrix();
+			}
+
+			else if(m1.getChar(i,j,1) == 'b') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glScalef(0.25, 0.25, 0.25);
+				b2.draw();
+				glFlush();
+				glPopMatrix();
+			}
+
+			else if(m1.getChar(i,j,1) == 'g') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				//glScalef(0.5, 0.0, 0.0);
+				glTranslatef(0.0, 0.15, 0.0);
+				g1.draw();
+				glFlush();
+				glPopMatrix();
+			}
+
+			else if(m1.getChar(i,j,1) == 't') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				//glScalef(0.5, 0.0, 0.0);
+				glTranslatef(0.0, 0.15, 0.0);
+				t2.draw();
 				glFlush();
 				glPopMatrix();
 			}

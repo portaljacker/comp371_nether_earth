@@ -99,6 +99,14 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 		grid[0][j][1] = '6';
 	for (int j = 1; j < 49; j++)
 		grid[49][j][1] = '6';
+
+	// Robot tests (with buildings for comparison)
+	grid[38][3][1] = '2';
+	grid[38][7][1] = 'b';
+	grid[42][3][1] = '2';
+	grid[42][7][1] = 'g';
+	grid[46][3][1] = '2';
+	grid[46][7][1] = 't';
 }
 
 //Methods to read contents of a particular index. in array.

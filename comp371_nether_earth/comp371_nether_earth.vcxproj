@@ -11,20 +11,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bipod.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Grav.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Rubble.cpp" />
     <ClCompile Include="SceneDriver.cpp" />
     <ClCompile Include="skeleton.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Tracks.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bipod.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="Grav.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Rubble.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="Tracks.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{44C2FB9F-9DD1-4A1E-BCF6-C735A036ECDD}</ProjectGuid>
