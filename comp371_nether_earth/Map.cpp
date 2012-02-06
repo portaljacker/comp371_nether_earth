@@ -22,16 +22,14 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	}
 
 	//Some rubble
-	grid[0][0][0] = 's';
-	grid[1][0][0] = 's';
-	grid[2][0][0] = 's';
-	grid[3][0][0] = 's';
-	grid[4][0][0] = 's';
-	grid[5][0][0] = 's';
-	grid[6][0][0] = 's';
-	grid[7][0][0] = 's';
+	grid[1][1][0] = 's';
+	grid[2][1][0] = 's';
+	grid[3][1][0] = 's';
+	grid[4][1][0] = 's';
+	grid[5][1][0] = 's';
+	grid[6][1][0] = 's';
+	grid[7][1][0] = 's';
 
-	grid[20][0][0] = 'm';
 	grid[20][1][0] = 'm';
 	grid[20][2][0] = 'm';
 	grid[20][3][0] = 'm';
