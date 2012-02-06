@@ -24,6 +24,7 @@
 #include "Grav.h"
 #include "Tracks.h"
 #include "eBrain.h"
+#include "Cannon.h"
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -81,6 +82,7 @@ void display ()
 	Grav g1 = Grav();
 	Tracks t2 = Tracks();
 	eBrain e1 = eBrain();
+	Cannon c2 = Cannon();
 
 	//Main rendering loop.
 	for(int i = 0; i < 50; i++)
@@ -313,6 +315,37 @@ void display ()
 			else if(m1.getChar(i,j,1) == 'e') {
 				glPushMatrix();
 				glTranslatef(i, 0, j);
+				e1.draw();
+				glFlush();
+				glPopMatrix();
+			}
+
+			else if(m1.getChar(i,j,1) == 'c') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				c2.draw();
+				glFlush();
+				glPopMatrix();
+			}
+
+			else if(m1.getChar(i,j,1) == 'r') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glTranslatef(-0.25, 0.15, 0.0);
+				t2.draw();
+				glFlush();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glTranslatef(0.0, 1.0, 0.0);
+				c2.draw();
+				glFlush();
+				glPopMatrix();
+
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glTranslatef(0.0, 1.5, 0.0);
 				e1.draw();
 				glFlush();
 				glPopMatrix();

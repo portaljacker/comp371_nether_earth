@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="Bipod.cpp" />
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="eBrain.cpp" />
     <ClCompile Include="Grav.cpp" />
@@ -26,6 +27,7 @@
   <ItemGroup>
     <ClInclude Include="Bipod.h" />
     <ClInclude Include="Block.h" />
+    <ClInclude Include="Cannon.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="eBrain.h" />
     <ClInclude Include="Grav.h" />

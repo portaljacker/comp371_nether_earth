@@ -26,7 +26,7 @@ void eBrain::draw()
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
 
 		//front
-		glColor3f(0.5, 0.5, 0.5);
+		glColor3f(0.0, 0.5, 0.5);
 		glVertex3f(0.5, 0.0, 0.5);
 		glVertex3f(0.5, 0.5, 0.5);
 		glVertex3f(-0.5, 0.5, 0.5);
