@@ -1,11 +1,12 @@
-//Comp371_w12 PA1
+//Comp371_w12 Section R
 //Prof. S. Mokhov
+//Programming Assignment 1
 //Team 4
-//Jordan V. 
+//Jordan V. 1300520
 //Taras K. 6901204
-//Gianni T.
-//Sebastien S.
-//This is the sample program skeleton.cpp from class. It is not used but provides the basis for some of the code in the SceneDriver file.
+//Gianni T. 1938878
+//Sebastien S. 9500782
+//This is the sample program skeleton.cpp from the course website. It is not used but provides the basis for some of the code in the SceneDriver file.
 
 /*// Skeleton program for GLUT applications.
 
