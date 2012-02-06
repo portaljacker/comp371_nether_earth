@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Rubble.cpp" />
     <ClCompile Include="SceneDriver.cpp" />
@@ -18,6 +20,8 @@
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Rubble.h" />
     <ClInclude Include="Tile.h" />

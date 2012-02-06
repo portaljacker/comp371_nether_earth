@@ -64,6 +64,43 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	grid[30][11][0] = 'v';
 	grid[30][12][0] = 'd';
 
+	//Buildings
+	grid[2][4][1] = '1';
+	grid[4][4][1] = '2';
+	grid[6][4][1] = '3';
+	grid[8][4][1] = '4';
+	
+	//HQ
+	grid[6][15][1] = '2';
+	grid[8][15][1] = '2';
+	grid[5][16][1] = '2';
+	grid[6][16][1] = '1';
+	grid[7][16][1] = '2';
+	grid[8][16][1] = '1';
+	grid[9][16][1] = '2';
+	grid[5][17][1] = '2';
+	grid[6][17][1] = '1';
+	grid[7][17][1] = '5';
+	grid[8][17][1] = '1';
+	grid[9][17][1] = '2';
+	grid[6][18][1] = '1';
+	grid[7][18][1] = '1';
+	grid[8][18][1] = '1';
+	grid[6][19][1] = '1';
+	grid[8][19][1] = '1';
+
+	//Controller
+	grid[10][10][2] = '1';
+
+	//Delimiters
+	for (int i = 0; i < 50; i++)
+		grid[i][0][1] = '6';
+	for (int i = 0; i < 50; i++)
+		grid[i][49][1] = '6';
+	for (int j = 1; j < 49; j++)
+		grid[0][j][1] = '6';
+	for (int j = 1; j < 49; j++)
+		grid[49][j][1] = '6';
 }
 
 //Methods to read contents of a particular index. in array.

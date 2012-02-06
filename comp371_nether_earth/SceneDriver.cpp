@@ -18,6 +18,8 @@
 #include "Tile.h"
 #include "Map.h"
 #include "Rubble.h"
+#include "Block.h"
+#include "Controller.h"
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -69,6 +71,8 @@ void display ()
 	Tile t1 = Tile();
 	Map m1 = Map();
 	Rubble r1 = Rubble();
+	Block b1 = Block();
+	Controller c1 = Controller();
 
 	//Main rendering loop.
 	for(int i = 0; i < 50; i++)
@@ -216,6 +220,69 @@ void display ()
 				glFlush();
 				glPopMatrix();
 			}
+
+			//Draw plain half-block
+			if(m1.getChar(i,j,1) == '1') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				b1.drawPH();
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw plain full-block
+			else if(m1.getChar(i,j,1) == '2') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				b1.drawPU();
+				glFlush();
+				glPopMatrix();
+			}
+			
+			//Draw holed half-block
+			else if(m1.getChar(i,j,1) == '3'){
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				b1.drawHH();
+				glFlush();
+				glPopMatrix();
+			}
+			
+			//Draw holed full-block
+			else if(m1.getChar(i,j,1) == '4') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				b1.drawHU();
+				glFlush();
+				glPopMatrix();
+			}
+			
+			//Draw HQ block
+			else if(m1.getChar(i,j,1) == '5') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				b1.drawHQ();
+				glFlush();
+				glPopMatrix();
+			}
+			
+			//Draw delimiter
+			else if(m1.getChar(i,j,1) == '6') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				b1.drawD();
+				glFlush();
+				glPopMatrix();
+			}
+
+			if (m1.getChar(i,j,2) == '1') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				c1.draw();
+				glFlush();
+				glPopMatrix();
+			}
+
 		}
 	}
 	
