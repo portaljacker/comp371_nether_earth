@@ -27,74 +27,74 @@ void Tile::draw()
 	//glBegin(GL_QUADS);
 		glPushMatrix();
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Front Side)	
-				glVertex3f( 0.5f, 0.0f, 0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f, 0.0f, 0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f,-0.2f, 0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.5f,-0.2f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Front Side)	
+				glVertex3f( 0.5, 0.0, 0.5);	//Top Right Vertex
+				glVertex3f(-0.5, 0.0, 0.5);	//Top Left Vertex
+				glVertex3f(-0.5,-0.2, 0.5);	//Bottom Left Vertex
+				glVertex3f( 0.5,-0.2, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Back Side)
-				glVertex3f( 0.5f,-0.2f,-0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f,-0.2f,-0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f, 0.0f,-0.5f);	//Bottom  Left Vertex
-				glVertex3f( 0.5f, 0.0f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Back Side)
+				glVertex3f( 0.5,-0.2,-0.5);	//Top Right Vertex
+				glVertex3f(-0.5,-0.2,-0.5);	//Top Left Vertex
+				glVertex3f(-0.5, 0.0,-0.5);	//Bottom  Left Vertex
+				glVertex3f( 0.5, 0.0,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Left Side)
-				glVertex3f(-0.5f, 0.0f, 0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f, 0.0f,-0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f,-0.2f,-0.5f);	//Bottom Left Vertex
-				glVertex3f(-0.5f,-0.2f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Left Side)
+				glVertex3f(-0.5, 0.0, 0.5);	//Top Right Vertex
+				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
+				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
+				glVertex3f(-0.5,-0.2, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Right Side)
-				glVertex3f( 0.5f, 0.0f,-0.5f);	//Top Right Vertex
-				glVertex3f( 0.5f, 0.0f, 0.5f);	//Top Left Vertex
-				glVertex3f( 0.5f,-0.2f, 0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.5f,-0.2f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Right Side)
+				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
+				glVertex3f( 0.5, 0.0, 0.5);	//Top Left Vertex
+				glVertex3f( 0.5,-0.2, 0.5);	//Bottom Left Vertex
+				glVertex3f( 0.5,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Bottom Side)
-				glVertex3f( 0.5f,-0.2f, 0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f,-0.2f, 0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f,-0.2f,-0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.5f,-0.2f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Bottom Side)
+				glVertex3f( 0.5,-0.2, 0.5);	//Top Right Vertex
+				glVertex3f(-0.5,-0.2, 0.5);	//Top Left Vertex
+				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
+				glVertex3f( 0.5,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
 				glColor3f(0.0f,1.0f,0.0f);		//(Top Side)
-				glVertex3f( 0.5f, 0.0f,-0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f, 0.0f,-0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f, 0.0f, 0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.5f, 0.0f, 0.5f);	//Bottom Right Vertex
+				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
+				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
+				glVertex3f(-0.5, 0.0, 0.5);	//Bottom Left Vertex
+				glVertex3f( 0.5, 0.0, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 
 			glPushMatrix();
-				glColor3f(1.0f,1.0f,1.0f);	//White (Team Number On Top)
+				glColor3f(1.0,1.0,1.0);	//White (Team Number On Top)
 
-				glVertex3f( 0.25f, 0.001f,-0.25f); //Long vetical bar.
-				glVertex3f( 0.15f, 0.001f,-0.25f);
-				glVertex3f( 0.15f, 0.001f, 0.35f);
-				glVertex3f( 0.25f, 0.001f, 0.35f);
+				glVertex3f( 0.25, 0.001,-0.25); //Long vetical bar.
+				glVertex3f( 0.15, 0.001,-0.25);
+				glVertex3f( 0.15, 0.001, 0.35);
+				glVertex3f( 0.25, 0.001, 0.35);
 			glPopMatrix();
 
 			glPushMatrix();
-				glVertex3f(-0.15f, 0.001f,-0.25f); //Short vertical bar.
-				glVertex3f(-0.25f, 0.001f,-0.25f);
-				glVertex3f(-0.25f, 0.001f, 0.0f);
-				glVertex3f(-0.15f, 0.001f, 0.0f);
+				glVertex3f(-0.15, 0.001,-0.25); //Short vertical bar.
+				glVertex3f(-0.25, 0.001,-0.25);
+				glVertex3f(-0.25, 0.001, 0.0);
+				glVertex3f(-0.15, 0.001, 0.0);
 			glPopMatrix();
 
 			glPushMatrix();
-				glVertex3f( 0.25f, 0.001f, 0.0f); //Horizontal bar.
-				glVertex3f(-0.25f, 0.001f, 0.0f);
-				glVertex3f(-0.25f, 0.001f, 0.1f);
-				glVertex3f( 0.25f, 0.001f, 0.1f);
+				glVertex3f( 0.25, 0.001, 0.0); //Horizontal bar.
+				glVertex3f(-0.25, 0.001, 0.0);
+				glVertex3f(-0.25, 0.001, 0.1);
+				glVertex3f( 0.25, 0.001, 0.1);
 			glPopMatrix();
 
 		glPopMatrix();
@@ -110,51 +110,51 @@ void Tile::drawHole()
 		glPushMatrix();
 			//Left side
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Front Side)	
-				glVertex3f(-0.25f, 0.0f, 0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f, 0.0f, 0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f,-0.2f, 0.5f);	//Bottom Left Vertex
-				glVertex3f(-0.25f,-0.2f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Front Side)	
+				glVertex3f(-0.25, 0.0, 0.5);	//Top Right Vertex
+				glVertex3f(-0.5, 0.0, 0.5);	//Top Left Vertex
+				glVertex3f(-0.5,-0.2, 0.5);	//Bottom Left Vertex
+				glVertex3f(-0.25,-0.2, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Back Side)
-				glVertex3f(-0.25f,-0.2f,-0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f,-0.2f,-0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f, 0.0f,-0.5f);	//Bottom  Left Vertex
-				glVertex3f(-0.25f, 0.0f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Back Side)
+				glVertex3f(-0.25,-0.2,-0.5);	//Top Right Vertex
+				glVertex3f(-0.5,-0.2,-0.5);	//Top Left Vertex
+				glVertex3f(-0.5, 0.0,-0.5);	//Bottom  Left Vertex
+				glVertex3f(-0.25, 0.0,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Left Side)
-				glVertex3f(-0.5f, 0.0f, 0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f, 0.0f,-0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f,-0.2f,-0.5f);	//Bottom Left Vertex
-				glVertex3f(-0.5f,-0.2f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Left Side)
+				glVertex3f(-0.5, 0.0, 0.5);	//Top Right Vertex
+				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
+				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
+				glVertex3f(-0.5,-0.2, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Right Side)
-				glVertex3f(-0.25f, 0.0f,-0.5f);	//Top Right Vertex
-				glVertex3f(-0.25f, 0.0f, 0.5f);	//Top Left Vertex
-				glVertex3f(-0.25f,-0.2f, 0.5f);	//Bottom Left Vertex
-				glVertex3f(-0.25f,-0.2f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Right Side)
+				glVertex3f(-0.25, 0.0,-0.5);	//Top Right Vertex
+				glVertex3f(-0.25, 0.0, 0.5);	//Top Left Vertex
+				glVertex3f(-0.25,-0.2, 0.5);	//Bottom Left Vertex
+				glVertex3f(-0.25,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Bottom Side)
-				glVertex3f(-0.25f,-0.2f, 0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f,-0.2f, 0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f,-0.2f,-0.5f);	//Bottom Left Vertex
-				glVertex3f(-0.25f,-0.2f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Bottom Side)
+				glVertex3f(-0.25,-0.2, 0.5);	//Top Right Vertex
+				glVertex3f(-0.5,-0.2, 0.5);	//Top Left Vertex
+				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
+				glVertex3f(-0.25,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,1.0f,0.0f);	//Green (Top Side)
-				glVertex3f(-0.25f, 0.0f,-0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f, 0.0f,-0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f, 0.0f, 0.5f);	//Bottom Left Vertex
-				glVertex3f(-0.25f, 0.0f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,1.0,0.0);	//Green (Top Side)
+				glVertex3f(-0.25, 0.0,-0.5);	//Top Right Vertex
+				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
+				glVertex3f(-0.5, 0.0, 0.5);	//Bottom Left Vertex
+				glVertex3f(-0.25, 0.0, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 
 		glPopMatrix();
@@ -162,51 +162,51 @@ void Tile::drawHole()
 		glPushMatrix();
 			//Right side
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Front Side)	
-				glVertex3f( 0.5f, 0.0f, 0.5f);	//Top Right Vertex
-				glVertex3f( 0.25f, 0.0f, 0.5f);	//Top Left Vertex
-				glVertex3f( 0.25f,-0.2f, 0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.5f,-0.2f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Front Side)	
+				glVertex3f( 0.5, 0.0, 0.5);	//Top Right Vertex
+				glVertex3f( 0.25, 0.0, 0.5);	//Top Left Vertex
+				glVertex3f( 0.25,-0.2, 0.5);	//Bottom Left Vertex
+				glVertex3f( 0.5,-0.2, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Back Side)
-				glVertex3f( 0.5f,-0.2f,-0.5f);	//Top Right Vertex
-				glVertex3f( 0.25f,-0.2f,-0.5f);	//Top Left Vertex
-				glVertex3f( 0.25f, 0.0f,-0.5f);	//Bottom  Left Vertex
-				glVertex3f( 0.5f, 0.0f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Back Side)
+				glVertex3f( 0.5,-0.2,-0.5);	//Top Right Vertex
+				glVertex3f( 0.25,-0.2,-0.5);	//Top Left Vertex
+				glVertex3f( 0.25, 0.0,-0.5);	//Bottom  Left Vertex
+				glVertex3f( 0.5, 0.0,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Left Side)
-				glVertex3f( 0.25f, 0.0f, 0.5f);	//Top Right Vertex
-				glVertex3f( 0.25f, 0.0f,-0.5f);	//Top Left Vertex
-				glVertex3f( 0.25f,-0.2f,-0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.25f,-0.2f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Left Side)
+				glVertex3f( 0.25, 0.0, 0.5);	//Top Right Vertex
+				glVertex3f( 0.25, 0.0,-0.5);	//Top Left Vertex
+				glVertex3f( 0.25,-0.2,-0.5);	//Bottom Left Vertex
+				glVertex3f( 0.25,-0.2, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Right Side)
-				glVertex3f( 0.5f, 0.0f,-0.5f);	//Top Right Vertex
-				glVertex3f( 0.5f, 0.0f, 0.5f);	//Top Left Vertex
-				glVertex3f( 0.5f,-0.2f, 0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.5f,-0.2f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Right Side)
+				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
+				glVertex3f( 0.5, 0.0, 0.5);	//Top Left Vertex
+				glVertex3f( 0.5,-0.2, 0.5);	//Bottom Left Vertex
+				glVertex3f( 0.5,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Bottom Side)
-				glVertex3f( 0.5f,-0.2f, 0.5f);	//Top Right Vertex
-				glVertex3f( 0.25f,-0.2f, 0.5f);	//Top Left Vertex
-				glVertex3f( 0.25f,-0.2f,-0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.5f,-0.2f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Bottom Side)
+				glVertex3f( 0.5,-0.2, 0.5);	//Top Right Vertex
+				glVertex3f( 0.25,-0.2, 0.5);	//Top Left Vertex
+				glVertex3f( 0.25,-0.2,-0.5);	//Bottom Left Vertex
+				glVertex3f( 0.5,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,1.0f,0.0f);		//(Top Side)
-				glVertex3f( 0.5f, 0.0f,-0.5f);	//Top Right Vertex
-				glVertex3f( 0.25f, 0.0f,-0.5f);	//Top Left Vertex
-				glVertex3f( 0.25f, 0.0f, 0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.5f, 0.0f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,1.0,0.0);		//(Top Side)
+				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
+				glVertex3f( 0.25, 0.0,-0.5);	//Top Left Vertex
+				glVertex3f( 0.25, 0.0, 0.5);	//Bottom Left Vertex
+				glVertex3f( 0.5, 0.0, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 
 		glPopMatrix();
@@ -222,51 +222,51 @@ void Tile::drawHoleEdge()
 		glPushMatrix();
 			//Left side
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Front Side)	
-				glVertex3f(-0.25f, 0.0f, 0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f, 0.0f, 0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f,-0.2f, 0.5f);	//Bottom Left Vertex
-				glVertex3f(-0.25f,-0.2f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Front Side)	
+				glVertex3f(-0.25, 0.0, 0.5);	//Top Right Vertex
+				glVertex3f(-0.5, 0.0, 0.5);	//Top Left Vertex
+				glVertex3f(-0.5,-0.2, 0.5);	//Bottom Left Vertex
+				glVertex3f(-0.25,-0.2, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Back Side)
-				glVertex3f(-0.25f,-0.2f,-0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f,-0.2f,-0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f, 0.0f,-0.5f);	//Bottom  Left Vertex
-				glVertex3f(-0.25f, 0.0f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Back Side)
+				glVertex3f(-0.25,-0.2,-0.5);	//Top Right Vertex
+				glVertex3f(-0.5,-0.2,-0.5);	//Top Left Vertex
+				glVertex3f(-0.5, 0.0,-0.5);	//Bottom  Left Vertex
+				glVertex3f(-0.25, 0.0,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Left Side)
-				glVertex3f(-0.5f, 0.0f, 0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f, 0.0f,-0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f,-0.2f,-0.5f);	//Bottom Left Vertex
-				glVertex3f(-0.5f,-0.2f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Left Side)
+				glVertex3f(-0.5, 0.0, 0.5);	//Top Right Vertex
+				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
+				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
+				glVertex3f(-0.5,-0.2, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Right Side)
-				glVertex3f(-0.25f, 0.0f,-0.5f);	//Top Right Vertex
-				glVertex3f(-0.25f, 0.0f, 0.5f);	//Top Left Vertex
-				glVertex3f(-0.25f,-0.2f, 0.5f);	//Bottom Left Vertex
-				glVertex3f(-0.25f,-0.2f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Right Side)
+				glVertex3f(-0.25, 0.0,-0.5);	//Top Right Vertex
+				glVertex3f(-0.25, 0.0, 0.5);	//Top Left Vertex
+				glVertex3f(-0.25,-0.2, 0.5);	//Bottom Left Vertex
+				glVertex3f(-0.25,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Bottom Side)
-				glVertex3f(-0.25f,-0.2f, 0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f,-0.2f, 0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f,-0.2f,-0.5f);	//Bottom Left Vertex
-				glVertex3f(-0.25f,-0.2f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Bottom Side)
+				glVertex3f(-0.25,-0.2, 0.5);	//Top Right Vertex
+				glVertex3f(-0.5,-0.2, 0.5);	//Top Left Vertex
+				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
+				glVertex3f(-0.25,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,1.0f,0.0f);		//(Top Side)
-				glVertex3f(-0.25f, 0.0f,-0.5f);	//Top Right Vertex
-				glVertex3f(-0.5f, 0.0f,-0.5f);	//Top Left Vertex
-				glVertex3f(-0.5f, 0.0f, 0.5f);	//Bottom Left Vertex
-				glVertex3f(-0.25f, 0.0f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,1.0,0.0);		//(Top Side)
+				glVertex3f(-0.25, 0.0,-0.5);	//Top Right Vertex
+				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
+				glVertex3f(-0.5, 0.0, 0.5);	//Bottom Left Vertex
+				glVertex3f(-0.25, 0.0, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 
 		glPopMatrix();
@@ -274,51 +274,51 @@ void Tile::drawHoleEdge()
 		glPushMatrix();
 			//Right side
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Front Side)	
-				glVertex3f( 0.5f, 0.0f, 0.5f);	//Top Right Vertex
-				glVertex3f( 0.25f, 0.0f, 0.5f);	//Top Left Vertex
-				glVertex3f( 0.25f,-0.2f, 0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.5f,-0.2f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Front Side)	
+				glVertex3f( 0.5, 0.0, 0.5);	//Top Right Vertex
+				glVertex3f( 0.25, 0.0, 0.5);	//Top Left Vertex
+				glVertex3f( 0.25,-0.2, 0.5);	//Bottom Left Vertex
+				glVertex3f( 0.5,-0.2, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Back Side)
-				glVertex3f( 0.5f,-0.2f,-0.5f);	//Top Right Vertex
-				glVertex3f( 0.25f,-0.2f,-0.5f);	//Top Left Vertex
-				glVertex3f( 0.25f, 0.0f,-0.5f);	//Bottom  Left Vertex
-				glVertex3f( 0.5f, 0.0f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Back Side)
+				glVertex3f( 0.5,-0.2,-0.5);	//Top Right Vertex
+				glVertex3f( 0.25,-0.2,-0.5);	//Top Left Vertex
+				glVertex3f( 0.25, 0.0,-0.5);	//Bottom  Left Vertex
+				glVertex3f( 0.5, 0.0,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Left Side)
-				glVertex3f( 0.25f, 0.0f, 0.5f);	//Top Right Vertex
-				glVertex3f( 0.25f, 0.0f,-0.5f);	//Top Left Vertex
-				glVertex3f( 0.25f,-0.2f,-0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.25f,-0.2f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Left Side)
+				glVertex3f( 0.25, 0.0, 0.5);	//Top Right Vertex
+				glVertex3f( 0.25, 0.0,-0.5);	//Top Left Vertex
+				glVertex3f( 0.25,-0.2,-0.5);	//Bottom Left Vertex
+				glVertex3f( 0.25,-0.2, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Right Side)
-				glVertex3f( 0.5f, 0.0f,-0.5f);	//Top Right Vertex
-				glVertex3f( 0.5f, 0.0f, 0.5f);	//Top Left Vertex
-				glVertex3f( 0.5f,-0.2f, 0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.5f,-0.2f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Right Side)
+				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
+				glVertex3f( 0.5, 0.0, 0.5);	//Top Left Vertex
+				glVertex3f( 0.5,-0.2, 0.5);	//Bottom Left Vertex
+				glVertex3f( 0.5,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Bottom Side)
-				glVertex3f( 0.5f,-0.2f, 0.5f);	//Top Right Vertex
-				glVertex3f( 0.25f,-0.2f, 0.5f);	//Top Left Vertex
-				glVertex3f( 0.25f,-0.2f,-0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.5f,-0.2f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Bottom Side)
+				glVertex3f( 0.5,-0.2, 0.5);	//Top Right Vertex
+				glVertex3f( 0.25,-0.2, 0.5);	//Top Left Vertex
+				glVertex3f( 0.25,-0.2,-0.5);	//Bottom Left Vertex
+				glVertex3f( 0.5,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,1.0f,0.0f);		//(Top Side)
-				glVertex3f( 0.5f, 0.0f,-0.5f);	//Top Right Vertex
-				glVertex3f( 0.25f, 0.0f,-0.5f);	//Top Left Vertex
-				glVertex3f( 0.25f, 0.0f, 0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.5f, 0.0f, 0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,1.0,0.0);		//(Top Side)
+				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
+				glVertex3f( 0.25, 0.0,-0.5);	//Top Left Vertex
+				glVertex3f( 0.25, 0.0, 0.5);	//Bottom Left Vertex
+				glVertex3f( 0.5, 0.0, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 
 		glPopMatrix();
@@ -326,51 +326,51 @@ void Tile::drawHoleEdge()
 		glPushMatrix();
 			//Middle
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Front Side)	
-				glVertex3f( 0.25f, 0.0f, 0.0f);	//Top Right Vertex
-				glVertex3f(-0.25f, 0.0f, 0.0f);	//Top Left Vertex
-				glVertex3f(-0.25f,-0.2f, 0.0f);	//Bottom Left Vertex
-				glVertex3f( 0.25f,-0.2f, 0.0f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Front Side)	
+				glVertex3f( 0.25, 0.0, 0.0);	//Top Right Vertex
+				glVertex3f(-0.25, 0.0, 0.0);	//Top Left Vertex
+				glVertex3f(-0.25,-0.2, 0.0);	//Bottom Left Vertex
+				glVertex3f( 0.25,-0.2, 0.0);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Back Side)
-				glVertex3f( 0.25f,-0.2f,-0.5f);	//Top Right Vertex
-				glVertex3f(-0.25f,-0.2f,-0.5f);	//Top Left Vertex
-				glVertex3f(-0.25f, 0.0f,-0.5f);	//Bottom  Left Vertex
-				glVertex3f( 0.25f, 0.0f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Back Side)
+				glVertex3f( 0.25,-0.2,-0.5);	//Top Right Vertex
+				glVertex3f(-0.25,-0.2,-0.5);	//Top Left Vertex
+				glVertex3f(-0.25, 0.0,-0.5);	//Bottom  Left Vertex
+				glVertex3f( 0.25, 0.0,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Left Side)
-				glVertex3f(-0.25f, 0.0f, 0.0f);	//Top Right Vertex
-				glVertex3f(-0.25f, 0.0f,-0.5f);	//Top Left Vertex
-				glVertex3f(-0.25f,-0.2f,-0.5f);	//Bottom Left Vertex
-				glVertex3f(-0.25f,-0.2f, 0.0f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Left Side)
+				glVertex3f(-0.25, 0.0, 0.0);	//Top Right Vertex
+				glVertex3f(-0.25, 0.0,-0.5);	//Top Left Vertex
+				glVertex3f(-0.25,-0.2,-0.5);	//Bottom Left Vertex
+				glVertex3f(-0.25,-0.2, 0.0);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Right Side)
-				glVertex3f( 0.25f, 0.0f,-0.5f);	//Top Right Vertex
-				glVertex3f( 0.25f, 0.0f, 0.0f);	//Top Left Vertex
-				glVertex3f( 0.25f,-0.2f, 0.0f);	//Bottom Left Vertex
-				glVertex3f( 0.25f,-0.2f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Right Side)
+				glVertex3f( 0.25, 0.0,-0.5);	//Top Right Vertex
+				glVertex3f( 0.25, 0.0, 0.0);	//Top Left Vertex
+				glVertex3f( 0.25,-0.2, 0.0);	//Bottom Left Vertex
+				glVertex3f( 0.25,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,0.5f,0.0f);		//(Bottom Side)
-				glVertex3f( 0.25f,-0.2f, 0.0f);	//Top Right Vertex
-				glVertex3f(-0.25f,-0.2f, 0.0f);	//Top Left Vertex
-				glVertex3f(-0.25f,-0.2f,-0.5f);	//Bottom Left Vertex
-				glVertex3f( 0.25f,-0.2f,-0.5f);	//Bottom Right Vertex
+				glColor3f(0.0,0.5,0.0);		//(Bottom Side)
+				glVertex3f( 0.25,-0.2, 0.0);	//Top Right Vertex
+				glVertex3f(-0.25,-0.2, 0.0);	//Top Left Vertex
+				glVertex3f(-0.25,-0.2,-0.5);	//Bottom Left Vertex
+				glVertex3f( 0.25,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
-				glColor3f(0.0f,1.0f,0.0f);		//(Top Side)
-				glVertex3f( 0.25f, 0.0f,-0.5f);	//Top Right Vertex
-				glVertex3f(-0.25f, 0.0f,-0.5f);	//Top Left Vertex
-				glVertex3f(-0.25f, 0.0f, 0.0f);	//Bottom Left Vertex
-				glVertex3f( 0.25f, 0.0f, 0.0f);	//Bottom Right Vertex
+				glColor3f(0.0,1.0,0.0);		//(Top Side)
+				glVertex3f( 0.25, 0.0,-0.5);	//Top Right Vertex
+				glVertex3f(-0.25, 0.0,-0.5);	//Top Left Vertex
+				glVertex3f(-0.25, 0.0, 0.0);	//Bottom Left Vertex
+				glVertex3f( 0.25, 0.0, 0.0);	//Bottom Right Vertex
 			glPopMatrix();
 
 		glPopMatrix();
