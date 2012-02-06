@@ -46,7 +46,6 @@ double alpha = 0;                                  // Set by idle function.
 double beta = 0;                                   // Set by mouse X.
 double distance = - (farPlane - nearPlane) / 2;    // Set by mouse Y.
 
-
 void display ()
 {
  	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -61,7 +60,9 @@ void display ()
 
 	//Rotation from keypress function.
 	//Hold A or D to rotate.
+	glTranslatef(25.0, 0.0, 25.0);
 	glRotatef(alpha, 0, 1, 0);
+	glTranslatef(-25.0, 0.0, -25.0);
 
 	//Objects for drawing.
 	Tile t1 = Tile();
@@ -265,7 +266,6 @@ void handleResize(int w, int h) {
 	glLoadIdentity();
 	gluPerspective(45.0, (double)w / (double)h, 1.0, 200.0);
 }
-
 
 
 int main(int argc, char** argv)
