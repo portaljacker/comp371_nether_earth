@@ -25,6 +25,9 @@
 #include "Tracks.h"
 #include "eBrain.h"
 #include "Cannon.h"
+#include "Nuke.h"
+#include "Missiles.h"
+#include "Phaser.h"
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -53,6 +56,8 @@ double fovy = 45.0;
 double alpha = 0;                                  // Set by idle function.
 double beta = 0;                                   // Set by mouse X.
 double distance = - (farPlane - nearPlane) / 2;    // Set by mouse Y.
+
+int WireFrame = 1; //For wireframe mode.
 
 void display ()
 {
@@ -83,6 +88,9 @@ void display ()
 	Tracks t2 = Tracks();
 	eBrain e1 = eBrain();
 	Cannon c2 = Cannon();
+	Nuke n1 = Nuke();
+	Missiles m2 = Missiles();
+	Phaser p1 = Phaser();
 
 	//Main rendering loop.
 	for(int i = 0; i < 50; i++)
@@ -328,24 +336,46 @@ void display ()
 				glPopMatrix();
 			}
 
-			else if(m1.getChar(i,j,1) == 'r') {
+			else if(m1.getChar(i,j,1) == 'p') {
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				glTranslatef(-0.25, 0.15, 0.0);
+				glRotatef(-90,1,0,0);
+				p1.draw();
+				glFlush();
+				glPopMatrix();
+			}
+
+			else if(m1.getChar(i,j,1) == 'n') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				n1.draw();
+				glFlush();
+				glPopMatrix();
+			}
+
+			else if(m1.getChar(i,j,1) == 'm') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				m2.draw();
+				glFlush();
+				glPopMatrix();
+			}
+
+			else if(m1.getChar(i,j,1) == 'r') {
+				glPushMatrix();
+				glTranslatef(i-0.35, 0.15, j);
 				t2.draw();
 				glFlush();
 				glPopMatrix();
 
 				glPushMatrix();
-				glTranslatef(i, 0, j);
-				glTranslatef(0.0, 1.0, 0.0);
+				glTranslatef(i, 1.0, j);
 				c2.draw();
 				glFlush();
 				glPopMatrix();
 
 				glPushMatrix();
-				glTranslatef(i, 0, j);
-				glTranslatef(0.0, 1.5, 0.0);
+				glTranslatef(i, 1.5, j);
 				e1.draw();
 				glFlush();
 				glPopMatrix();
@@ -377,20 +407,30 @@ void handleKeypress(unsigned char key, int x, int y)
 		case 27: //Escape key
 			exit(0);
 
-		case 97: //a key
+		case 'a': 
 			alpha += STEP;
 			if (alpha > ALL_ROUND)
 				alpha -= ALL_ROUND;
 
 			glutPostRedisplay();
 			break;
-		case 100: //d key
+		case 'd':
 			alpha += STEP2;
 			if (alpha > ALL_ROUND)
 				alpha -= ALL_ROUND;
 
 			glutPostRedisplay();
 			break;
+
+		case 'w':
+				WireFrame = 1-WireFrame;
+				if (WireFrame)
+					glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);		// Wireframes
+				else 
+					glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);		// Solid
+				
+				glutPostRedisplay();
+				break;
 	}
 }
 

@@ -51,6 +51,15 @@
     <ClCompile Include="Cannon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Phaser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Missiles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Nuke.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -81,6 +90,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Cannon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Missiles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Nuke.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Phaser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -111,6 +111,9 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	grid[35][7][1] = 'e';
 	grid[32][3][1] = '2';
 	grid[32][7][1] = 'c';
+	grid[32][10][1] = 'p';
+	grid[35][10][1] = 'n';
+	grid[39][9][1] = 'm';
 
 	grid[33][12][1] = 'r';
 }

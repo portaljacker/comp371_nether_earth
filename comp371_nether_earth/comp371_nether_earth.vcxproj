@@ -18,6 +18,9 @@
     <ClCompile Include="eBrain.cpp" />
     <ClCompile Include="Grav.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Missiles.cpp" />
+    <ClCompile Include="Nuke.cpp" />
+    <ClCompile Include="Phaser.cpp" />
     <ClCompile Include="Rubble.cpp" />
     <ClCompile Include="SceneDriver.cpp" />
     <ClCompile Include="skeleton.cpp" />
@@ -32,6 +35,9 @@
     <ClInclude Include="eBrain.h" />
     <ClInclude Include="Grav.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Missiles.h" />
+    <ClInclude Include="Nuke.h" />
+    <ClInclude Include="Phaser.h" />
     <ClInclude Include="Rubble.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Tracks.h" />
