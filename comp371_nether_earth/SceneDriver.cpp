@@ -1,12 +1,12 @@
 //Comp371_w12 Section R
 //Prof. S. Mokhov
-//Programming Assignment 1
+//Programming Assignment 2
 //Team 4
 //Jordan V. 1300520
 //Taras K. 6901204
 //Gianni T. 1938878
 //Sebastien S. 9500782
-//This is the main driver. It uses some functions from the sample skeleton.cpp program from class, such as camera control and related variables.
+//This is the main driver. It uses some functions from the sample skeleton.cpp and sampleprogram.cpp files from class, such as camera control and related variables.
 
 #include <iostream>
 #include <GL/glut.h>
@@ -31,7 +31,7 @@
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
-const int HEIGHT = 400;
+const int HEIGHT = 600;
 
 // Current size of window.
 int width  = WIDTH;
@@ -46,36 +46,82 @@ double xMouse = 0.5;
 double yMouse = 0.5;
 
 // Bounds of viewing frustum.
+double viewWindowLeft =  -100;
+double viewWindowRight  = 100;
+double viewWindowBottom =  -100;
+double viewWindowTop  = 100;
 double nearPlane =  1;
 double farPlane  = 200;
+
+// Variables used in zooming (1 and 2 keys).
+const double ZoomSTEP = 2;
+const double zoomFactor = 1.03;
 
 // Viewing angle.
 double fovy = 45.0;
 
 // Variables.
-double alpha = 0;                                  // Set by idle function.
-double beta = 0;                                   // Set by mouse X.
-double distance = - (farPlane - nearPlane) / 2;    // Set by mouse Y.
+//Used in camera rotation (Ortho mode).
+double alpha = 0;                                  
+double beta = 0;
+double gamma = 0;
+double distance = - (farPlane - nearPlane) / 2; 
 
-int WireFrame = 1; //For wireframe mode.
+//Used in eye placement (Perspective mode).
+double movX = 0;
+double movY = 0;
+double movZ = 0;
+
+double rotX = 0;
+double rotY = 0;
+double rotZ = 0;
+
+int WireFrame = 0; //For wireframe mode.
+int cameraMode = 1; //For camera modes.
+bool cameraReset = false;
+
+void setCamera()
+{
+	// Must set it up in Projection Matrix
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	// Rotation about Y from LEFT-RIGHT Arrow key.
+	glRotatef(alpha, 0, 1, 0);
+	// Rotation about X from UP-DOWN Arrow key.
+	glRotatef(beta, 1, 0, 0);
+	//Rotation about Z from F1-F2 keys.
+	glRotatef(gamma, 0, 0, 1);
+
+	if(cameraMode)
+	{
+		gluPerspective(fovy, width/height, nearPlane, farPlane);
+	}
+	else
+	{
+		glOrtho(viewWindowLeft, viewWindowRight, viewWindowBottom, viewWindowTop, nearPlane, farPlane);
+	}
+	
+}
 
 void display ()
 {
+	setCamera();
+
  	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0.00, 0.00, 2.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
 
-	// Translate using Y mouse to middle of map.
-	distance = - (yMouse * (farPlane - nearPlane) + nearPlane);
-	glTranslatef(-25, 0, distance);
-	glRotatef(45, 1, 0, 0);
+	if(cameraReset)
+	{
+		gluLookAt(0.00, 50.00, 50.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
+		cameraReset = false;
+	}
+	else
+		gluLookAt(movX, movY + 50.00, movZ +50.00, movX + rotX, movY + rotY, movZ + rotZ, 0.00, 1.00, 0.00);
 
-	//Rotation from keypress function.
-	//Hold A or D to rotate.
-	glTranslatef(25.0, 0.0, 25.0);
-	glRotatef(alpha, 0, 1, 0);
-	glTranslatef(-25.0, 0.0, -25.0);
+	//Centers map aroundt he origin for viewing.
+	glTranslatef(-25, 0, -25);
 
 	//Objects for drawing.
 	Tile t1 = Tile();
@@ -398,6 +444,23 @@ void display ()
 	glutSwapBuffers();
 }
 
+void zoom(unsigned char direction)
+{
+   //Function found in the sampleprogram.cpp file from class.
+
+	if (direction == '+') {
+			viewWindowLeft += ZoomSTEP; viewWindowRight -= ZoomSTEP;
+			viewWindowBottom += ZoomSTEP; viewWindowTop -= ZoomSTEP;
+			fovy = fovy / zoomFactor;
+		}
+		else if (direction == '-') {
+			viewWindowLeft -= ZoomSTEP; viewWindowRight += ZoomSTEP;
+			viewWindowBottom -= ZoomSTEP; viewWindowTop += ZoomSTEP;
+			fovy = fovy * zoomFactor;
+		}
+
+}
+
 //Called when a key is pressed
 void handleKeypress(unsigned char key, int x, int y)
 {
@@ -407,41 +470,151 @@ void handleKeypress(unsigned char key, int x, int y)
 		case 27: //Escape key
 			exit(0);
 
-		case 'a': 
-			alpha += STEP;
-			if (alpha > ALL_ROUND)
-				alpha -= ALL_ROUND;
-
-			glutPostRedisplay();
+		//These controls only work with the perspective camera.
+		case 'a':
+			if(cameraMode == 1)
+				movX -= STEP;
 			break;
-		case 'd':
-			alpha += STEP2;
-			if (alpha > ALL_ROUND)
-				alpha -= ALL_ROUND;
 
-			glutPostRedisplay();
+		case 'd':
+			if(cameraMode == 1)
+				movX += STEP;
 			break;
 
 		case 'w':
+			if(cameraMode == 1)
+				movZ -= STEP;
+			break;
+
+		case 's':
+			if(cameraMode == 1)
+				movZ += STEP;
+			break;
+
+		case 'q':
+			if(cameraMode == 1)
+				movY -= STEP;
+			break;
+
+		case 'e':
+			if(cameraMode == 1)
+				movY += STEP;
+			break;
+			
+		//These keys work in both camera modes.
+		case '1':
+			zoom('+');
+			break;
+			
+		case '2':
+			zoom('-');
+			break;
+
+		case 'c':
+			cameraMode = 1 - cameraMode;
+			break;
+
+		case 'r':
+			alpha = 0;
+			beta = 0;
+			gamma = 0;
+			movX = 0;
+			movY = 0;
+			movZ = 0;
+			rotX = 0;
+			rotY = 0;
+			rotZ = 0;
+			viewWindowLeft =  -100;
+			viewWindowRight  = 100;
+			viewWindowBottom =  -100;
+			viewWindowTop  = 100;
+			cameraReset = true;
+			break;
+
+		case 't':
 				WireFrame = 1-WireFrame;
 				if (WireFrame)
 					glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);		// Wireframes
 				else 
 					glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);		// Solid
-				
-				glutPostRedisplay();
 				break;
 	}
+	glutPostRedisplay();
 }
 
-
-void mouseMovement (int mx, int my)
+void functionKeys (int key, int x, int y)
 {
-	// Normalize mouse coordinates.
-	xMouse = double(mx) / double(width);
-	yMouse = 1 - double(my) / double(height);
-	// Redisplay image.
-	glutPostRedisplay();
+	
+	   switch (key)
+	   {
+		   //These keys work differently depending on the camera mode.
+			case GLUT_KEY_LEFT:
+				if(cameraMode ==1)
+				{
+					rotX -= STEP;
+				}
+				else
+				{
+					alpha -= STEP;
+					if (alpha > ALL_ROUND)
+						alpha -= ALL_ROUND;
+				}
+				break;
+
+			case GLUT_KEY_RIGHT:
+				if(cameraMode == 1)
+				{
+					rotX += STEP;
+				}
+				else
+				{
+					alpha += STEP;
+					if (alpha > ALL_ROUND)
+						alpha -= ALL_ROUND;
+				}
+				break;
+
+			case GLUT_KEY_UP:
+				if(cameraMode == 1)
+				{
+					rotY += STEP;
+				}
+				else
+				{
+					beta += STEP;
+					if (beta > ALL_ROUND)
+						beta -= ALL_ROUND;
+				}
+				break;
+
+			case GLUT_KEY_DOWN:
+				if(cameraMode == 1)
+				{
+					rotY -= STEP;
+				}
+				else
+				{
+					beta -= STEP;
+					if (beta > ALL_ROUND)
+						beta -= ALL_ROUND;
+				}
+				break;
+
+			//These keys work the same way in both camera modes.
+			case GLUT_KEY_F1:
+				gamma -= STEP;
+				if (gamma > ALL_ROUND)
+					gamma -= ALL_ROUND;
+				break;
+			
+			case GLUT_KEY_F2:
+				gamma += STEP;
+				if (gamma > ALL_ROUND)
+					gamma -= ALL_ROUND;
+				break;
+	   }
+
+   	glutPostRedisplay();
 }
 
 void handleResize(int w, int h) {
@@ -457,7 +630,7 @@ int main(int argc, char** argv)
 	//Initialize GLUT
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowSize(400, 400);
+	glutInitWindowSize(WIDTH, HEIGHT);
 	
 	//Create the window
 	glutCreateWindow("Nether Earth Test Map");
@@ -465,8 +638,8 @@ int main(int argc, char** argv)
 	//Set handler functions
 	glutDisplayFunc(display);
 	glutKeyboardFunc(handleKeypress);
+	glutSpecialFunc(functionKeys);
 	glutReshapeFunc(handleResize);
-	glutMotionFunc(mouseMovement);
 	
 	glutMainLoop();
 	return 0;

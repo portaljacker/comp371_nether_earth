@@ -1,0 +1,20 @@
+Camera controls:
+Perspective mode:
+w, a, s, d: Move the camera around.
+q, e: Move the camera up or down.(Closer or farther from the "ground".)
+left & right arrow keys: Rotate camera horizontally.
+up & down arrow keys: Rotate camera vertically.(Look up or down.)
+
+Orthogonal mode:
+left & right arrow keys: Rotate around y axis.
+up & down arrow keys: Rotate around x axis.
+
+Controls common to both modes:
+1, 2: Zoom in and out.
+F1, F2: Rotate around Z axis.(May get clippy in Perspective mode.)
+c: Toggle Perspective / Orthogonal mode.
+r: Reset camera.
+
+Other controls:
+t: Toggle Wireframe mode.
+esc: Close the program.
