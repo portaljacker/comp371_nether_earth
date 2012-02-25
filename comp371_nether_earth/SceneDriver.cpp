@@ -28,6 +28,7 @@
 #include "Nuke.h"
 #include "Missiles.h"
 #include "Phaser.h"
+using namespace std;
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -37,8 +38,8 @@ const int HEIGHT = 600;
 int width  = WIDTH;
 int height = HEIGHT;
 
-const double STEP = 2;
-const double STEP2 = -2;
+const double STEP = 2; //Used in Perspective and Orthogonal camera modes.
+const double ORBSTEP = 0.01; //Used to lessen rotation during Orbit Mode.
 const double ALL_ROUND = 360;
 
 // Mouse positions, normalized to [0,1].
@@ -72,9 +73,20 @@ double movX = 0;
 double movY = 0;
 double movZ = 0;
 
+//Tilt (Orthogonal Mode).
 double rotX = 0;
 double rotY = 0;
 double rotZ = 0;
+
+//Coordinates for Orbit Mode.
+double orbX = 0;
+double eyeX = 0;
+double eyeY = 50;
+double eyeZ = 50;
+double upX= 0;
+double upY= 1;
+double upZ= 0;
+double r = 70; //Orbit Radius
 
 int WireFrame = 0; //For wireframe mode.
 int cameraMode = 1; //For camera modes.
@@ -93,15 +105,70 @@ void setCamera()
 	//Rotation about Z from F1-F2 keys.
 	glRotatef(gamma, 0, 0, 1);
 
-	if(cameraMode)
+	if(cameraMode == 1 || cameraMode == 2)
 	{
 		gluPerspective(fovy, width/height, nearPlane, farPlane);
 	}
 	else
 	{
-		glOrtho(viewWindowLeft, viewWindowRight, viewWindowBottom, viewWindowTop, nearPlane, farPlane);
+		glOrtho(viewWindowLeft, viewWindowRight, viewWindowBottom, viewWindowTop, nearPlane, farPlane); //Useful for question 9.
 	}
 	
+}
+//Displays controls in console window.
+void dispKeys()
+{
+	cout << "Camera controls:" << endl;
+	cout << "Perspective mode:" << endl;
+	cout << "w, a, s, d: Move the camera around." << endl;
+	cout << "q, e: Move the camera up or down.(Closer or farther from the \"ground\".)" << endl;
+	cout << "left & right arrow keys: Rotate camera horizontally." << endl;
+	cout << "up & down arrow keys: Rotate camera vertically.(Look up or down.)" << endl;
+	cout << endl;
+	cout << "Orbit mode:" << endl;
+	cout << "a, d: Make camera orbit left or right." << endl;
+	cout << endl;
+	cout << "Orthogonal mode:" << endl;
+	cout << "left & right arrow keys: Rotate around y axis." << endl;
+	cout << "up & down arrow keys: Rotate around x axis." << endl;
+	cout << endl;
+	cout << "Controls common to all modes:" << endl;
+	cout << "1, 2: Zoom in and out." << endl;
+	cout << "F1, F2: Rotate around Z axis.(May get clippy in Perspective mode.)" << endl;
+	cout << "c: Toggle Perspective / Orbit / Orthogonal mode." << endl;
+	cout << "r: Reset camera." << endl;
+	cout << endl;
+	cout << "Other controls:" << endl;
+	cout << "t: Toggle Wireframe mode." << endl;
+	cout << "h/H: Display list of controls in console window." << endl;
+	cout << "esc: Close the program." << endl;
+	cout << endl;
+}
+
+//Resets variables to initial values.
+void resetCam()
+{
+	alpha = 0;
+	beta = 0;
+	gamma = 0;
+	movX = 0;
+	movY = 0;
+	movZ = 0;
+	rotX = 0;
+	rotY = 0;
+	rotZ = 0;
+	orbX = 0;
+	eyeX = 0;
+	eyeY = 50;
+	eyeZ = 50;
+	upX= 0;
+	upY= 1;
+	upZ= 0;
+	viewWindowLeft =  -100;
+	viewWindowRight  = 100;
+	viewWindowBottom =  -100;
+	viewWindowTop  = 100;
+	cameraReset = true;
 }
 
 void display ()
@@ -112,13 +179,29 @@ void display ()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	if(cameraReset)
+	if(cameraMode != 2) //For Perspective and Orthogonal modes.
 	{
-		gluLookAt(0.00, 50.00, 50.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
-		cameraReset = false;
+		if(cameraReset)//Reset camera to starting point.
+		{
+			gluLookAt(0.00, 50.00, 50.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
+			cameraReset = false;
+		}
+		else
+			gluLookAt(movX, movY + 50.00, movZ +50.00, movX + rotX, movY + rotY, movZ + rotZ, 0.00, 1.00, 0.00);
 	}
-	else
-		gluLookAt(movX, movY + 50.00, movZ +50.00, movX + rotX, movY + rotY, movZ + rotZ, 0.00, 1.00, 0.00);
+
+	else //For Orbit mode.
+	{
+		if(cameraReset)//Reset camera to starting point.
+		{
+			gluLookAt(0.00, 50.00, 50.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
+			cameraReset = false;
+		}
+		else
+		{
+			gluLookAt(eyeX, eyeY, eyeZ, 0.00, 0.00, 0.00, upX, upY, upZ);
+		}
+	}
 
 	//Centers map aroundt he origin for viewing.
 	glTranslatef(-25, 0, -25);
@@ -444,10 +527,9 @@ void display ()
 	glutSwapBuffers();
 }
 
+//Function found in the sampleprogram.cpp file from class.
 void zoom(unsigned char direction)
 {
-   //Function found in the sampleprogram.cpp file from class.
-
 	if (direction == '+') {
 			viewWindowLeft += ZoomSTEP; viewWindowRight -= ZoomSTEP;
 			viewWindowBottom += ZoomSTEP; viewWindowTop -= ZoomSTEP;
@@ -461,84 +543,113 @@ void zoom(unsigned char direction)
 
 }
 
+//Based on Mouse Coordinates function by H. Shirokawa.
+//http://homepages.ius.edu/rwisman/b481/html/notes/FlyAround.htm
+void orbit()
+{
+// Mouse point to angle conversion
+  double theta = (360.0/HEIGHT)*50*3.0;
+  double phi = (360.0/WIDTH)*orbX*3.0;
+
+// Convert spherical coordinates to eye coordinates.
+   eyeX = r * sin(theta*ORBSTEP)* sin(phi*ORBSTEP);
+   eyeY = r * cos(theta*ORBSTEP);
+   eyeZ = r * sin(theta*ORBSTEP)* cos(phi*ORBSTEP);
+
+// Calculate the coordinates of another point on the same plane as the first.
+   double diff = 1.0; //Subtracted from old theta to get new theta.
+   double eyeXtemp = r * sin(theta*ORBSTEP-diff)* sin(phi*ORBSTEP);
+   double eyeYtemp = r * cos(theta*ORBSTEP-diff);
+   double eyeZtemp = r * sin(theta*ORBSTEP-diff)* cos(phi*ORBSTEP);
+
+// Connect these two points to obtain the camera's up vector.
+   upX=eyeXtemp-eyeX;
+   upY=eyeYtemp-eyeY;
+   upZ=eyeZtemp-eyeZ;
+
+	glutPostRedisplay();
+}
+
 //Called when a key is pressed
 void handleKeypress(unsigned char key, int x, int y)
 {
-	switch (key)
-	{
+	
+		switch (key)
+		{
 
-		case 27: //Escape key
-			exit(0);
-
-		//These controls only work with the perspective camera.
-		case 'a':
-			if(cameraMode == 1)
-				movX -= STEP;
-			break;
-
-		case 'd':
-			if(cameraMode == 1)
-				movX += STEP;
-			break;
-
-		case 'w':
-			if(cameraMode == 1)
-				movZ -= STEP;
-			break;
-
-		case 's':
-			if(cameraMode == 1)
-				movZ += STEP;
-			break;
-
-		case 'q':
-			if(cameraMode == 1)
-				movY -= STEP;
-			break;
-
-		case 'e':
-			if(cameraMode == 1)
-				movY += STEP;
-			break;
-			
-		//These keys work in both camera modes.
-		case '1':
-			zoom('+');
-			break;
-			
-		case '2':
-			zoom('-');
-			break;
-
-		case 'c':
-			cameraMode = 1 - cameraMode;
-			break;
-
-		case 'r':
-			alpha = 0;
-			beta = 0;
-			gamma = 0;
-			movX = 0;
-			movY = 0;
-			movZ = 0;
-			rotX = 0;
-			rotY = 0;
-			rotZ = 0;
-			viewWindowLeft =  -100;
-			viewWindowRight  = 100;
-			viewWindowBottom =  -100;
-			viewWindowTop  = 100;
-			cameraReset = true;
-			break;
-
-		case 't':
-				WireFrame = 1-WireFrame;
-				if (WireFrame)
-					glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);		// Wireframes
-				else 
-					glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);		// Solid
+			case 27: //Escape key
+				exit(0);
+			//These controls only work in Perspective Mode (a and d also work in Orbit Mode).
+			case 'a':
+				if(cameraMode == 1)
+					movX -= STEP;
+				if(cameraMode == 2)
+				{
+					orbX -= STEP;
+					orbit();
+				}
 				break;
+
+			case 'd':
+				if(cameraMode == 1)
+					movX += STEP;
+				if(cameraMode == 2)
+				{
+					orbX += STEP;
+					orbit();
+				}
+				break;
+
+			case 'w':
+				if(cameraMode == 1)
+					movZ -= STEP;
+				break;
+
+			case 's':
+				if(cameraMode == 1)
+					movZ += STEP;
+				break;
+
+			case 'q':
+				if(cameraMode == 1)
+					movY -= STEP;
+				break;
+
+			case 'e':
+				if(cameraMode == 1)
+					movY += STEP;
+				break;
+			
+			//These keys work in all camera modes.
+			case '1':
+				zoom('+');
+				break;
+			
+			case '2':
+				zoom('-');
+				break;
+
+			case 'c':
+				if(cameraMode != 2)
+					cameraMode++;
+				else
+					cameraMode = 0;
+				break;
+
+			case 'r'://Reset camera.
+				resetCam();
+				break;
+
+			case 'h'://Displays controls in console window.
+				dispKeys();
+				break;
+
+			case 'H':
+				dispKeys();
+				break;
+
 	}
+
 	glutPostRedisplay();
 }
 
@@ -549,11 +660,12 @@ void functionKeys (int key, int x, int y)
 	   {
 		   //These keys work differently depending on the camera mode.
 			case GLUT_KEY_LEFT:
-				if(cameraMode ==1)
+				if(cameraMode == 1)//Perspective Mode
 				{
 					rotX -= STEP;
 				}
-				else
+
+				if(cameraMode == 0)//Orthogonal Mode
 				{
 					alpha -= STEP;
 					if (alpha > ALL_ROUND)
@@ -566,7 +678,8 @@ void functionKeys (int key, int x, int y)
 				{
 					rotX += STEP;
 				}
-				else
+
+				if(cameraMode == 0)
 				{
 					alpha += STEP;
 					if (alpha > ALL_ROUND)
@@ -579,7 +692,8 @@ void functionKeys (int key, int x, int y)
 				{
 					rotY += STEP;
 				}
-				else
+
+				if(cameraMode == 0)
 				{
 					beta += STEP;
 					if (beta > ALL_ROUND)
@@ -592,7 +706,8 @@ void functionKeys (int key, int x, int y)
 				{
 					rotY -= STEP;
 				}
-				else
+
+				if(cameraMode == 0)
 				{
 					beta -= STEP;
 					if (beta > ALL_ROUND)
@@ -600,18 +715,24 @@ void functionKeys (int key, int x, int y)
 				}
 				break;
 
-			//These keys work the same way in both camera modes.
+			//These keys work the same way in both Perspective and Ortohognal camera modes.
 			case GLUT_KEY_F1:
-				gamma -= STEP;
-				if (gamma > ALL_ROUND)
-					gamma -= ALL_ROUND;
-				break;
+				if(cameraMode != 2)
+				{
+					gamma -= STEP;
+					if (gamma > ALL_ROUND)
+						gamma -= ALL_ROUND;
+					break;
+				}
 			
 			case GLUT_KEY_F2:
-				gamma += STEP;
-				if (gamma > ALL_ROUND)
-					gamma -= ALL_ROUND;
-				break;
+				if(cameraMode != 2)
+				{
+					gamma += STEP;
+					if (gamma > ALL_ROUND)
+						gamma -= ALL_ROUND;
+					break;
+				}
 	   }
 
    	glutPostRedisplay();
