@@ -173,18 +173,13 @@ void resetCam()
 
 void display ()
 {
-<<<<<<< HEAD
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-=======
 	setCamera();
 
  	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
->>>>>>> 52ca3745ba1d2c086ba6605687bfa039c5676645
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-<<<<<<< HEAD
-	
+	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_LIGHTING); //Enable lighting
 	glEnable(GL_LIGHT0); //Enable light #0
@@ -192,16 +187,6 @@ void display ()
 	glEnable(GL_NORMALIZE); //Automatically normalize normals
 	//glShadeModel(GL_SMOOTH); //Enable smooth shading
 
-
-	//Add ambient light
-	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 1.0f}; //Color (0.2, 0.2, 0.2)
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
-	
-	// Translate using Y mouse to middle of map.
-	distance = - (yMouse * (farPlane - nearPlane) + nearPlane);
-	glTranslatef(-25, 0, distance);
-	glRotatef(45, 1, 0, 0);
-=======
 	if(cameraMode != 2) //For Perspective and Orthogonal modes.
 	{
 		if(cameraReset)//Reset camera to starting point.
@@ -225,8 +210,12 @@ void display ()
 			gluLookAt(eyeX, eyeY, eyeZ, 0.00, 0.00, 0.00, upX, upY, upZ);
 		}
 	}
->>>>>>> 52ca3745ba1d2c086ba6605687bfa039c5676645
 
+
+	//Add ambient light
+	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 1.0f}; //Color (0.2, 0.2, 0.2)
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+	
 	//Centers map aroundt he origin for viewing.
 	glTranslatef(-25, 0, -25);
 
@@ -785,8 +774,7 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(handleKeypress);
 	glutSpecialFunc(functionKeys);
 	glutReshapeFunc(handleResize);
-	glShadeModel(GL_SMOOTH);
-
+	
 	glutMainLoop();
 	return 0;
 }
