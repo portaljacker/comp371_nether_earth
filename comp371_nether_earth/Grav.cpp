@@ -22,10 +22,18 @@ Grav::~Grav(void)
 
 void Grav::draw(void)
 {
+	//Add directed light
+	GLfloat lightColor1[] = {1.0f, 1.0f, 1.0f, 1.0f}; //Color (0.5, 0.2, 0.2)
+	//Coming from the direction (-1, 0.5, 0.5)
+	GLfloat lightPos1[] = {0.0f, 1.0f, 1.0f, 0.0f};
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor1);
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos1);
+	
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
 
 	//top
 	glColor3f(0.5f, 0.5f, 0.5f);
+	glNormal3f(0.0, 1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, -0.5f);
 	glVertex3f(0.25f, 0.0f, -0.5f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
@@ -33,6 +41,7 @@ void Grav::draw(void)
 
 	//bottom
 	//glColor3f(1.0f, 0.0f, 0.0f);
+	glNormal3f(0.0, -1.0f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, -0.25f);
 	glVertex3f(0.25f, -0.15f, -0.25f);
 	glVertex3f(0.25f, -0.15f, 0.25f);
@@ -40,6 +49,7 @@ void Grav::draw(void)
 
 	//back
 	//glColor3f(1.0f, 0.5f, 0.0f);
+	glNormal3f(0.0, 0.0f, -1.0f);
 	glVertex3f(-0.25f, 0.0f, -0.5f);
 	glVertex3f(0.25f, 0.0f, -0.5f);
 	glVertex3f(0.25f, -0.15f, -0.25f);
@@ -47,6 +57,7 @@ void Grav::draw(void)
 
 	//front
 	//glColor3f(1.0f, 0.0f, 0.5f);
+	glNormal3f(0.0, 0.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, -0.15f, 0.25f);
@@ -54,6 +65,7 @@ void Grav::draw(void)
 
 	//right 1
 	//glColor3f(1.0f, 0.5f, 0.5f);
+	glNormal3f(1.0, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, -0.25f);
 	glVertex3f(0.25f, 0.0f, 0.25f);
 	glVertex3f(0.25f, -0.15f, 0.25f);
@@ -61,6 +73,7 @@ void Grav::draw(void)
 
 	//right 2
 	//glColor3f(1.0f, 0.5f, 0.5f);
+	glNormal3f(1.0, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, 0.0f, -0.25f);
 	glVertex3f(0.25f, -0.15f, -0.25f);
@@ -68,6 +81,7 @@ void Grav::draw(void)
 
 	//right 3
 	//glColor3f(1.0f, 0.5f, 0.5f);
+	glNormal3f(1.0, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, -0.5f);
 	glVertex3f(0.25f, 0.0f, -0.25f);
 	glVertex3f(0.25f, -0.15f, -0.25f);
@@ -75,6 +89,7 @@ void Grav::draw(void)
 
 	//left 1
 	//glColor3f(0.5f, 0.5f, 1.0f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
 	glVertex3f(-0.25f, 0.0f, 0.25f);
 	glVertex3f(-0.25f, -0.15f, 0.25f);
@@ -82,6 +97,7 @@ void Grav::draw(void)
 
 	//left 2
 	//glColor3f(0.5f, 0.5f, 1.0f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, 0.5f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
 	glVertex3f(-0.25f, -0.15f, -0.25f);
@@ -89,6 +105,7 @@ void Grav::draw(void)
 
 	//left 3
 	//glColor3f(0.5f, 0.5f, 1.0f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, -0.5f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
 	glVertex3f(-0.25f, -0.15f, -0.25f);
@@ -100,9 +117,10 @@ void Grav::draw(void)
 	glTranslatef(-1.0f, 0.0f, 0.0f);
 
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
-
+	
 	//top
-	//glColor3f(1.0f, 1.0f, 0.0f);
+	glColor3f(0.5f, 0.5f, 0.5f);
+	glNormal3f(0.0, 1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, -0.5f);
 	glVertex3f(0.25f, 0.0f, -0.5f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
@@ -110,6 +128,7 @@ void Grav::draw(void)
 
 	//bottom
 	//glColor3f(1.0f, 0.0f, 0.0f);
+	glNormal3f(0.0, -1.0f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, -0.25f);
 	glVertex3f(0.25f, -0.15f, -0.25f);
 	glVertex3f(0.25f, -0.15f, 0.25f);
@@ -117,6 +136,7 @@ void Grav::draw(void)
 
 	//back
 	//glColor3f(1.0f, 0.5f, 0.0f);
+	glNormal3f(0.0, 0.0f, -1.0f);
 	glVertex3f(-0.25f, 0.0f, -0.5f);
 	glVertex3f(0.25f, 0.0f, -0.5f);
 	glVertex3f(0.25f, -0.15f, -0.25f);
@@ -124,6 +144,7 @@ void Grav::draw(void)
 
 	//front
 	//glColor3f(1.0f, 0.0f, 0.5f);
+	glNormal3f(0.0, 0.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, -0.15f, 0.25f);
@@ -131,6 +152,7 @@ void Grav::draw(void)
 
 	//right 1
 	//glColor3f(1.0f, 0.5f, 0.5f);
+	glNormal3f(1.0, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, -0.25f);
 	glVertex3f(0.25f, 0.0f, 0.25f);
 	glVertex3f(0.25f, -0.15f, 0.25f);
@@ -138,6 +160,7 @@ void Grav::draw(void)
 
 	//right 2
 	//glColor3f(1.0f, 0.5f, 0.5f);
+	glNormal3f(1.0, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, 0.0f, -0.25f);
 	glVertex3f(0.25f, -0.15f, -0.25f);
@@ -145,6 +168,7 @@ void Grav::draw(void)
 
 	//right 3
 	//glColor3f(1.0f, 0.5f, 0.5f);
+	glNormal3f(1.0, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, -0.5f);
 	glVertex3f(0.25f, 0.0f, -0.25f);
 	glVertex3f(0.25f, -0.15f, -0.25f);
@@ -152,6 +176,7 @@ void Grav::draw(void)
 
 	//left 1
 	//glColor3f(0.5f, 0.5f, 1.0f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
 	glVertex3f(-0.25f, 0.0f, 0.25f);
 	glVertex3f(-0.25f, -0.15f, 0.25f);
@@ -159,6 +184,7 @@ void Grav::draw(void)
 
 	//left 2
 	//glColor3f(0.5f, 0.5f, 1.0f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, 0.5f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
 	glVertex3f(-0.25f, -0.15f, -0.25f);
@@ -166,11 +192,11 @@ void Grav::draw(void)
 
 	//left 3
 	//glColor3f(0.5f, 0.5f, 1.0f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, -0.5f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
 	glVertex3f(-0.25f, -0.15f, -0.25f);
 	glVertex3f(-0.25f, -0.15f, -0.25f);
-
 
 	glEnd(); //End quadrilateral coordinates
 
@@ -180,6 +206,7 @@ void Grav::draw(void)
 
 	//bottom
 	//glColor3f(1.0f, 1.0f, 1.0f);
+	glNormal3f(0.0, -1.0f, 0.0f);
 	glVertex3f(-0.65f, 0.01f, -0.45f);
 	glVertex3f(0.65f, 0.01f, -0.45f);
 	glVertex3f(0.65f, 0.01f, 0.45f);
@@ -187,6 +214,7 @@ void Grav::draw(void)
 
 	//top                    
 	//glColor3f(1.0f, 0.0f, 1.0f);
+	glNormal3f(0.0, 1.0f, 0.0f);
 	glVertex3f(-0.65f, 0.11f, -0.45f);
 	glVertex3f(0.65f, 0.11f, -0.45f);
 	glVertex3f(0.65f, 0.11f, 0.45f);
@@ -194,6 +222,7 @@ void Grav::draw(void)
 
 	//back
 	//glColor3f(1.0f, 0.5f, 0.0f);
+	glNormal3f(0.0, 0.0f, -1.0f);
 	glVertex3f(-0.65f, 0.01f, -0.45f);
 	glVertex3f(0.65f, 0.01f, -0.45f);
 	glVertex3f(0.65f, 0.11f, -0.45f);
@@ -201,6 +230,7 @@ void Grav::draw(void)
 
 	//front
 	//glColor3f(1.0f, 0.0f, 0.5f);
+	glNormal3f(0.0, 0.0f, 1.0f);
 	glVertex3f(-0.65f, 0.0f, 0.45f);
 	glVertex3f(0.65f, 0.0f, 0.45f);
 	glVertex3f(0.65f, 0.11f, 0.45f);
@@ -208,6 +238,7 @@ void Grav::draw(void)
 
 	//right
 	//glColor3f(1.0f, 0.5f, 0.5f);
+	glNormal3f(1.0, 0.0f, 0.0f);
 	glVertex3f(0.65f, 0.11f, -0.45f);
 	glVertex3f(0.65f, 0.11f, 0.45f);
 	glVertex3f(0.65f, 0.01f, 0.45f);
@@ -215,6 +246,7 @@ void Grav::draw(void)
 
 	//left
 	//glColor3f(1.0f, 0.5f, 0.5f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
 	glVertex3f(-0.65f, 0.11f, -0.45f);
 	glVertex3f(-0.65f, 0.11f, 0.45f);
 	glVertex3f(-0.65f, 0.01f, 0.45f);

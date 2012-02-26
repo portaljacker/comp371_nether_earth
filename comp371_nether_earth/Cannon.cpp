@@ -23,10 +23,18 @@ Cannon::~Cannon(void)
 
 void Cannon::draw()
 {
+	//Add directed light
+	GLfloat lightColor1[] = {1.0f, 1.0f, 1.0f, 1.0f}; //Color (0.5, 0.2, 0.2)
+	//Coming from the direction (-1, 0.5, 0.5)
+	GLfloat lightPos1[] = {0.0f, 1.0f, 1.0f, 0.0f};
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor1);
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos1);
+	
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
 
 	//front
 	glColor3f(0.0, 0.0, 1.0);
+	glNormal3f(0.0, 0.0, 1.0);
 	glVertex3f(0.5, 0.0, 0.5);
 	glVertex3f(0.5, 0.5, 0.5);
 	glVertex3f(-0.5, 0.5, 0.5);
@@ -34,6 +42,7 @@ void Cannon::draw()
 	
 	//back
 	//glColor3f(1.0, 0.0, 0.0);
+	glNormal3f(0.0, 0.0, -1.0);
 	glVertex3f(0.5, 0.0, -0.5);
 	glVertex3f(0.5, 0.5, -0.5);
 	glVertex3f(-0.5, 0.5, -0.5);
@@ -41,6 +50,7 @@ void Cannon::draw()
 
 	//bottom
 	//glColor3f(1.0, 1.0, 0.0);
+	glNormal3f(0.0, -1.0, 0.0);
 	glVertex3f(0.5, 0.0, 0.5);
 	glVertex3f(0.5, 0.0, -0.5);
 	glVertex3f(-0.5, 0.0, -0.5);
@@ -48,6 +58,7 @@ void Cannon::draw()
 
 	//top
 	//glColor3f(1.0, 1.0, 0.0);
+	glNormal3f(0.0, 1.0, 0.0);
 	glVertex3f(0.5, 0.5, 0.5);
 	glVertex3f(0.5, 0.5, -0.5);
 	glVertex3f(-0.5, 0.5, -0.5);
@@ -55,6 +66,7 @@ void Cannon::draw()
 
 	//right
 	//glColor3f(0.0, 1.0, 1.0);
+	glNormal3f(1.0, 0.0, 0.0);
 	glVertex3f(0.5, 0.5, 0.5);
 	glVertex3f(0.5, 0.5, -0.5);
 	glVertex3f(0.5, 0.0, -0.5);
@@ -62,6 +74,7 @@ void Cannon::draw()
 
 	//left
 	//glColor3f(0.0, 1.0, 1.0);
+	glNormal3f(-1.0, 0.0, 0.0);
 	glVertex3f(-0.5, 0.5, 0.5);
 	glVertex3f(-0.5, 0.5, -0.5);
 	glVertex3f(-0.5, 0.0, -0.5);
@@ -75,6 +88,7 @@ void Cannon::draw()
 	
 	//front
 	//glColor3f(0.5, 0.5, 0.5);
+	glNormal3f(0.0, 0.0, 1.0);
 	glVertex3f(0.05, 0.15, 0.75);
 	glVertex3f(0.05, 0.25, 0.75);
 	glVertex3f(-0.05, 0.25, 0.75);
@@ -82,6 +96,7 @@ void Cannon::draw()
 	
 	//back
 	//glColor3f(1.0, 0.0, 0.0);
+	glNormal3f(0.0, 0.0, -1.0);
 	glVertex3f(0.05, 0.15, 0.5);
 	glVertex3f(0.05, 0.25, 0.5);
 	glVertex3f(-0.05, 0.25, 0.5);
@@ -89,6 +104,7 @@ void Cannon::draw()
 
 	//bottom
 	//glColor3f(1.0, 1.0, 0.0);
+	glNormal3f(0.0, -1.0, 0.0);
 	glVertex3f(0.05, 0.15, 0.75);
 	glVertex3f(0.05, 0.15, 0.5);
 	glVertex3f(-0.05, 0.15, 0.5);
@@ -96,6 +112,7 @@ void Cannon::draw()
 
 	//top
 	//glColor3f(1.0, 1.0, 0.0);
+	glNormal3f(0.0, 1.0, 0.0);
 	glVertex3f(0.05, 0.25, 0.75);
 	glVertex3f(0.05, 0.25, 0.5);
 	glVertex3f(-0.05, 0.25, 0.5);
@@ -103,6 +120,7 @@ void Cannon::draw()
 
 	//right
 	//glColor3f(0.0, 1.0, 1.0);
+	glNormal3f(1.0, 0.0, 0.0);
 	glVertex3f(0.05, 0.25, 0.75);
 	glVertex3f(0.05, 0.25, 0.5);
 	glVertex3f(0.05, 0.15, 0.5);
@@ -110,6 +128,7 @@ void Cannon::draw()
 
 	//left
 	//glColor3f(0.0, 1.0, 1.0);
+	glNormal3f(-1.0, 0.0, 0.0);
 	glVertex3f(-0.05, 0.25, 0.75);
 	glVertex3f(-0.05, 0.25, 0.5);
 	glVertex3f(-0.05, 0.15, 0.5);
@@ -121,6 +140,7 @@ void Cannon::draw()
 	
 	//front
 	//glColor3f(0.5, 0.5, 0.5);
+	glNormal3f(0.0, 0.0, 1.0);
 	glVertex3f(0.05, 0.15, 0.75);
 	glVertex3f(0.05, 0.25, 0.75);
 	glVertex3f(-0.05, 0.25, 0.75);
@@ -128,6 +148,7 @@ void Cannon::draw()
 	
 	//back
 	//glColor3f(1.0, 0.0, 0.0);
+	glNormal3f(0.0, 0.0, -1.0);
 	glVertex3f(0.05, 0.15, 0.5);
 	glVertex3f(0.05, 0.25, 0.5);
 	glVertex3f(-0.05, 0.25, 0.5);
@@ -135,6 +156,7 @@ void Cannon::draw()
 
 	//bottom
 	//glColor3f(1.0, 1.0, 0.0);
+	glNormal3f(0.0, -1.0, 0.0);
 	glVertex3f(0.05, 0.15, 0.75);
 	glVertex3f(0.05, 0.15, 0.5);
 	glVertex3f(-0.05, 0.15, 0.5);
@@ -142,6 +164,7 @@ void Cannon::draw()
 
 	//top
 	//glColor3f(1.0, 1.0, 0.0);
+	glNormal3f(0.0, 1.0, 0.0);
 	glVertex3f(0.05, 0.25, 0.75);
 	glVertex3f(0.05, 0.25, 0.5);
 	glVertex3f(-0.05, 0.25, 0.5);
@@ -149,6 +172,7 @@ void Cannon::draw()
 
 	//right
 	//glColor3f(0.0, 1.0, 1.0);
+	glNormal3f(1.0, 0.0, 0.0);
 	glVertex3f(0.05, 0.25, 0.75);
 	glVertex3f(0.05, 0.25, 0.5);
 	glVertex3f(0.05, 0.15, 0.5);
@@ -156,10 +180,13 @@ void Cannon::draw()
 
 	//left
 	//glColor3f(0.0, 1.0, 1.0);
+	glNormal3f(-1.0, 0.0, 0.0);
 	glVertex3f(-0.05, 0.25, 0.75);
 	glVertex3f(-0.05, 0.25, 0.5);
 	glVertex3f(-0.05, 0.15, 0.5);
 	glVertex3f(-0.05, 0.15, 0.75);
+
+	glEnd();
 	glEnd();
 
 

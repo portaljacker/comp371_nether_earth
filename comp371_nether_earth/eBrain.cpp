@@ -23,10 +23,18 @@ eBrain::~eBrain(void)
 
 void eBrain::draw()
 {
+	//Add directed light
+	GLfloat lightColor1[] = {1.0f, 1.0f, 1.0f, 1.0f}; //Color (0.5, 0.2, 0.2)
+	//Coming from the direction (-1, 0.5, 0.5)
+	GLfloat lightPos1[] = {0.0f, 1.0f, 1.0f, 0.0f};
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor1);
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos1);
+	
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
 
 		//front
 		glColor3f(0.0, 0.5, 0.5);
+		glNormal3f(0.0, 0.0, 1.0);
 		glVertex3f(0.5, 0.0, 0.5);
 		glVertex3f(0.5, 0.5, 0.5);
 		glVertex3f(-0.5, 0.5, 0.5);
@@ -34,6 +42,7 @@ void eBrain::draw()
 	
 		//back
 		//glColor3f(1.0, 0.0, 0.0);
+		glNormal3f(0.0, 0.0, -1.0);
 		glVertex3f(0.5, 0.0, -0.5);
 		glVertex3f(0.5, 0.5, -0.5);
 		glVertex3f(-0.5, 0.5, -0.5);
@@ -41,6 +50,7 @@ void eBrain::draw()
 
 		//bottom
 		//glColor3f(1.0, 1.0, 0.0);
+		glNormal3f(0.0, -1.0, 0.0);
 		glVertex3f(0.5, 0.0, 0.5);
 		glVertex3f(0.5, 0.0, -0.5);
 		glVertex3f(-0.5, 0.0, -0.5);
@@ -48,6 +58,7 @@ void eBrain::draw()
 
 		//top
 		//glColor3f(1.0, 1.0, 0.0);
+		glNormal3f(0.0, 1.0, 0.0);
 		glVertex3f(0.5, 0.5, 0.5);
 		glVertex3f(0.5, 0.5, -0.5);
 		glVertex3f(-0.5, 0.5, -0.5);
@@ -55,6 +66,7 @@ void eBrain::draw()
 
 		//right
 		//glColor3f(0.0, 1.0, 1.0);
+		glNormal3f(1.0, 0.0, 0.0);
 		glVertex3f(0.5, 0.5, 0.5);
 		glVertex3f(0.5, 0.5, -0.5);
 		glVertex3f(0.5, 0.0, -0.5);
@@ -62,6 +74,7 @@ void eBrain::draw()
 
 		//left
 		//glColor3f(0.0, 1.0, 1.0);
+		glNormal3f(-1.0, 0.0, 0.0);
 		glVertex3f(-0.5, 0.5, 0.5);
 		glVertex3f(-0.5, 0.5, -0.5);
 		glVertex3f(-0.5, 0.0, -0.5);
@@ -71,6 +84,7 @@ void eBrain::draw()
 
 		glColor3f(1.0, 1.0, 1.0);
 		glTranslatef(0.0, 0.5, 0.0);
+		glNormal3f(0.0, 1.0, 0.0);
 		glutSolidSphere( 0.5, 8.0, 8.0);
 
 		//4

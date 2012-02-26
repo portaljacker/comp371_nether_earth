@@ -20,12 +20,23 @@ Tracks::~Tracks(void)
 {
 }
 
+
 void Tracks::draw(void)
 {
-	glBegin(GL_QUADS); //Begin quadrilateral coordinates
 
+	//Add directed light
+	GLfloat lightColor1[] = {1.0f, 1.0f, 1.0f, 1.0f}; //Color (0.5, 0.2, 0.2)
+	//Coming from the direction (-1, 0.5, 0.5)
+	GLfloat lightPos1[] = {0.0f, 1.0f, 1.0f, 0.0f};
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor1);
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos1);
+	
+
+	glBegin(GL_QUADS); //Begin quadrilateral coordinates
+	
 	//front
-	glColor3f(0.5f, 0.5f, 0.5f);
+	glColor3f(0.5f,0.5f, 0.5f);
+	glNormal3f(0.0, 0.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.0f);
@@ -33,6 +44,7 @@ void Tracks::draw(void)
 
 	//back
 	//glColor3f(1.0f, 1.0f, 1.0f);
+	glNormal3f(0.0, 0.0f, -1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, -0.15f, 0.5f);
@@ -40,6 +52,7 @@ void Tracks::draw(void)
 
 	//top
 	//glColor3f(1.0f, 1.0f, 0.0f);
+	glNormal3f(0.0, 1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
@@ -47,6 +60,7 @@ void Tracks::draw(void)
 
 	//bottom
 	//glColor3f(1.0f, 1.0f, 0.0f);
+	glNormal3f(0.0, -1.0f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.5f);
@@ -54,6 +68,7 @@ void Tracks::draw(void)
 
 	//right
 	//glColor3f(0.0f, 1.0f, 1.0f);
+	glNormal3f(1.0, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.5f);
@@ -61,6 +76,7 @@ void Tracks::draw(void)
 
 	//left
 	//glColor3f(0.0f, 1.0f, 1.0f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, 0.5f);
@@ -71,9 +87,10 @@ void Tracks::draw(void)
 	glTranslatef(1.0f, 0.0f, 0.0f);
 
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
-
+	
 	//front
 	//glColor3f(1.0f, 1.0f, 1.0f);
+	glNormal3f(0.0, 0.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.0f);
@@ -81,6 +98,7 @@ void Tracks::draw(void)
 
 	//back
 	//glColor3f(1.0f, 1.0f, 1.0f);
+	glNormal3f(0.0, 0.0f, -1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, -0.15f, 0.5f);
@@ -88,6 +106,7 @@ void Tracks::draw(void)
 
 	//top
 	//glColor3f(1.0f, 1.0f, 0.0f);
+	glNormal3f(0.0, 1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
@@ -95,6 +114,7 @@ void Tracks::draw(void)
 
 	//bottom
 	//glColor3f(1.0f, 1.0f, 0.0f);
+	glNormal3f(0.0, -1.0f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.5f);
@@ -102,26 +122,28 @@ void Tracks::draw(void)
 
 	//right
 	//glColor3f(0.0f, 1.0f, 1.0f);
+	glNormal3f(1.0, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.5f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
 
 	//left
-	//glColor3f(0.0f, 1.0f, 1.0f);
+	///glColor3f(0.0f, 1.0f, 1.0f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, 0.5f);
 	glVertex3f(-0.25f, 0.0f, 0.5f);
-
 	glEnd(); //End quadrilateral coordinates
-
+	
 	glTranslatef(0.0f, 0.0f, -1.0f);
 
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
-
+	
 	//front
 	//glColor3f(1.0f, 1.0f, 1.0f);
+	glNormal3f(0.0, 0.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.0f);
@@ -129,6 +151,7 @@ void Tracks::draw(void)
 
 	//back
 	//glColor3f(1.0f, 1.0f, 1.0f);
+	glNormal3f(0.0, 0.0f, -1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, -0.15f, 0.5f);
@@ -136,6 +159,7 @@ void Tracks::draw(void)
 
 	//top
 	//glColor3f(1.0f, 1.0f, 0.0f);
+	glNormal3f(0.0, 1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
@@ -143,6 +167,7 @@ void Tracks::draw(void)
 
 	//bottom
 	//glColor3f(1.0f, 1.0f, 0.0f);
+	glNormal3f(0.0, -1.0f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.5f);
@@ -150,6 +175,7 @@ void Tracks::draw(void)
 
 	//right
 	//glColor3f(0.0f, 1.0f, 1.0f);
+	glNormal3f(1.0, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.5f);
@@ -157,19 +183,21 @@ void Tracks::draw(void)
 
 	//left
 	//glColor3f(0.0f, 1.0f, 1.0f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, 0.5f);
 	glVertex3f(-0.25f, 0.0f, 0.5f);
 
 	glEnd(); //End quadrilateral coordinates
-
+	
 	glTranslatef(-1.0f, 0.0f, 0.0f);
 
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
-
-	//front
+	
+//front
 	//glColor3f(1.0f, 1.0f, 1.0f);
+	glNormal3f(0.0, 0.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.0f);
@@ -177,6 +205,7 @@ void Tracks::draw(void)
 
 	//back
 	//glColor3f(1.0f, 1.0f, 1.0f);
+	glNormal3f(0.0, 0.0f, -1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
 	glVertex3f(0.25f, -0.15f, 0.5f);
@@ -184,6 +213,7 @@ void Tracks::draw(void)
 
 	//top
 	//glColor3f(1.0f, 1.0f, 0.0f);
+	glNormal3f(0.0, 1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.5f);
@@ -191,6 +221,7 @@ void Tracks::draw(void)
 
 	//bottom
 	//glColor3f(1.0f, 1.0f, 0.0f);
+	glNormal3f(0.0, -1.0f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.5f);
@@ -198,6 +229,7 @@ void Tracks::draw(void)
 
 	//right
 	//glColor3f(0.0f, 1.0f, 1.0f);
+	glNormal3f(1.0, 0.0f, 0.0f);
 	glVertex3f(0.25f, 0.0f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.0f);
 	glVertex3f(0.25f, -0.15f, 0.5f);
@@ -205,19 +237,22 @@ void Tracks::draw(void)
 
 	//left
 	//glColor3f(0.0f, 1.0f, 1.0f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, 0.0f);
 	glVertex3f(-0.25f, -0.15f, 0.5f);
 	glVertex3f(-0.25f, 0.0f, 0.5f);
+
 
 	glEnd(); //End quadrilateral coordinates
 
 	glTranslatef(0.5f, 0.15f, 0.5f);
 
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
-
+	
 	//front
 	//glColor3f(1.0f, 1.0f, 1.0f);
+	glNormal3f(0.0, 0.0f, 1.0f);
 	glVertex3f(-0.5f, 0.0f, -0.25f);
 	glVertex3f(0.5f, 0.0f, -0.25f);
 	glVertex3f(0.5f, -0.15f, -0.25f);
@@ -225,6 +260,7 @@ void Tracks::draw(void)
 
 	//back
 	//glColor3f(1.0f, 1.0f, 1.0f);
+	glNormal3f(0.0, 0.0f, -1.0f);
 	glVertex3f(-0.5f, 0.0f, 0.75f);
 	glVertex3f(0.5f, 0.0f, 0.75f);
 	glVertex3f(0.5f, -0.15f, 0.75f);
@@ -232,6 +268,7 @@ void Tracks::draw(void)
 
 	//top
 	//glColor3f(1.0f, 1.0f, 0.0f);
+	glNormal3f(0.0, 1.0f, 0.0f);
 	glVertex3f(-0.5f, 0.0f, -0.25f);
 	glVertex3f(0.5f, 0.0f, -0.25f);
 	glVertex3f(0.5f, 0.0f, 0.75f);
@@ -239,6 +276,7 @@ void Tracks::draw(void)
 
 	//bottom
 	//glColor3f(1.0f, 1.0f, 0.0f);
+	glNormal3f(0.0, -1.0f, 0.0f);
 	glVertex3f(-0.5f, -0.15f, -0.25f);
 	glVertex3f(0.5f, -0.15f, -0.25f);
 	glVertex3f(0.5f, -0.15f, 0.75f);
@@ -246,6 +284,7 @@ void Tracks::draw(void)
 
 	//right
 	//glColor3f(0.0f, 1.0f, 1.0f);
+	glNormal3f(1.0, 0.0f, 0.0f);
 	glVertex3f(0.5f, 0.0f, -0.25f);
 	glVertex3f(0.5f, -0.15f, -0.25f);
 	glVertex3f(0.5f, -0.15f, 0.75f);
@@ -253,6 +292,7 @@ void Tracks::draw(void)
 
 	//left
 	//glColor3f(0.0f, 1.0f, 1.0f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
 	glVertex3f(-0.5f, 0.0f, -0.25f);
 	glVertex3f(-0.5f, -0.15f, -0.25f);
 	glVertex3f(-0.5f, -0.15f, 0.75f);
@@ -282,4 +322,6 @@ void Tracks::draw(void)
 	glVertex3f(-0.1f, 0.01f, -0.15f);
 
 	glEnd();
+	
+	
 }
