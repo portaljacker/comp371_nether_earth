@@ -761,7 +761,8 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(handleKeypress);
 	glutSpecialFunc(functionKeys);
 	glutReshapeFunc(handleResize);
-	
+	glShadeModel(GL_SMOOTH);
+
 	glutMainLoop();
 	return 0;
 }
