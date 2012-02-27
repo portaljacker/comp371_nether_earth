@@ -19,6 +19,6 @@ c: Toggle Perspective / Orbit / Orthogonal mode.
 r: Reset camera.
 
 Other controls:
-t: Toggle Wireframe mode.
+t: Toggle wireframe/shading mode.
 h/H: Display list of controls in console window.
 esc: Close the program.

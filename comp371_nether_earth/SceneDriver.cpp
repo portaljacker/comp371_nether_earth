@@ -139,7 +139,7 @@ void dispKeys()
 	cout << "r: Reset camera." << endl;
 	cout << endl;
 	cout << "Other controls:" << endl;
-	cout << "t: Toggle Wireframe mode." << endl;
+	cout << "t: Toggle wireframe/shading mode." << endl;
 	cout << "h/H: Display list of controls in console window." << endl;
 	cout << "esc: Close the program." << endl;
 	cout << endl;
@@ -185,7 +185,6 @@ void display ()
 	glEnable(GL_LIGHT0); //Enable light #0
 	glEnable(GL_LIGHT1); //Enable light #1
 	glEnable(GL_NORMALIZE); //Automatically normalize normals
-	glShadeModel(GL_SMOOTH); //Enable smooth shading
 
 	if(cameraMode != 2) //For Perspective and Orthogonal modes.
 	{
@@ -661,13 +660,20 @@ void handleKeypress(unsigned char key, int x, int y)
 		dispKeys();
 		break;
 	case 't':
-		wireFrame = 1-wireFrame;
-		if (wireFrame)
-			glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);    // Wireframes
-		else 
-			glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);    // Solid
+		wireFrame++;
+		wireFrame %= 3;
+		switch(wireFrame) {
+		case 0: 
+			glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);	// Solid
+			break;
+		case 1:
+			glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);	// Wireframes
+			break;
+		case 3:
+			glShadeModel(GL_SMOOTH);					// Smooth
+			break;
+		}
 		glutPostRedisplay();
-		break;
 	}
 
 	glutPostRedisplay();
