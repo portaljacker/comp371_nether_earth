@@ -23,7 +23,7 @@ Block::~Block(void)
 
 void Block::drawPH(void) {	// plain half-block
 	glPushMatrix();
-		glColor3ub(222, 184, 135);
+		glColor3ub(250, 125, 32);
 		glPushMatrix();
 			glTranslatef(0.0, 0.25, 0.0);
 			glScalef(1.0, 0.5, 1.0);
@@ -83,7 +83,7 @@ void Block::drawHU(void) {	// holed full-block
 
 void Block::drawHQ(void) {	// plain half-block
 	glPushMatrix();
-		glColor3ub(139, 0, 0);
+		glColor3ub(139, 50, 0);
 		glPushMatrix();
 			glTranslatef(0.0, 0.5, 0.0);
 			glutSolidCube(1.0);
@@ -119,18 +119,18 @@ void Block::drawD() {
 	glPushMatrix();
 		glColor3ub(105, 105, 105);
 		glPushMatrix();
-			glTranslatef(0.0, 0.33333/2, 0.0);
-			glScalef(0.4, 0.33333, 0.4);
+			glTranslatef(0.0, 0.25, 0.0);
+			glScalef(0.5, 0.5, 0.5);
 			glutSolidCube(1.0);
 		glPopMatrix();
 		glPushMatrix();
-			glTranslatef(0.0, .33333+.33333/2, 0.0);
-			glScalef(0.2, 0.33333, 0.2);
+			glTranslatef(0.0, 0.75, 0.0);
+			glScalef(0.25, 0.5, 0.25);
 			glutSolidCube(1.0);
 		glPopMatrix();
 		glPushMatrix();
-			glTranslatef(0.0, 2*.33333+.33333/2, 0.0);
-			glScalef(0.1, 0.33333, 0.1);
+			glTranslatef(0.0, 1.25, 0.0);
+			glScalef(0.125, 0.5, 0.125);
 			glutSolidCube(1.0);
 		glPopMatrix();
 	glPopMatrix();

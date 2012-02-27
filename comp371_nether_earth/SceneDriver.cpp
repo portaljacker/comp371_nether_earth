@@ -88,7 +88,7 @@ double upY= 1;
 double upZ= 0;
 double r = 70; //Orbit Radius
 
-int WireFrame = 0; //For wireframe mode.
+int wireFrame = 0; //For wireframe mode.
 int cameraMode = 1; //For camera modes.
 bool cameraReset = false;
 
@@ -185,7 +185,7 @@ void display ()
 	glEnable(GL_LIGHT0); //Enable light #0
 	glEnable(GL_LIGHT1); //Enable light #1
 	glEnable(GL_NORMALIZE); //Automatically normalize normals
-	//glShadeModel(GL_SMOOTH); //Enable smooth shading
+	glShadeModel(GL_SMOOTH); //Enable smooth shading
 
 	if(cameraMode != 2) //For Perspective and Orthogonal modes.
 	{
@@ -586,81 +586,88 @@ void orbit()
 //Called when a key is pressed
 void handleKeypress(unsigned char key, int x, int y)
 {
-	
-		switch (key)
+
+	switch (key)
+	{
+
+	case 27: //Escape key
+		exit(0);
+		//These controls only work in Perspective Mode (a and d also work in Orbit Mode).
+	case 'a':
+		if(cameraMode == 1)
+			movX -= STEP;
+		if(cameraMode == 2)
 		{
+			orbX -= STEP;
+			orbit();
+		}
+		break;
 
-			case 27: //Escape key
-				exit(0);
-			//These controls only work in Perspective Mode (a and d also work in Orbit Mode).
-			case 'a':
-				if(cameraMode == 1)
-					movX -= STEP;
-				if(cameraMode == 2)
-				{
-					orbX -= STEP;
-					orbit();
-				}
-				break;
+	case 'd':
+		if(cameraMode == 1)
+			movX += STEP;
+		if(cameraMode == 2)
+		{
+			orbX += STEP;
+			orbit();
+		}
+		break;
 
-			case 'd':
-				if(cameraMode == 1)
-					movX += STEP;
-				if(cameraMode == 2)
-				{
-					orbX += STEP;
-					orbit();
-				}
-				break;
+	case 'w':
+		if(cameraMode == 1)
+			movZ -= STEP;
+		break;
 
-			case 'w':
-				if(cameraMode == 1)
-					movZ -= STEP;
-				break;
+	case 's':
+		if(cameraMode == 1)
+			movZ += STEP;
+		break;
 
-			case 's':
-				if(cameraMode == 1)
-					movZ += STEP;
-				break;
+	case 'q':
+		if(cameraMode == 1)
+			movY -= STEP;
+		break;
 
-			case 'q':
-				if(cameraMode == 1)
-					movY -= STEP;
-				break;
+	case 'e':
+		if(cameraMode == 1)
+			movY += STEP;
+		break;
 
-			case 'e':
-				if(cameraMode == 1)
-					movY += STEP;
-				break;
-			
-			//These keys work in all camera modes.
-			case '1':
-				zoom('+');
-				break;
-			
-			case '2':
-				zoom('-');
-				break;
+		//These keys work in all camera modes.
+	case '1':
+		zoom('+');
+		break;
 
-			case 'c':
-				if(cameraMode != 2)
-					cameraMode++;
-				else
-					cameraMode = 0;
-				break;
+	case '2':
+		zoom('-');
+		break;
 
-			case 'r'://Reset camera.
-				resetCam();
-				break;
+	case 'c':
+		if(cameraMode != 2)
+			cameraMode++;
+		else
+			cameraMode = 0;
+		break;
 
-			case 'h'://Displays controls in console window.
-				dispKeys();
-				break;
+	case 'r'://Reset camera.
+		resetCam();
+		break;
 
-			case 'H':
-				dispKeys();
-				break;
+	case 'h'://Displays controls in console window.
+		dispKeys();
+		break;
 
+	case 'H':
+		dispKeys();
+		break;
+	case 't':
+		wireFrame = 1-wireFrame;
+		if (wireFrame)
+			glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);    // Wireframes
+		else 
+			glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);    // Solid
+		glutPostRedisplay();
+		break;
 	}
 
 	glutPostRedisplay();
