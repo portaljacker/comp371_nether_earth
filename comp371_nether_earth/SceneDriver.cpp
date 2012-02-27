@@ -88,7 +88,9 @@ double upY= 1;
 double upZ= 0;
 double r = 70; //Orbit Radius
 
-int wireFrame = 0; //For wireframe mode.
+enum Shade {FLAT = 0, WIRE = 1, SMOOTH = 2};
+Shade shade = FLAT;	//For wireframe mode.
+
 int cameraMode = 1; //For camera modes.
 bool cameraReset = false;
 
@@ -660,17 +662,27 @@ void handleKeypress(unsigned char key, int x, int y)
 		dispKeys();
 		break;
 	case 't':
-		wireFrame++;
-		wireFrame %= 3;
-		switch(wireFrame) {
-		case 0: 
+		switch(shade) {
+			case FLAT: 
+			shade = WIRE;
+			break;
+		case WIRE:
+			shade = SMOOTH;
+			break;
+		case SMOOTH:
+			shade = FLAT;
+			break;
+		}
+
+		switch(shade) {
+			case FLAT: 
 			glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);	// Solid
 			glShadeModel(GL_FLAT);
 			break;
-		case 1:
+		case WIRE:
 			glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);	// Wireframes
 			break;
-		case 2:
+		case SMOOTH:
 			glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
 			glShadeModel(GL_SMOOTH);					// Smooth
 			break;
