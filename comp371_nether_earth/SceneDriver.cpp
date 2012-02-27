@@ -107,7 +107,7 @@ void setCamera()
 	//Rotation about Z from F1-F2 keys.
 	glRotatef(gamma, 0, 0, 1);
 
-	if(cameraMode == 1 || cameraMode == 2)
+	if(cameraMode != 0)
 	{
 		gluPerspective(fovy, width/height, nearPlane, farPlane);
 	}
@@ -184,11 +184,13 @@ void display ()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_LIGHTING); //Enable lighting
-	glEnable(GL_LIGHT0); //Enable light #0
+	//glEnable(GL_LIGHT0); //Enable light #0
 	glEnable(GL_LIGHT1); //Enable light #1
-	glEnable(GL_NORMALIZE); //Automatically normalize normals
+	glEnable(GL_LIGHT2); //Enable light #2	
+	//glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 20);
+	//glEnable(GL_NORMALIZE); //Automatically normalize normals
 
-	if(cameraMode != 2) //For Perspective and Orthogonal modes.
+	if(cameraMode == 0 || cameraMode == 1) //For Perspective and Orthogonal modes.
 	{
 		if(cameraReset)//Reset camera to starting point.
 		{
@@ -199,7 +201,7 @@ void display ()
 			gluLookAt(movX, movY + 50.00, movZ +50.00, movX + rotX, movY + rotY, movZ + rotZ, 0.00, 1.00, 0.00);
 	}
 
-	else //For Orbit mode.
+	else if(cameraMode == 2) //For Orbit mode.
 	{
 		if(cameraReset)//Reset camera to starting point.
 		{
@@ -212,9 +214,20 @@ void display ()
 		}
 	}
 
+	else //First person robot view.
+	{
+		if(cameraReset)//Reset camera to starting point.
+		{
+			gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
+			cameraReset = false;
+		}
+		else
+			gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
+	}
+
 
 	//Add ambient light
-	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 1.0f}; //Color (0.2, 0.2, 0.2)
+	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 1.0f}; 
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 	
 	//Centers map aroundt he origin for viewing.
@@ -506,7 +519,7 @@ void display ()
 
 			else if(m1.getChar(i,j,1) == 'r') {
 				glPushMatrix();
-				glTranslatef(i-0.35, 0.15, j);
+				glTranslatef(i-0.50, 0.85, j+0.25);
 				t2.draw();
 				glFlush();
 				glPopMatrix();
@@ -644,7 +657,7 @@ void handleKeypress(unsigned char key, int x, int y)
 		break;
 
 	case 'c':
-		if(cameraMode != 2)
+		if(cameraMode != 3)
 			cameraMode++;
 		else
 			cameraMode = 0;

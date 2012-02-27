@@ -115,7 +115,7 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	grid[35][10][1] = 'n';
 	grid[39][9][1] = 'm';
 
-	grid[33][12][1] = 'r';
+	grid[33][20][1] = 'r';
 }
 
 //Methods to read contents of a particular index. in array.

@@ -23,11 +23,10 @@ Bipod::~Bipod(void)
 void Bipod::draw(void)
 {
 	//Add directed light
-	GLfloat lightColor1[] = {1.0f, 1.0f, 1.0f, 1.0f}; //Color (0.5, 0.2, 0.2)
-	//Coming from the direction (-1, 0.5, 0.5)
-	GLfloat lightPos1[] = {0.0f, 1.0f, 1.0f, 0.0f};
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor1);
-	glLightfv(GL_LIGHT0, GL_POSITION, lightPos1);
+	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
+	GLfloat lightPos1[] = {0.0f, 1.0f, -1.0f, 0.0f};
+	glLightfv(GL_LIGHT2, GL_DIFFUSE, lightColor1);
+	glLightfv(GL_LIGHT2, GL_POSITION, lightPos1);
 	
 	glBegin(GL_QUADS);
 
