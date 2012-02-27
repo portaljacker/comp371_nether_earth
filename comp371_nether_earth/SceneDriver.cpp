@@ -665,11 +665,13 @@ void handleKeypress(unsigned char key, int x, int y)
 		switch(wireFrame) {
 		case 0: 
 			glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);	// Solid
+			glShadeModel(GL_FLAT);
 			break;
 		case 1:
 			glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);	// Wireframes
 			break;
-		case 3:
+		case 2:
+			glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
 			glShadeModel(GL_SMOOTH);					// Smooth
 			break;
 		}
@@ -787,6 +789,8 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(handleKeypress);
 	glutSpecialFunc(functionKeys);
 	glutReshapeFunc(handleResize);
+
+	glShadeModel(GL_FLAT);
 	
 	glutMainLoop();
 	return 0;
