@@ -20,9 +20,15 @@ Controller::~Controller(void)
 {
 }
 
-void Controller::draw() {
+void Controller::draw(Shade shade) {
 	
 	glPushMatrix();
+		float matAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+		float matSpecular[] = { 0.1f, 0.1f, 0.0f, 0.1f };
+		float matShininess = 60;
+		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, matSpecular);
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, matShininess);
 		glColor3f(0.5, 0.5, 0.5);
 		glPushMatrix();	// middle block
 			glTranslatef (0.0, 0.2, 0.0);   
@@ -60,8 +66,18 @@ void Controller::draw() {
 			glRotatef(90.0, 1.0, 0.0, 0.0);
 			if (!GL_Quadric)
 			{
-				GL_Quadric = gluNewQuadric();  
-				gluQuadricNormals(GL_Quadric, GL_TRUE);
+				GL_Quadric = gluNewQuadric();
+				switch (shade) {
+				case FLAT:
+					gluQuadricNormals(GL_Quadric, GL_FLAT);
+					break;
+				case WIRE:
+					gluQuadricNormals(GL_Quadric, GL_TRUE);
+					break;
+				case SMOOTH:
+					gluQuadricNormals(GL_Quadric, GL_SMOOTH);
+					break;
+				}
 			}
 			gluCylinder(GL_Quadric, 0.02, 0.02, 0.8, 20, 20);
 		glPopMatrix();

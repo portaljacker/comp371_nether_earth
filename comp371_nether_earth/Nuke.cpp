@@ -22,7 +22,7 @@ Nuke::~Nuke(void)
 }
 
 // The draw function for the nuke weapon
-void Nuke::draw()
+void Nuke::draw(Shade shade)
 {
 	//Add directed light
 	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
@@ -34,6 +34,18 @@ void Nuke::draw()
 
 	cylinder = gluNewQuadric ( );
 	gluQuadricDrawStyle (cylinder, GLU_FILL);
+
+	switch (shade) {
+	case FLAT:
+		gluQuadricNormals(cylinder, GL_FLAT);
+		break;
+	case WIRE:
+		gluQuadricNormals(cylinder, GL_TRUE);
+		break;
+	case SMOOTH:
+		gluQuadricNormals(cylinder, GL_SMOOTH);
+		break;
+	}
 
 	// Situate the robot weapon at the right Y location
 	glTranslatef(0,2,0);

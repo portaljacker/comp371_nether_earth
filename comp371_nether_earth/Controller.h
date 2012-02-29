@@ -8,6 +8,8 @@
 //Sebastien S. 9500782
 //This is the controller header.
 
+#include "Enumerations.h"
+
 #pragma once
 class Controller
 {
@@ -15,6 +17,6 @@ public:
 	Controller(void);
 	~Controller(void);
 	
-	void draw(void);
+	void draw(Shade shade);
 };
 

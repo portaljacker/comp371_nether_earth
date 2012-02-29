@@ -8,6 +8,8 @@
 //Sebastien S. 9500782
 //This is the Missiles header file
 
+#include "Enumerations.h"
+
 #pragma once
 
 class Missiles
@@ -16,6 +18,6 @@ public:
 
 	Missiles(void);
 	~Missiles(void);
-	void draw(void);
+	void draw(Shade shade);
 };
 

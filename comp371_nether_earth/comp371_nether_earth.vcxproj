@@ -33,6 +33,7 @@
     <ClInclude Include="Cannon.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="eBrain.h" />
+    <ClInclude Include="Enumerations.h" />
     <ClInclude Include="Grav.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Missiles.h" />

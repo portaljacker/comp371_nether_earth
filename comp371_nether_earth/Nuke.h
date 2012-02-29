@@ -8,6 +8,8 @@
 //Sebastien S. 9500782
 //This is the Nuke header file
 
+#include "Enumerations.h"
+
 #pragma once
 
 class Nuke
@@ -16,6 +18,6 @@ public:
 
 	Nuke(void);
 	~Nuke(void);
-	void draw();
+	void draw(Shade shade);
 
 };

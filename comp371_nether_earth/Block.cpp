@@ -23,6 +23,8 @@ Block::~Block(void)
 
 void Block::drawPH(void) {	// plain half-block
 	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 		glColor3ub(250, 125, 32);
 		glPushMatrix();
 			glTranslatef(0.0, 0.25, 0.0);
@@ -34,6 +36,8 @@ void Block::drawPH(void) {	// plain half-block
 
 void Block::drawPU(void) {	// plain full-block
 	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 		glColor3ub(184, 134, 11);
 		glPushMatrix();
 			glTranslatef(0.0, 0.5, 0.0);
@@ -43,6 +47,8 @@ void Block::drawPU(void) {	// plain full-block
 }
 void Block::drawHH(void) {	// holed half-block
 	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 		glColor3ub(160, 82, 45);
 		glPushMatrix();
 			glTranslatef(0.0, 0.25, 0.0);
@@ -63,6 +69,8 @@ void Block::drawHH(void) {	// holed half-block
 }
 void Block::drawHU(void) {	// holed full-block
 	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 		glColor3ub(160, 82, 45);
 		glPushMatrix();
 			glTranslatef(0.0, 0.5, 0.0);
@@ -83,6 +91,8 @@ void Block::drawHU(void) {	// holed full-block
 
 void Block::drawHQ(void) {	// plain half-block
 	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 		glColor3ub(139, 50, 0);
 		glPushMatrix();
 			glTranslatef(0.0, 0.5, 0.0);
@@ -117,6 +127,8 @@ void Block::drawHQ(void) {	// plain half-block
 
 void Block::drawD() {
 	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 		glColor3ub(105, 105, 105);
 		glPushMatrix();
 			glTranslatef(0.0, 0.25, 0.0);

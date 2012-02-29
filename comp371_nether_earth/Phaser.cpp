@@ -20,7 +20,7 @@ Phaser::~Phaser(void)
 }
 
 // This function is called to display the scene.
-void Phaser::draw()
+void Phaser::draw(Shade shade)
 {
 	//Add directed light
 	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
@@ -33,12 +33,26 @@ void Phaser::draw()
 	disk = gluNewQuadric ( );
 	gluQuadricDrawStyle (disk, GLU_FILL);
 
+	switch (shade) {
+	case FLAT:
+		gluQuadricNormals(disk, GL_FLAT);
+		break;
+	case WIRE:
+		gluQuadricNormals(disk, GL_TRUE);
+		break;
+	case SMOOTH:
+		gluQuadricNormals(disk, GL_SMOOTH);
+		break;
+	}
+
 	// Situate the robot weapon at the right Y location
 	glTranslatef(0,1,0);
 	glScalef(1.5,1.5,1.5);
 
 	// Push the entire object
 	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 
 		// The cube
 		glPushMatrix();
