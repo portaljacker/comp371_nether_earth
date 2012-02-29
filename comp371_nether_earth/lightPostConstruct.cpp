@@ -160,7 +160,7 @@ void lightPostConstruct::createLight(void)
 	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spotDir);
 
 	// Define the intensity of light (def= 25)
-	glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 25);
+	glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 150);
 	
 	// Define the Cutt-Off angle   (12.5 * 2 = 25)
 	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 12.5);

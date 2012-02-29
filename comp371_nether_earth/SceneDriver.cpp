@@ -95,6 +95,9 @@ Shade shade = FLAT;	//For wireframe mode.
 int cameraMode = 1; //For camera modes.
 bool cameraReset = false;
 
+// Constant look at point of the lightpost's light and the camera 
+const GLfloat lookAtPoint = 3.0 * sqrt(2.0); 
+
 void setCamera()
 {
 	// Must set it up in Projection Matrix
@@ -138,7 +141,7 @@ void dispKeys()
 	cout << "Controls common to all modes:" << endl;
 	cout << "1, 2: Zoom in and out." << endl;
 	cout << "F1, F2: Rotate around Z axis.(May get clippy in Perspective mode.)" << endl;
-	cout << "c: Toggle Perspective / Orbit / Orthogonal mode." << endl;
+	cout << "c: Toggle Perspective / Orbit / Orthogonal mode / First Person Robot View / Light Post Views" << endl;
 	cout << "r: Reset camera." << endl;
 	cout << endl;
 	cout << "Other controls:" << endl;
@@ -215,46 +218,44 @@ void display ()
 		}
 	}
 
-	else //First person robot view.
+	else if(cameraMode == 3)//First person robot view.
 	{
-		if(cameraReset)//Reset camera to starting point.
-		{
+		//if(cameraReset)//Reset camera to starting point.
+		//{
 			gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
-			cameraReset = false;
-		}
-		else
-			gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
+			//cameraReset = false;
+		//}
+		//else
+			//gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
 	}
 
-	/*
-	else //First person lightpost 1 view
+	
+	else if(cameraMode == 4)//First person lightpost 1 view
 	{
 		
-		gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
+		gluLookAt(25, 6.0, 25, 0, 0.1, 0, 0.00, 1.00, 0.00);
 			
 	}
 
-	else //First person lightpost 2 view
+	else if(cameraMode == 5)//First person lightpost 2 view
 	{
 		
-		gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
+		gluLookAt(25, 6.0, -25, 0, 0.1, 0, 0.00, 1.00, 0.00);
 			
 	}
 
-	else //First person lightpost 3 view
+	else if(cameraMode == 6) //First person lightpost 3 view
 	{
 		
-		gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
+		gluLookAt(-25, 6.0, 25, 0, 0.1, 0, 0.00, 1.00, 0.00);
 			
 	}
 
 	else //First person lightpost 4 view
 	{
-		
-		gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
+		gluLookAt(-25, 6.0, 025, 0, 0.1, 0, 0.00, 1.00, 0.00);
 			
 	}
-	*/
 
 	//Add ambient light
 	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 1.0f}; 
@@ -732,7 +733,7 @@ void handleKeypress(unsigned char key, int x, int y)
 		break;
 
 	case 'c':
-		if(cameraMode != 3)
+		if(cameraMode != 7)
 			cameraMode++;
 		else
 			cameraMode = 0;
