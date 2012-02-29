@@ -100,6 +100,12 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	for (int j = 1; j < 49; j++)
 		grid[49][j][1] = '6';
 
+	// Four courner light posts
+	grid[0][0][1] = '%';
+	grid[0][49][1] = '^';
+	grid[49][0][1] = '&';
+	grid[49][49][1] = '*';
+
 	// Robot tests (with buildings for comparison)
 	grid[38][3][1] = '2';
 	grid[38][7][1] = 'b';

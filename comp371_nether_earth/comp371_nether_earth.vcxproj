@@ -17,6 +17,7 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="eBrain.cpp" />
     <ClCompile Include="Grav.cpp" />
+    <ClCompile Include="lightPostConstruct.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Missiles.cpp" />
     <ClCompile Include="Nuke.cpp" />
@@ -34,6 +35,7 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="eBrain.h" />
     <ClInclude Include="Grav.h" />
+    <ClInclude Include="lightPostConstruct.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Missiles.h" />
     <ClInclude Include="Nuke.h" />
