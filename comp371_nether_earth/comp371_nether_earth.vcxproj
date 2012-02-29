@@ -34,6 +34,7 @@
     <ClInclude Include="Cannon.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="eBrain.h" />
+    <ClInclude Include="Enumerations.h" />
     <ClInclude Include="Grav.h" />
     <ClInclude Include="lightPostConstruct.h" />
     <ClInclude Include="Map.h" />

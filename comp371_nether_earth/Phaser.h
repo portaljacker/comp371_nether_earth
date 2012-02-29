@@ -8,6 +8,8 @@
 //Sebastien S. 9500782
 //This is the phaser class specification
 
+#include "Enumerations.h"
+
 #pragma once
 
 class Phaser
@@ -16,6 +18,6 @@ public:
 
 	Phaser(void);
 	~Phaser(void);
-	void draw();
+	void draw(Shade shade);
 	
 };

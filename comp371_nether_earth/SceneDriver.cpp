@@ -15,6 +15,7 @@
 
 #include <strstream>
 #include <iomanip>
+#include "Enumerations.h"
 #include "Tile.h"
 #include "Map.h"
 #include "Rubble.h"
@@ -89,7 +90,6 @@ double upY= 1;
 double upZ= 0;
 double r = 70; //Orbit Radius
 
-enum Shade {FLAT = 0, WIRE = 1, SMOOTH = 2};
 Shade shade = FLAT;	//For wireframe mode.
 
 int cameraMode = 1; //For camera modes.
@@ -258,7 +258,7 @@ void display ()
 	}
 
 	//Add ambient light
-	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 1.0f}; 
+	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 	
 	//Centers map aroundt he origin for viewing.
@@ -290,9 +290,7 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				glBegin(GL_QUADS);
 				t1.draw();
-				glEnd();
 				glFlush();
 				glPopMatrix();
 			}
@@ -302,9 +300,7 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				glBegin(GL_QUADS);
 				t1.draw();
-				glEnd();
 				glFlush();
 				glPopMatrix();
 
@@ -320,9 +316,7 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				glBegin(GL_QUADS);
 				t1.draw();
-				glEnd();
 				glFlush();
 				glPopMatrix();
 
@@ -338,9 +332,7 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				glBegin(GL_QUADS);
 				t1.draw();
-				glEnd();
 				glFlush();
 				glPopMatrix();
 
@@ -357,9 +349,7 @@ void display ()
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				glRotatef(90, 0, 1, 0); //rotate to horizontal position
-				glBegin(GL_QUADS);
 				t1.drawHole();
-				glEnd();
 				glFlush();
 				glPopMatrix();
 			}
@@ -369,9 +359,7 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				glBegin(GL_QUADS);
 				t1.drawHole();
-				glEnd();
 				glFlush();
 				glPopMatrix();
 			}
@@ -382,9 +370,7 @@ void display ()
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				glRotatef(-90, 0, 1, 0); //rotate to proper position
-				glBegin(GL_QUADS);
 				t1.drawHoleEdge();
-				glEnd();
 				glFlush();
 				glPopMatrix();
 			}
@@ -395,9 +381,7 @@ void display ()
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				glRotatef(90, 0, 1, 0); //rotate to proper position
-				glBegin(GL_QUADS);
 				t1.drawHoleEdge();
-				glEnd();
 				glFlush();
 				glPopMatrix();
 			}
@@ -407,9 +391,7 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				glBegin(GL_QUADS);
 				t1.drawHoleEdge();
-				glEnd();
 				glFlush();
 				glPopMatrix();
 			}
@@ -420,9 +402,7 @@ void display ()
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				glRotatef(180, 0, 1, 0); //rotate to proper position
-				glBegin(GL_QUADS);
 				t1.drawHoleEdge();
-				glEnd();
 				glFlush();
 				glPopMatrix();
 			}
@@ -572,7 +552,7 @@ void display ()
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				glRotatef(-90,1,0,0);
-				p1.draw();
+				p1.draw(shade);
 				glFlush();
 				glPopMatrix();
 			}
@@ -580,7 +560,7 @@ void display ()
 			else if(m1.getChar(i,j,1) == 'n') {
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				n1.draw();
+				n1.draw(shade);
 				glFlush();
 				glPopMatrix();
 			}
@@ -588,7 +568,7 @@ void display ()
 			else if(m1.getChar(i,j,1) == 'm') {
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				m2.draw();
+				m2.draw(shade);
 				glFlush();
 				glPopMatrix();
 			}
@@ -616,7 +596,7 @@ void display ()
 			if (m1.getChar(i,j,2) == '1') {
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				c1.draw();
+				c1.draw(shade);
 				glFlush();
 				glPopMatrix();
 			}
@@ -650,7 +630,7 @@ void zoom(unsigned char direction)
 //http://homepages.ius.edu/rwisman/b481/html/notes/FlyAround.htm
 void orbit()
 {
-// Mouse point to angle conversion
+// Coordinate to angle conversion
   double theta = (360.0/HEIGHT)*50*3.0;
   double phi = (360.0/WIDTH)*orbX*3.0;
 

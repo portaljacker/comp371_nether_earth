@@ -19,7 +19,7 @@ Missiles::~Missiles(void)
 {
 }
 
-void Missiles::draw()
+void Missiles::draw(Shade shade)
 {
 	//Add directed light
 	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
@@ -32,6 +32,18 @@ void Missiles::draw()
 	disk = gluNewQuadric ( );
 	gluQuadricDrawStyle (disk, GLU_FILL);
 
+	switch (shade) {
+	case FLAT:
+		gluQuadricNormals(disk, GL_FLAT);
+		break;
+	case WIRE:
+		gluQuadricNormals(disk, GL_TRUE);
+		break;
+	case SMOOTH:
+		gluQuadricNormals(disk, GL_SMOOTH);
+		break;
+	}
+
 	// Situate the robot weapon at the right Y location
 	//glTranslatef(0,1,0);
 
@@ -41,6 +53,8 @@ void Missiles::draw()
 
 	//Push entire object
 	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 
 		// The base cube
 		glPushMatrix();
