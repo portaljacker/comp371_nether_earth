@@ -60,6 +60,9 @@
     <ClCompile Include="Nuke.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lightPostConstruct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -102,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Enumerations.h">
+    	<Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lightPostConstruct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

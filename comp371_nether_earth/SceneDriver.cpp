@@ -29,6 +29,7 @@
 #include "Nuke.h"
 #include "Missiles.h"
 #include "Phaser.h"
+#include "lightPostConstruct.h"
 using namespace std;
 
 // Initial size of graphics window.
@@ -225,6 +226,35 @@ void display ()
 			gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
 	}
 
+	/*
+	else //First person lightpost 1 view
+	{
+		
+		gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
+			
+	}
+
+	else //First person lightpost 2 view
+	{
+		
+		gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
+			
+	}
+
+	else //First person lightpost 3 view
+	{
+		
+		gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
+			
+	}
+
+	else //First person lightpost 4 view
+	{
+		
+		gluLookAt(8.00, 1.50, -5.00, 8.00, 0.00, 1.00, 0.00, 1.00, 0.00);
+			
+	}
+	*/
 
 	//Add ambient light
 	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
@@ -247,6 +277,7 @@ void display ()
 	Nuke n1 = Nuke();
 	Missiles m2 = Missiles();
 	Phaser p1 = Phaser();
+	lightPostConstruct l1 = lightPostConstruct();
 
 	//Main rendering loop.
 	for(int i = 0; i < 50; i++)
@@ -425,6 +456,50 @@ void display ()
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				b1.drawD();
+				glFlush();
+				glPopMatrix();
+			}
+
+			// Draw light post 1 
+			else if(m1.getChar(i,j,1) == '%') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glRotatef(45,0,1,0);
+				l1.draw();
+				l1.createLight();
+				glFlush();
+				glPopMatrix();
+			}
+
+			// Draw light post 2 
+			else if(m1.getChar(i,j,1) == '^') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glRotatef(135,0,1,0);
+				l1.draw();
+				l1.createLight();
+				glFlush();
+				glPopMatrix();
+			}
+
+			// Draw light post 3 
+			else if(m1.getChar(i,j,1) == '&') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glRotatef(-45,0,1,0);
+				l1.draw();
+				l1.createLight();
+				glFlush();
+				glPopMatrix();
+			}
+
+			// Draw light post 4
+			else if(m1.getChar(i,j,1) == '*') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				glRotatef(-135,0,1,0);
+				l1.draw();
+				l1.createLight();
 				glFlush();
 				glPopMatrix();
 			}
