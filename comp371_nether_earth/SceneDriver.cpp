@@ -233,27 +233,27 @@ void display ()
 	else if(cameraMode == 4)//First person lightpost 1 view
 	{
 		
-		gluLookAt(25, 6.0, 25, 0, 0.1, 0, 0.00, 1.00, 0.00);
+		gluLookAt(23, 6.0, 23, 0, 0.1, 0, 0.00, 1.00, 0.00);
 			
 	}
 
 	else if(cameraMode == 5)//First person lightpost 2 view
 	{
 		
-		gluLookAt(25, 6.0, -25, 0, 0.1, 0, 0.00, 1.00, 0.00);
+		gluLookAt(23, 6.0, -23, 0, 0.1, 0, 0.00, 1, 0.00);
 			
 	}
 
 	else if(cameraMode == 6) //First person lightpost 3 view
 	{
 		
-		gluLookAt(-25, 6.0, 25, 0, 0.1, 0, 0.00, 1.00, 0.00);
+		gluLookAt(-23, 6.0, 23, 0, 0.1, 0, 0.00, 1.00, 0.00);
 			
 	}
 
 	else //First person lightpost 4 view
 	{
-		gluLookAt(-25, 6.0, 025, 0, 0.1, 0, 0.00, 1.00, 0.00);
+		gluLookAt(-23, 6.0, -23, 0, 0, 0, 0.00, 1.00, 0.00);
 			
 	}
 

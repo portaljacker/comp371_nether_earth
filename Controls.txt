@@ -1,3 +1,7 @@
+Comp 371
+Programming Assignment 2
+Team 4
+
 Camera controls:
 Perspective mode:
 w, a, s, d: Move the camera around.
@@ -15,10 +19,10 @@ up & down arrow keys: Rotate around x axis.
 Controls common to all modes:
 1, 2: Zoom in and out.
 F1, F2: Rotate around Z axis.(May get clippy in Perspective mode.)
-c: Toggle Perspective / Orbit / Orthogonal mode.
+c: Toggle Perspective / Orbit / Orthogonal / First Person View modes.
 r: Reset camera.
 
 Other controls:
-t: Toggle wireframe/shading mode.
+t: Toggle wireframe/shading modes.
 h/H: Display list of controls in console window.
 esc: Close the program.
