@@ -1,6 +1,6 @@
 //Comp371_w12 Section R
 //Prof. S. Mokhov
-//Programming Assignment 2
+//Programming Assignment 3
 //Team 4
 //Jordan V. 1300520
 //Taras K. 6901204
@@ -29,7 +29,64 @@ void Block::drawPH(void) {	// plain half-block
 		glPushMatrix();
 			glTranslatef(0.0, 0.25, 0.0);
 			glScalef(1.0, 0.5, 1.0);
-			glutSolidCube(1.0);
+			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
+			glPushMatrix();
+				glBegin(GL_QUADS);
+				glPushMatrix();
+					//(Front Side)
+					glNormal3f(0.0, 0.0, 1.0);
+					glVertex3f( 0.5, 0.5, 0.5);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+					glVertex3f( 0.5,-0.5, 0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Back Side)
+					glNormal3f(0.0, 0.0, -1.0);
+					glVertex3f( 0.5,-0.5,-0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f( 0.5, 0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Left Side)
+					glNormal3f(-1.0, 0.0, 0.0);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Right Side)
+					glNormal3f(1.0, 0.0, 0.0);
+					glVertex3f( 0.5, 0.5,-0.5);
+					glVertex3f( 0.5, 0.5, 0.5);
+					glVertex3f( 0.5,-0.5, 0.5);
+					glVertex3f( 0.5,-0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Bottom Side)
+					glNormal3f(0.0, -1.0, 0.0);
+					glVertex3f( 0.5,-0.5, 0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f( 0.5,-0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Top Side)
+					glNormal3f(0.0, 1.0, 0.0);
+					glVertex3f( 0.5, 0.5,-0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f( 0.5, 0.5, 0.5);
+				glPopMatrix();
+				glEnd();
+			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
 }
@@ -41,7 +98,64 @@ void Block::drawPU(void) {	// plain full-block
 		glColor3ub(184, 134, 11);
 		glPushMatrix();
 			glTranslatef(0.0, 0.5, 0.0);
-			glutSolidCube(1.0);
+			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
+			glPushMatrix();
+				glBegin(GL_QUADS);
+				glPushMatrix();
+					//(Front Side)
+					glNormal3f(0.0, 0.0, 1.0);
+					glVertex3f( 0.5, 0.5, 0.5);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+					glVertex3f( 0.5,-0.5, 0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Back Side)
+					glNormal3f(0.0, 0.0, -1.0);
+					glVertex3f( 0.5,-0.5,-0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f( 0.5, 0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Left Side)
+					glNormal3f(-1.0, 0.0, 0.0);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Right Side)
+					glNormal3f(1.0, 0.0, 0.0);
+					glVertex3f( 0.5, 0.5,-0.5);
+					glVertex3f( 0.5, 0.5, 0.5);
+					glVertex3f( 0.5,-0.5, 0.5);
+					glVertex3f( 0.5,-0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Bottom Side)
+					glNormal3f(0.0, -1.0, 0.0);
+					glVertex3f( 0.5,-0.5, 0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f( 0.5,-0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Top Side)
+					glNormal3f(0.0, 1.0, 0.0);
+					glVertex3f( 0.5, 0.5,-0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f( 0.5, 0.5, 0.5);
+				glPopMatrix();
+				glEnd();
+			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
 }
@@ -53,7 +167,64 @@ void Block::drawHH(void) {	// holed half-block
 		glPushMatrix();
 			glTranslatef(0.0, 0.25, 0.0);
 			glScalef(1.0, 0.5, 1.0);
-			glutSolidCube(1.0);
+			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
+			glPushMatrix();
+				glBegin(GL_QUADS);
+				glPushMatrix();
+					//(Front Side)
+					glNormal3f(0.0, 0.0, 1.0);
+					glVertex3f( 0.5, 0.5, 0.5);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+					glVertex3f( 0.5,-0.5, 0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Back Side)
+					glNormal3f(0.0, 0.0, -1.0);
+					glVertex3f( 0.5,-0.5,-0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f( 0.5, 0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Left Side)
+					glNormal3f(-1.0, 0.0, 0.0);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Right Side)
+					glNormal3f(1.0, 0.0, 0.0);
+					glVertex3f( 0.5, 0.5,-0.5);
+					glVertex3f( 0.5, 0.5, 0.5);
+					glVertex3f( 0.5,-0.5, 0.5);
+					glVertex3f( 0.5,-0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Bottom Side)
+					glNormal3f(0.0, -1.0, 0.0);
+					glVertex3f( 0.5,-0.5, 0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f( 0.5,-0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Top Side)
+					glNormal3f(0.0, 1.0, 0.0);
+					glVertex3f( 0.5, 0.5,-0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f( 0.5, 0.5, 0.5);
+				glPopMatrix();
+				glEnd();
+			glPopMatrix();
 		glPopMatrix();
 		glPushMatrix();
 			glColor3f(0.0, 0.0, 0.0);
@@ -74,7 +245,64 @@ void Block::drawHU(void) {	// holed full-block
 		glColor3ub(160, 82, 45);
 		glPushMatrix();
 			glTranslatef(0.0, 0.5, 0.0);
-			glutSolidCube(1.0);
+			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
+			glPushMatrix();
+				glBegin(GL_QUADS);
+				glPushMatrix();
+					//(Front Side)
+					glNormal3f(0.0, 0.0, 1.0);
+					glVertex3f( 0.5, 0.5, 0.5);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+					glVertex3f( 0.5,-0.5, 0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Back Side)
+					glNormal3f(0.0, 0.0, -1.0);
+					glVertex3f( 0.5,-0.5,-0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f( 0.5, 0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Left Side)
+					glNormal3f(-1.0, 0.0, 0.0);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Right Side)
+					glNormal3f(1.0, 0.0, 0.0);
+					glVertex3f( 0.5, 0.5,-0.5);
+					glVertex3f( 0.5, 0.5, 0.5);
+					glVertex3f( 0.5,-0.5, 0.5);
+					glVertex3f( 0.5,-0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Bottom Side)
+					glNormal3f(0.0, -1.0, 0.0);
+					glVertex3f( 0.5,-0.5, 0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f( 0.5,-0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Top Side)
+					glNormal3f(0.0, 1.0, 0.0);
+					glVertex3f( 0.5, 0.5,-0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f( 0.5, 0.5, 0.5);
+				glPopMatrix();
+				glEnd();
+			glPopMatrix();
 		glPopMatrix();
 		glPushMatrix();
 			glColor3f(0.0, 0.0, 0.0);
@@ -96,7 +324,64 @@ void Block::drawHQ(void) {	// plain half-block
 		glColor3ub(139, 50, 0);
 		glPushMatrix();
 			glTranslatef(0.0, 0.5, 0.0);
-			glutSolidCube(1.0);
+			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
+			glPushMatrix();
+				glBegin(GL_QUADS);
+				glPushMatrix();
+					//(Front Side)
+					glNormal3f(0.0, 0.0, 1.0);
+					glVertex3f( 0.5, 0.5, 0.5);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+					glVertex3f( 0.5,-0.5, 0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Back Side)
+					glNormal3f(0.0, 0.0, -1.0);
+					glVertex3f( 0.5,-0.5,-0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f( 0.5, 0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Left Side)
+					glNormal3f(-1.0, 0.0, 0.0);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Right Side)
+					glNormal3f(1.0, 0.0, 0.0);
+					glVertex3f( 0.5, 0.5,-0.5);
+					glVertex3f( 0.5, 0.5, 0.5);
+					glVertex3f( 0.5,-0.5, 0.5);
+					glVertex3f( 0.5,-0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Bottom Side)
+					glNormal3f(0.0, -1.0, 0.0);
+					glVertex3f( 0.5,-0.5, 0.5);
+					glVertex3f(-0.5,-0.5, 0.5);
+					glVertex3f(-0.5,-0.5,-0.5);
+					glVertex3f( 0.5,-0.5,-0.5);
+				glPopMatrix();
+				
+				glPushMatrix();
+					//(Top Side)
+					glNormal3f(0.0, 1.0, 0.0);
+					glVertex3f( 0.5, 0.5,-0.5);
+					glVertex3f(-0.5, 0.5,-0.5);
+					glVertex3f(-0.5, 0.5, 0.5);
+					glVertex3f( 0.5, 0.5, 0.5);
+				glPopMatrix();
+				glEnd();
+			glPopMatrix();
 		glPopMatrix();
 		glPushMatrix();
 			glTranslatef(0.0, 1.001, 0.0);

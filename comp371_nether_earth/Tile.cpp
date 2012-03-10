@@ -1,6 +1,6 @@
 //Comp371_w12 Section R
 //Prof. S. Mokhov
-//Programming Assignment 2
+//Programming Assignment 3
 //Team 4
 //Jordan V. 1300520
 //Taras K. 6901204
@@ -29,11 +29,11 @@ void Tile::draw()
 			float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 			glColor3f(0.5f,0.5f,0.5f);
-			glNormal3f(0.0, 1.0, 0.0);
 
 			glBegin(GL_QUADS);
 			glPushMatrix();
-				//(Front Side)	
+				//(Front Side)
+				glNormal3f(0.0, 0.0, 1.0);
 				glVertex3f( 0.5, 0.0, 0.5);	//Top Right Vertex
 				glVertex3f(-0.5, 0.0, 0.5);	//Top Left Vertex
 				glVertex3f(-0.5,-0.2, 0.5);	//Bottom Left Vertex
@@ -42,6 +42,7 @@ void Tile::draw()
 				
 			glPushMatrix();
 				//(Back Side)
+				glNormal3f(0.0, 0.0, -1.0);
 				glVertex3f( 0.5,-0.2,-0.5);	//Top Right Vertex
 				glVertex3f(-0.5,-0.2,-0.5);	//Top Left Vertex
 				glVertex3f(-0.5, 0.0,-0.5);	//Bottom  Left Vertex
@@ -50,6 +51,7 @@ void Tile::draw()
 				
 			glPushMatrix();
 				//(Left Side)
+				glNormal3f(-1.0, 0.0, 0.0);
 				glVertex3f(-0.5, 0.0, 0.5);	//Top Right Vertex
 				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
 				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
@@ -58,6 +60,7 @@ void Tile::draw()
 				
 			glPushMatrix();
 				//(Right Side)
+				glNormal3f(1.0, 0.0, 0.0);
 				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
 				glVertex3f( 0.5, 0.0, 0.5);	//Top Left Vertex
 				glVertex3f( 0.5,-0.2, 0.5);	//Bottom Left Vertex
@@ -66,6 +69,7 @@ void Tile::draw()
 				
 			glPushMatrix();
 				//(Bottom Side)
+				glNormal3f(0.0, -1.0, 0.0);
 				glVertex3f( 0.5,-0.2, 0.5);	//Top Right Vertex
 				glVertex3f(-0.5,-0.2, 0.5);	//Top Left Vertex
 				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
@@ -74,6 +78,7 @@ void Tile::draw()
 				
 			glPushMatrix();
 				//(Top Side)
+				glNormal3f(0.0, 1.0, 0.0);
 				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
 				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
 				glVertex3f(-0.5, 0.0, 0.5);	//Bottom Left Vertex
@@ -123,7 +128,8 @@ void Tile::drawHole()
 		glPushMatrix();
 			//Left side
 			glPushMatrix();
-				//(Front Side)	
+				//(Front Side)
+				glNormal3f(0.0, 0.0, 1.0);
 				glVertex3f(-0.25, 0.0, 0.5);	//Top Right Vertex
 				glVertex3f(-0.5, 0.0, 0.5);	//Top Left Vertex
 				glVertex3f(-0.5,-0.2, 0.5);	//Bottom Left Vertex
@@ -132,6 +138,7 @@ void Tile::drawHole()
 				
 			glPushMatrix();
 				//(Back Side)
+				glNormal3f(0.0, 0.0, -1.0);
 				glVertex3f(-0.25,-0.2,-0.5);	//Top Right Vertex
 				glVertex3f(-0.5,-0.2,-0.5);	//Top Left Vertex
 				glVertex3f(-0.5, 0.0,-0.5);	//Bottom  Left Vertex
@@ -140,6 +147,7 @@ void Tile::drawHole()
 				
 			glPushMatrix();
 				//(Left Side)
+				glNormal3f(-1.0, 0.0, 0.0);
 				glVertex3f(-0.5, 0.0, 0.5);	//Top Right Vertex
 				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
 				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
@@ -148,6 +156,7 @@ void Tile::drawHole()
 				
 			glPushMatrix();
 				//(Right Side)
+				glNormal3f(1.0, 0.0, 0.0);
 				glVertex3f(-0.25, 0.0,-0.5);	//Top Right Vertex
 				glVertex3f(-0.25, 0.0, 0.5);	//Top Left Vertex
 				glVertex3f(-0.25,-0.2, 0.5);	//Bottom Left Vertex
@@ -156,6 +165,7 @@ void Tile::drawHole()
 				
 			glPushMatrix();
 				//(Bottom Side)
+				glNormal3f(0.0, -1.0, 0.0);
 				glVertex3f(-0.25,-0.2, 0.5);	//Top Right Vertex
 				glVertex3f(-0.5,-0.2, 0.5);	//Top Left Vertex
 				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
@@ -164,6 +174,7 @@ void Tile::drawHole()
 				
 			glPushMatrix();
 				//(Top Side)
+				glNormal3f(0.0, 1.0, 0.0);
 				glVertex3f(-0.25, 0.0,-0.5);	//Top Right Vertex
 				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
 				glVertex3f(-0.5, 0.0, 0.5);	//Bottom Left Vertex
@@ -176,6 +187,7 @@ void Tile::drawHole()
 			//Right side
 			glPushMatrix();
 				//(Front Side)	
+				glNormal3f(0.0, 0.0, 1.0);
 				glVertex3f( 0.5, 0.0, 0.5);	//Top Right Vertex
 				glVertex3f( 0.25, 0.0, 0.5);	//Top Left Vertex
 				glVertex3f( 0.25,-0.2, 0.5);	//Bottom Left Vertex
@@ -184,6 +196,7 @@ void Tile::drawHole()
 				
 			glPushMatrix();
 				//(Back Side)
+				glNormal3f(0.0, 0.0, -1.0);
 				glVertex3f( 0.5,-0.2,-0.5);	//Top Right Vertex
 				glVertex3f( 0.25,-0.2,-0.5);	//Top Left Vertex
 				glVertex3f( 0.25, 0.0,-0.5);	//Bottom  Left Vertex
@@ -192,6 +205,7 @@ void Tile::drawHole()
 				
 			glPushMatrix();
 				//(Left Side)
+				glNormal3f(-1.0, 0.0, 0.0);
 				glVertex3f( 0.25, 0.0, 0.5);	//Top Right Vertex
 				glVertex3f( 0.25, 0.0,-0.5);	//Top Left Vertex
 				glVertex3f( 0.25,-0.2,-0.5);	//Bottom Left Vertex
@@ -200,6 +214,7 @@ void Tile::drawHole()
 				
 			glPushMatrix();
 				//(Right Side)
+				glNormal3f(1.0, 0.0, 0.0);
 				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
 				glVertex3f( 0.5, 0.0, 0.5);	//Top Left Vertex
 				glVertex3f( 0.5,-0.2, 0.5);	//Bottom Left Vertex
@@ -208,6 +223,7 @@ void Tile::drawHole()
 				
 			glPushMatrix();
 				//(Bottom Side)
+				glNormal3f(0.0, -1.0, 0.0);
 				glVertex3f( 0.5,-0.2, 0.5);	//Top Right Vertex
 				glVertex3f( 0.25,-0.2, 0.5);	//Top Left Vertex
 				glVertex3f( 0.25,-0.2,-0.5);	//Bottom Left Vertex
@@ -216,6 +232,7 @@ void Tile::drawHole()
 				
 			glPushMatrix();
 				//(Top Side)
+				glNormal3f(0.0, 1.0, 0.0);
 				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
 				glVertex3f( 0.25, 0.0,-0.5);	//Top Left Vertex
 				glVertex3f( 0.25, 0.0, 0.5);	//Bottom Left Vertex
@@ -243,7 +260,8 @@ void Tile::drawHoleEdge()
 		glPushMatrix();
 			//Left side
 			glPushMatrix();
-				//(Front Side)	
+				//(Front Side)
+				glNormal3f(0.0, 0.0, 1.0);
 				glVertex3f(-0.25, 0.0, 0.5);	//Top Right Vertex
 				glVertex3f(-0.5, 0.0, 0.5);	//Top Left Vertex
 				glVertex3f(-0.5,-0.2, 0.5);	//Bottom Left Vertex
@@ -252,6 +270,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Back Side)
+				glNormal3f(0.0, 0.0, -1.0);
 				glVertex3f(-0.25,-0.2,-0.5);	//Top Right Vertex
 				glVertex3f(-0.5,-0.2,-0.5);	//Top Left Vertex
 				glVertex3f(-0.5, 0.0,-0.5);	//Bottom  Left Vertex
@@ -260,6 +279,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Left Side)
+				glNormal3f(-1.0, 0.0, 0.0);
 				glVertex3f(-0.5, 0.0, 0.5);	//Top Right Vertex
 				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
 				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
@@ -268,6 +288,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Right Side)
+				glNormal3f(1.0, 0.0, 0.0);
 				glVertex3f(-0.25, 0.0,-0.5);	//Top Right Vertex
 				glVertex3f(-0.25, 0.0, 0.5);	//Top Left Vertex
 				glVertex3f(-0.25,-0.2, 0.5);	//Bottom Left Vertex
@@ -276,6 +297,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Bottom Side)
+				glNormal3f(0.0, -1.0, 0.0);
 				glVertex3f(-0.25,-0.2, 0.5);	//Top Right Vertex
 				glVertex3f(-0.5,-0.2, 0.5);	//Top Left Vertex
 				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
@@ -284,6 +306,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Top Side)
+				glNormal3f(0.0, 1.0, 0.0);
 				glVertex3f(-0.25, 0.0,-0.5);	//Top Right Vertex
 				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
 				glVertex3f(-0.5, 0.0, 0.5);	//Bottom Left Vertex
@@ -295,7 +318,8 @@ void Tile::drawHoleEdge()
 		glPushMatrix();
 			//Right side
 			glPushMatrix();
-				//(Front Side)	
+				//(Front Side)
+				glNormal3f(0.0, 0.0, 1.0);
 				glVertex3f( 0.5, 0.0, 0.5);	//Top Right Vertex
 				glVertex3f( 0.25, 0.0, 0.5);	//Top Left Vertex
 				glVertex3f( 0.25,-0.2, 0.5);	//Bottom Left Vertex
@@ -304,6 +328,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Back Side)
+				glNormal3f(0.0, 0.0, -1.0);
 				glVertex3f( 0.5,-0.2,-0.5);	//Top Right Vertex
 				glVertex3f( 0.25,-0.2,-0.5);	//Top Left Vertex
 				glVertex3f( 0.25, 0.0,-0.5);	//Bottom  Left Vertex
@@ -312,6 +337,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Left Side)
+				glNormal3f(-1.0, 0.0, 0.0);
 				glVertex3f( 0.25, 0.0, 0.5);	//Top Right Vertex
 				glVertex3f( 0.25, 0.0,-0.5);	//Top Left Vertex
 				glVertex3f( 0.25,-0.2,-0.5);	//Bottom Left Vertex
@@ -320,6 +346,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Right Side)
+				glNormal3f(1.0, 0.0, 0.0);
 				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
 				glVertex3f( 0.5, 0.0, 0.5);	//Top Left Vertex
 				glVertex3f( 0.5,-0.2, 0.5);	//Bottom Left Vertex
@@ -328,6 +355,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Bottom Side)
+				glNormal3f(0.0, -1.0, 0.0);
 				glVertex3f( 0.5,-0.2, 0.5);	//Top Right Vertex
 				glVertex3f( 0.25,-0.2, 0.5);	//Top Left Vertex
 				glVertex3f( 0.25,-0.2,-0.5);	//Bottom Left Vertex
@@ -336,6 +364,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Top Side)
+				glNormal3f(0.0, 1.0, 0.0);
 				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
 				glVertex3f( 0.25, 0.0,-0.5);	//Top Left Vertex
 				glVertex3f( 0.25, 0.0, 0.5);	//Bottom Left Vertex
@@ -347,7 +376,8 @@ void Tile::drawHoleEdge()
 		glPushMatrix();
 			//Middle
 			glPushMatrix();
-				//(Front Side)	
+				//(Front Side)
+				glNormal3f(0.0, 0.0, 1.0);
 				glVertex3f( 0.25, 0.0, 0.0);	//Top Right Vertex
 				glVertex3f(-0.25, 0.0, 0.0);	//Top Left Vertex
 				glVertex3f(-0.25,-0.2, 0.0);	//Bottom Left Vertex
@@ -356,6 +386,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Back Side)
+				glNormal3f(0.0, 0.0, -1.0);
 				glVertex3f( 0.25,-0.2,-0.5);	//Top Right Vertex
 				glVertex3f(-0.25,-0.2,-0.5);	//Top Left Vertex
 				glVertex3f(-0.25, 0.0,-0.5);	//Bottom  Left Vertex
@@ -364,6 +395,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Left Side)
+				glNormal3f(-1.0, 0.0, 0.0);
 				glVertex3f(-0.25, 0.0, 0.0);	//Top Right Vertex
 				glVertex3f(-0.25, 0.0,-0.5);	//Top Left Vertex
 				glVertex3f(-0.25,-0.2,-0.5);	//Bottom Left Vertex
@@ -372,6 +404,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Right Side)
+				glNormal3f(1.0, 0.0, 0.0);
 				glVertex3f( 0.25, 0.0,-0.5);	//Top Right Vertex
 				glVertex3f( 0.25, 0.0, 0.0);	//Top Left Vertex
 				glVertex3f( 0.25,-0.2, 0.0);	//Bottom Left Vertex
@@ -380,6 +413,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Bottom Side)
+				glNormal3f(0.0, -1.0, 0.0);
 				glVertex3f( 0.25,-0.2, 0.0);	//Top Right Vertex
 				glVertex3f(-0.25,-0.2, 0.0);	//Top Left Vertex
 				glVertex3f(-0.25,-0.2,-0.5);	//Bottom Left Vertex
@@ -388,6 +422,7 @@ void Tile::drawHoleEdge()
 				
 			glPushMatrix();
 				//(Top Side)
+				glNormal3f(0.0, 1.0, 0.0);
 				glVertex3f( 0.25, 0.0,-0.5);	//Top Right Vertex
 				glVertex3f(-0.25, 0.0,-0.5);	//Top Left Vertex
 				glVertex3f(-0.25, 0.0, 0.0);	//Bottom Left Vertex
