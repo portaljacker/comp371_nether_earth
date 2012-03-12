@@ -188,7 +188,7 @@ void display ()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_LIGHTING); //Enable lighting
-	//glEnable(GL_LIGHT0); //Enable light #0
+	glEnable(GL_LIGHT0); //Enable light #0
 	glEnable(GL_LIGHT1); //Enable light #1
 	glEnable(GL_LIGHT2); //Enable light #2	
 	//glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 20);
@@ -508,7 +508,6 @@ void display ()
 			else if(m1.getChar(i,j,1) == 'b') {
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				glScalef(0.25, 0.25, 0.25);
 				b2.draw();
 				glFlush();
 				glPopMatrix();
@@ -517,7 +516,6 @@ void display ()
 			else if(m1.getChar(i,j,1) == 'g') {
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				glTranslatef(0.0, 0.15, 0.0);
 				g1.draw();
 				glFlush();
 				glPopMatrix();
@@ -526,7 +524,6 @@ void display ()
 			else if(m1.getChar(i,j,1) == 't') {
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				glTranslatef(0.0, 0.15, 0.0);
 				t2.draw();
 				glFlush();
 				glPopMatrix();
@@ -575,8 +572,8 @@ void display ()
 
 			else if(m1.getChar(i,j,1) == 'r') {
 				glPushMatrix();
-				glTranslatef(i-0.50, 0.85, j+0.25);
-				t2.draw();
+				glTranslatef(i, 0.5, j + 0.60);
+				g1.draw();
 				glFlush();
 				glPopMatrix();
 
@@ -587,7 +584,7 @@ void display ()
 				glPopMatrix();
 
 				glPushMatrix();
-				glTranslatef(i, 1.5, j);
+				glTranslatef(i, 2.0, j);
 				e1.draw();
 				glFlush();
 				glPopMatrix();

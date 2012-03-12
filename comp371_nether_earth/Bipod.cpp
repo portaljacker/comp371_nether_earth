@@ -22,272 +22,234 @@ Bipod::~Bipod(void)
 
 void Bipod::draw(void)
 {
-	//Add directed light
+	/*//Add directed light
 	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
 	GLfloat lightPos1[] = {0.0f, 1.0f, -1.0f, 0.0f};
 	glLightfv(GL_LIGHT2, GL_DIFFUSE, lightColor1);
 	glLightfv(GL_LIGHT2, GL_POSITION, lightPos1);
-	
-	glBegin(GL_QUADS);
-
+	*/
 	glPushMatrix();
+
+		glBegin(GL_QUADS);
+	//Leg
+	//Bottom face
+	glColor3f(1.0f, 0.0f, 1.0f);
+	glNormal3f(0.0, -1.0f, 0.0f);
+	glVertex3f(-0.35f, 0.0f, -0.15f);
+	glVertex3f(-0.15f, 0.0f, -0.15f);
+	glVertex3f(-0.15f, 0.0f, 0.25f);
+	glVertex3f(-0.35f, 0.0f, 0.25f);
 	
-	glScalef(0.1, 0.1, 0.1);
-	//Bottom face
+	//Left face
+	glNormal3f(-1.0, 0.0f, 0.0f);
+	glColor3f(0.0f, 1.0f, 1.0f);
+	glVertex3f(-0.35f, 0.0f, 0.0f);
+	glVertex3f(-0.35f, 0.0f, -0.15f);
+	glVertex3f(-0.35f, 0.75f, -0.15f);
+	glVertex3f(-0.35f, 0.75f, 0.0f);
+	
+	//Left face 2
+	glNormal3f(-1.0, 0.0f, 0.0f);
+	glColor3f(0.0f, 1.0f, 1.0f);
+	glVertex3f(-0.35f, 0.0f, -0.15f);
+	glVertex3f(-0.35f, 0.25f, -0.15f);
+	glVertex3f(-0.35f, 0.05f, 0.25f);
+	glVertex3f(-0.35f, 0.0f, 0.25f);
+	
+	//Right face
+	glNormal3f(1.0, 0.0f, 0.0f);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(-0.15f, 0.0f, -0.15f);
+	glVertex3f(-0.15f, 0.75f, -0.15f);
+	glVertex3f(-0.15f, 0.75f, 0.0f);
+	glVertex3f(-0.15f, 0.0f, 0.0f);
+	
+	//Right face 2
+	glNormal3f(1.0, 0.0f, 0.0f);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(-0.15f, 0.0f, -0.15f);
+	glVertex3f(-0.15f, 0.25f, -0.15f);
+	glVertex3f(-0.15f, 0.05f, 0.25f);
+	glVertex3f(-0.15f, 0.0f, 0.25f);
+	
+	//Front face
+	glNormal3f(0.0, 0.0f, 1.0f);
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(-0.35f, 0.0f, 0.25f);
+	glVertex3f(-0.15f, 0.0f, 0.25f);
+	glVertex3f(-0.15f, 0.05f, 0.25f);
+	glVertex3f(-0.35f, 0.05f, 0.25f);
+	
+	//Front Face 2
+	glNormal3f(0.0, 0.0f, 1.0f);
+	glColor3f(0.0f, 0.5f, 0.0f);
+	glVertex3f(-0.35f, 0.05f, 0.25f);
+	glVertex3f(-0.15f, 0.05f, 0.25f);
+	glVertex3f(-0.15f, 0.25f, -0.15f);
+	glVertex3f(-0.35f, 0.25f, -0.15f);
+	
+	//Back face
+	glNormal3f(0.0, 0.0f, -1.0f);
 	glColor3f(0.5f, 0.5f, 0.5f);
-	glNormal3f(0.0, -1.0f, 0.0f);
-	glVertex3f(-0.5f, -0.5f, -0.5f);
-	glVertex3f(0.5f, -0.5f, -0.5f);
-	glVertex3f(0.5f, -0.5f, 2.0f);
-	glVertex3f(-0.5f, -0.5f, 2.0f);
-
-	//Left face
-	glNormal3f(-1.0, 0.0f, 0.0f);
-	//glColor3f(0.0f, 1.0f, 1.0f);
-	glVertex3f(-0.5f, -0.5f, -0.5f);
-	glVertex3f(-0.5f, -0.5f, 0.5f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-	glVertex3f(-0.5f, 0.5f, -0.5f);
-
-	//Left face 2
-	glNormal3f(-1.0, 0.0f, 0.0f);
-	//glColor3f(0.0f, 1.0f, 1.0f);
-	glVertex3f(-0.5f, -0.5f, 0.5f);
-	glVertex3f(-0.5f, -0.5f, 2.0f);
-	glVertex3f(-0.5f, -0.25f, 2.0f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-
-	//Right face
-	glNormal3f(1.0, 0.0f, 0.0f);
-	//glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(0.5f, -0.5f, -0.5f);
-	glVertex3f(0.5f, 0.5f, -0.5f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(0.5f, -0.5f, 0.5f);
-
-	//Right face 2
-	glNormal3f(1.0, 0.0f, 0.0f);
-	//glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(0.5f, -0.5f, 0.5f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(0.5f, -0.25f, 2.0f);
-	glVertex3f(0.5f, -0.5f, 2.0f);
-
-	//Front face
-	glNormal3f(0.0, 0.0f, 1.0f);
-	//glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(-0.5f, -0.25f, 2.0f);
-	glVertex3f(0.5f, -0.25f, 2.0f);
-	glVertex3f(0.5f, -0.5f, 2.0f);
-	glVertex3f(-0.5f, -0.5f, 2.0f);
-
-	//Front Face 2
-	glNormal3f(0.0, 0.0f, 1.0f);
-	//glColor3f(0.0f, 0.5f, 0.0f);
-	glVertex3f(-0.5f, -0.25f, 2.0f);
-	glVertex3f(0.5f, -0.25f, 2.0f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-
-	//Back face
-	glNormal3f(0.0, 0.0f, -1.0f);
-	//glColor3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(-0.5f, -0.5f, -0.5f);
-	glVertex3f(-0.5f, 3.0f, -0.5f);
-	glVertex3f(0.5f, 3.0f, -0.5f);
-	glVertex3f(0.5f, -0.5f, -0.5f);
-
-	//Leg
-
+	glVertex3f(-0.35f, 0.0f, -0.15f);
+	glVertex3f(-0.35f, 0.75f, -0.15f);
+	glVertex3f(-0.15f, 0.75f, -0.15f);
+	glVertex3f(-0.15f, 0.0f, -0.15f);
+	
 	//Front 
 	glNormal3f(0.0, 0.0f, 1.0f);
-	//glColor3f(0.0f, 0.5f, 0.0f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(0.5f, 3.0f, 0.5f);
-	glVertex3f(-0.5f, 3.0f, 0.5f);
-
-	//Right 
-	glNormal3f(1.0, 0.0f, 0.0f);
-	//glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(0.5f, 0.5f, -0.5f);
-	glVertex3f(0.5f, 3.0f, -0.5f);
-	glVertex3f(0.5f, 3.0f, 0.5f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-
-	//Left face
-	glNormal3f(-1.0, 0.0f, 0.0f);
-	//glColor3f(0.0f, 1.0f, 1.0f);
-	glVertex3f(-0.5f, 0.5f, -0.5f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-	glVertex3f(-0.5f, 3.0f, 0.5f);
-	glVertex3f(-0.5f, 3.0f, -0.5f);
-
+	glColor3f(0.0f, 0.5f, 0.0f);
+	glVertex3f(-0.35f, 0.15f, 0.0f);
+	glVertex3f(-0.15f, 0.15f, 0.0f);
+	glVertex3f(-0.15f, 0.75f, 0.0f);
+	glVertex3f(-0.35f, 0.75f, 0.0f);
+	
 	//Top face
-	//glColor3f(1.0f, 1.0f, 0.0f);
+	glColor3f(1.0f, 1.0f, 0.0f);
 	glNormal3f(0.0, 1.0f, 0.0f);
-	glVertex3f(-0.5f, 3.0f, -0.5f);
-	glVertex3f(-0.5f, 3.0f, 0.5f);
-	glVertex3f(0.5f, 3.0f, 0.5f);
-	glVertex3f(0.5f, 3.0f, -0.5f);
+	glVertex3f(-0.35f, 0.75f, -0.15f);
+	glVertex3f(-0.35f, 0.75f, 0.0f);
+	glVertex3f(-0.15f, 0.75f, 0.0f);
+	glVertex3f(-0.15f, 0.75f, -0.15f);
+	
 	glEnd();
 
-	glTranslatef(2.5f, 0.0f, 0.0f);
-
+	glTranslatef(0.6, 0.0, 0.0);
 	glBegin(GL_QUADS);
-
-
+	//Leg
 	//Bottom face
-	//glColor3f(1.0f, 0.0f, 1.0f);
+	glColor3f(1.0f, 0.0f, 1.0f);
 	glNormal3f(0.0, -1.0f, 0.0f);
-	glVertex3f(-0.5f, -0.5f, -0.5f);
-	glVertex3f(0.5f, -0.5f, -0.5f);
-	glVertex3f(0.5f, -0.5f, 2.0f);
-	glVertex3f(-0.5f, -0.5f, 2.0f);
-
+	glVertex3f(-0.35f, 0.0f, -0.15f);
+	glVertex3f(-0.15f, 0.0f, -0.15f);
+	glVertex3f(-0.15f, 0.0f, 0.25f);
+	glVertex3f(-0.35f, 0.0f, 0.25f);
+	
 	//Left face
 	glNormal3f(-1.0, 0.0f, 0.0f);
-	//glColor3f(0.0f, 1.0f, 1.0f);
-	glVertex3f(-0.5f, -0.5f, -0.5f);
-	glVertex3f(-0.5f, -0.5f, 0.5f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-	glVertex3f(-0.5f, 0.5f, -0.5f);
-
+	glColor3f(0.0f, 1.0f, 1.0f);
+	glVertex3f(-0.35f, 0.0f, 0.0f);
+	glVertex3f(-0.35f, 0.0f, -0.15f);
+	glVertex3f(-0.35f, 0.75f, -0.15f);
+	glVertex3f(-0.35f, 0.75f, 0.0f);
+	
 	//Left face 2
 	glNormal3f(-1.0, 0.0f, 0.0f);
-	//glColor3f(0.0f, 1.0f, 1.0f);
-	glVertex3f(-0.5f, -0.5f, 0.5f);
-	glVertex3f(-0.5f, -0.5f, 2.0f);
-	glVertex3f(-0.5f, -0.25f, 2.0f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-
+	glColor3f(0.0f, 1.0f, 1.0f);
+	glVertex3f(-0.35f, 0.0f, -0.15f);
+	glVertex3f(-0.35f, 0.25f, -0.15f);
+	glVertex3f(-0.35f, 0.05f, 0.25f);
+	glVertex3f(-0.35f, 0.0f, 0.25f);
+	
 	//Right face
 	glNormal3f(1.0, 0.0f, 0.0f);
-	//glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(0.5f, -0.5f, -0.5f);
-	glVertex3f(0.5f, 0.5f, -0.5f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(0.5f, -0.5f, 0.5f);
-
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(-0.15f, 0.0f, -0.15f);
+	glVertex3f(-0.15f, 0.75f, -0.15f);
+	glVertex3f(-0.15f, 0.75f, 0.0f);
+	glVertex3f(-0.15f, 0.0f, 0.0f);
+	
 	//Right face 2
 	glNormal3f(1.0, 0.0f, 0.0f);
-	//glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(0.5f, -0.5f, 0.5f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(0.5f, -0.25f, 2.0f);
-	glVertex3f(0.5f, -0.5f, 2.0f);
-
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(-0.15f, 0.0f, -0.15f);
+	glVertex3f(-0.15f, 0.25f, -0.15f);
+	glVertex3f(-0.15f, 0.05f, 0.25f);
+	glVertex3f(-0.15f, 0.0f, 0.25f);
+	
 	//Front face
 	glNormal3f(0.0, 0.0f, 1.0f);
-	//glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(-0.5f, -0.25f, 2.0f);
-	glVertex3f(0.5f, -0.25f, 2.0f);
-	glVertex3f(0.5f, -0.5f, 2.0f);
-	glVertex3f(-0.5f, -0.5f, 2.0f);
-
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(-0.35f, 0.0f, 0.25f);
+	glVertex3f(-0.15f, 0.0f, 0.25f);
+	glVertex3f(-0.15f, 0.05f, 0.25f);
+	glVertex3f(-0.35f, 0.05f, 0.25f);
+	
 	//Front Face 2
 	glNormal3f(0.0, 0.0f, 1.0f);
-	//glColor3f(0.0f, 0.5f, 0.0f);
-	glVertex3f(-0.5f, -0.25f, 2.0f);
-	glVertex3f(0.5f, -0.25f, 2.0f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-
+	glColor3f(0.0f, 0.5f, 0.0f);
+	glVertex3f(-0.35f, 0.05f, 0.25f);
+	glVertex3f(-0.15f, 0.05f, 0.25f);
+	glVertex3f(-0.15f, 0.25f, -0.15f);
+	glVertex3f(-0.35f, 0.25f, -0.15f);
+	
 	//Back face
 	glNormal3f(0.0, 0.0f, -1.0f);
-	//glColor3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(-0.5f, -0.5f, -0.5f);
-	glVertex3f(-0.5f, 3.0f, -0.5f);
-	glVertex3f(0.5f, 3.0f, -0.5f);
-	glVertex3f(0.5f, -0.5f, -0.5f);
-
-	//Leg
-
+	glColor3f(0.5f, 0.5f, 0.5f);
+	glVertex3f(-0.35f, 0.0f, -0.15f);
+	glVertex3f(-0.35f, 0.75f, -0.15f);
+	glVertex3f(-0.15f, 0.75f, -0.15f);
+	glVertex3f(-0.15f, 0.0f, -0.15f);
+	
 	//Front 
 	glNormal3f(0.0, 0.0f, 1.0f);
-	//glColor3f(0.0f, 0.5f, 0.0f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(0.5f, 3.0f, 0.5f);
-	glVertex3f(-0.5f, 3.0f, 0.5f);
-
-	//Right 
-	glNormal3f(1.0, 0.0f, 0.0f);
-	//glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(0.5f, 0.5f, -0.5f);
-	glVertex3f(0.5f, 3.0f, -0.5f);
-	glVertex3f(0.5f, 3.0f, 0.5f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-
-	//Left face
-	glNormal3f(-1.0, 0.0f, 0.0f);
-	//glColor3f(0.0f, 1.0f, 1.0f);
-	glVertex3f(-0.5f, 0.5f, -0.5f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-	glVertex3f(-0.5f, 3.0f, 0.5f);
-	glVertex3f(-0.5f, 3.0f, -0.5f);
-
+	glColor3f(0.0f, 0.5f, 0.0f);
+	glVertex3f(-0.35f, 0.15f, 0.0f);
+	glVertex3f(-0.15f, 0.15f, 0.0f);
+	glVertex3f(-0.15f, 0.75f, 0.0f);
+	glVertex3f(-0.35f, 0.75f, 0.0f);
+	
 	//Top face
-	//glColor3f(1.0f, 1.0f, 0.0f);
+	glColor3f(1.0f, 1.0f, 0.0f);
 	glNormal3f(0.0, 1.0f, 0.0f);
-	glVertex3f(-0.5f, 3.0f, -0.5f);
-	glVertex3f(-0.5f, 3.0f, 0.5f);
-	glVertex3f(0.5f, 3.0f, 0.5f);
-	glVertex3f(0.5f, 3.0f, -0.5f);
+	glVertex3f(-0.35f, 0.75f, -0.15f);
+	glVertex3f(-0.35f, 0.75f, 0.0f);
+	glVertex3f(-0.15f, 0.75f, 0.0f);
+	glVertex3f(-0.15f, 0.75f, -0.15f);
+	
 	glEnd();
 
-	glTranslatef(-1.25f, 0.0f, 0.0f);
+	glTranslatef(-0.55f, 0.0f, 0.0f);
 
 	glBegin(GL_QUADS);
-	//Torso
 
-	//Bottom
-	//glColor3f(1.0f, 1.0f, 0.0f);
-	glNormal3f(0.0, 1.0f, 0.0f);
-	glVertex3f(-2.5f, 3.0f, -2.0f);
-	glVertex3f(-2.5f, 3.0f, 2.0f);
-	glVertex3f(2.5f, 3.0f, 2.0f);
-	glVertex3f(2.5f, 3.0f, -2.0f);
+	//bottom
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glNormal3f(0.0, -1.0f, 0.0f);
+	glVertex3f(-0.45f, 0.75f, -0.45f);
+	glVertex3f(0.45f, 0.75f, -0.45f);
+	glVertex3f(0.45f, 0.75f, 0.45f);
+	glVertex3f(-0.45f, 0.75f, 0.45f);
 
-	//Top
+	//top                    
 	//glColor3f(1.0f, 0.0f, 1.0f);
 	glNormal3f(0.0, 1.0f, 0.0f);
-	glVertex3f(-2.5f, 3.5f, -2.0f);
-	glVertex3f(-2.5f, 3.5f, 2.0f);
-	glVertex3f(2.5f, 3.5f, 2.0f);
-	glVertex3f(2.5f, 3.5f, -2.0f);
+	glVertex3f(-0.45f, 1.0f, -0.45f);
+	glVertex3f(0.45f, 1.0f, -0.45f);
+	glVertex3f(0.45f, 1.0f, 0.45f);
+	glVertex3f(-0.45f, 1.0f, 0.45f);
 
-	//Front face
-	glNormal3f(0.0, 0.0f, 1.0f);
-	//glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(-2.5f, 3.0f, 2.0f);
-	glVertex3f(2.5f, 3.0f, 2.0f);
-	glVertex3f(2.5f, 3.5f, 2.0f);
-	glVertex3f(-2.5f, 3.5f, 2.0f);
-
-	//Right face
-	glNormal3f(1.0, 0.0f, 0.0f);
-	//glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(2.5f, 3.0f, -2.0f);
-	glVertex3f(2.5f, 3.5f, -2.0f);
-	glVertex3f(2.5f, 3.5f, 2.0f);
-	glVertex3f(2.5f, 3.0f, 2.0f);
-
-	//Left face
-	glNormal3f(-1.0, 0.0f, 0.0f);
-	//glColor3f(0.0f, 1.0f, 1.0f);
-	glVertex3f(-2.5f, 3.0f, -2.0f);
-	glVertex3f(-2.5f, 3.0f, 2.0f);
-	glVertex3f(-2.5f, 3.5f, 2.0f);
-	glVertex3f(-2.5f, 3.5f, -2.0f);
-
-	//Back face
+	//back
+	//glColor3f(1.0f, 0.5f, 0.0f);
 	glNormal3f(0.0, 0.0f, -1.0f);
-	//glColor3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(-2.5f, 3.0f, -2.0f);
-	glVertex3f(-2.5f, 3.5f, -2.0f);
-	glVertex3f(2.5f, 3.5f, -2.0f);
-	glVertex3f(2.5f, 3.0f, -2.0f);
+	glVertex3f(-0.45f, 0.75f, -0.45f);
+	glVertex3f(0.45f, 0.75f, -0.45f);
+	glVertex3f(0.45f, 1.0f, -0.45f);
+	glVertex3f(-0.45f, 1.0f, -0.45f);
+
+	//front
+	//glColor3f(1.0f, 0.0f, 0.5f);
+	glNormal3f(0.0, 0.0f, 1.0f);
+	glVertex3f(-0.45f, 0.75f, 0.45f);
+	glVertex3f(0.45f, 0.75f, 0.45f);
+	glVertex3f(0.45f, 1.0f, 0.45f);
+	glVertex3f(-0.45f, 1.0f, 0.45f);
+
+	//right
+	//glColor3f(1.0f, 0.5f, 0.5f);
+	glNormal3f(1.0, 0.0f, 0.0f);
+	glVertex3f(0.45f, 1.0f, -0.45f);
+	glVertex3f(0.45f, 1.0f, 0.45f);
+	glVertex3f(0.45f, 0.75f, 0.45f);
+	glVertex3f(0.45f, 0.75f, -0.45f);
+
+	//left
+	//glColor3f(1.0f, 0.5f, 0.5f);
+	glNormal3f(-1.0, 0.0f, 0.0f);
+	glVertex3f(-0.45f, 1.0f, -0.45f);
+	glVertex3f(-0.45f, 1.0f, 0.45f);
+	glVertex3f(-0.45f, 0.75f, 0.45f);
+	glVertex3f(-0.45f, 0.75f, -0.45f);
 
 	glEnd();
 
@@ -295,25 +257,22 @@ void Bipod::draw(void)
 	glBegin(GL_QUADS);
 
 	glColor3f(0.0f, 1.0f, 0.0f);
-	glNormal3f(0.0, 1.0f, 0.0f);
-	glVertex3f(-0.5f, 3.6f, -0.1f);
-	glVertex3f(-0.5f, 3.6f, 0.1f);
-	glVertex3f(0.25f, 3.6f, 0.1f);
-	glVertex3f(0.25f, 3.6f, -0.1f);
+	glVertex3f(-0.1f, 1.01f, 0.1f);
+	glVertex3f(-0.1f, 1.01f, 0.2f);
+	glVertex3f(0.1f, 1.01f, 0.2f);
+	glVertex3f(0.1f, 1.01f, 0.1f);
 
 	glColor3f(0.0f, 1.0f, 0.0f);
-	glNormal3f(0.0, 1.0f, 0.0f);
-	glVertex3f(-0.0f, 3.6f, -0.5f);
-	glVertex3f(-0.0f, 3.6f, 0.5f);
-	glVertex3f(0.25f, 3.6f, 0.5f);
-	glVertex3f(0.25f, 3.6f, -0.5f);
+	glVertex3f(-0.0f, 1.01f, -0.15f);
+	glVertex3f(-0.0f, 1.01f, 0.3f);
+	glVertex3f(0.1f, 1.01f, 0.3f);
+	glVertex3f(0.1f, 1.01f, -0.15f);
 
 	glColor3f(0.0f, 1.0f, 0.0f);
-	glNormal3f(0.0, 1.0f, 0.0f);
-	glVertex3f(-1.0f, 3.6f, -0.5f);
-	glVertex3f(-1.0f, 3.6f, 0.1f);
-	glVertex3f(-0.5f, 3.6f, 0.1f);
-	glVertex3f(-0.5f, 3.6f, -0.5f);
+	glVertex3f(-0.25f, 1.01f, -0.15f);
+	glVertex3f(-0.25f, 1.01f, 0.2f);
+	glVertex3f(-0.1f, 1.01f, 0.2f);
+	glVertex3f(-0.1f, 1.01f, -0.15f);
 
 	glEnd();
 

@@ -21,12 +21,12 @@ Missiles::~Missiles(void)
 
 void Missiles::draw(Shade shade)
 {
-	//Add directed light
+	/*//Add directed light
 	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
 	GLfloat lightPos1[] = {0.0f, 1.0f, -1.0f, 0.0f};
 	glLightfv(GL_LIGHT2, GL_DIFFUSE, lightColor1);
 	glLightfv(GL_LIGHT2, GL_POSITION, lightPos1);
-	
+	*/
 	GLUquadricObj *disk;
 
 	disk = gluNewQuadric ( );
