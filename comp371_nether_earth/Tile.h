@@ -9,6 +9,8 @@
 //This is the Tile class header. This class can draw regular tiles or tiles with pits.
 
 #pragma once
+#include <GL/glut.h>
+
 class Tile
 {
 public:

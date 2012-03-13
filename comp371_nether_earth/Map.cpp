@@ -107,15 +107,15 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	grid[49][49][1] = '*';
 
 	// Robot tests (with buildings for comparison)
-	grid[38][3][1] = '2';
+	grid[38][3][1] = '7';
 	grid[38][7][1] = 'b';
-	grid[42][3][1] = '2';
+	grid[42][3][1] = '7';
 	grid[42][7][1] = 'g';
-	grid[46][3][1] = '2';
+	grid[46][3][1] = '7';
 	grid[46][7][1] = 't';
-	grid[35][3][1] = '2';
+	grid[35][3][1] = '7';
 	grid[35][7][1] = 'e';
-	grid[32][3][1] = '2';
+	grid[32][3][1] = '7';
 	grid[32][7][1] = 'c';
 	grid[32][10][1] = 'p';
 	grid[35][10][1] = 'n';

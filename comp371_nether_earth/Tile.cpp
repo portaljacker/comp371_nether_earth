@@ -9,7 +9,6 @@
 //This is the Tile class implimentation file.
 
 #include "Tile.h"
-#include <GL/glut.h>
 
 //Default constructor..
 Tile::Tile()
@@ -34,36 +33,52 @@ void Tile::draw()
 			glPushMatrix();
 				//(Front Side)
 				glNormal3f(0.0, 0.0, 1.0);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f( 0.5, 0.0, 0.5);	//Top Right Vertex
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f(-0.5, 0.0, 0.5);	//Top Left Vertex
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(-0.5,-0.2, 0.5);	//Bottom Left Vertex
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f( 0.5,-0.2, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
 				//(Back Side)
 				glNormal3f(0.0, 0.0, -1.0);
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f( 0.5,-0.2,-0.5);	//Top Right Vertex
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(-0.5,-0.2,-0.5);	//Top Left Vertex
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f(-0.5, 0.0,-0.5);	//Bottom  Left Vertex
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f( 0.5, 0.0,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
 				//(Left Side)
 				glNormal3f(-1.0, 0.0, 0.0);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f(-0.5, 0.0, 0.5);	//Top Right Vertex
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(-0.5,-0.2,-0.5);	//Bottom Left Vertex
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(-0.5,-0.2, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
 			glPushMatrix();
 				//(Right Side)
 				glNormal3f(1.0, 0.0, 0.0);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f( 0.5, 0.0, 0.5);	//Top Left Vertex
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f( 0.5,-0.2, 0.5);	//Bottom Left Vertex
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f( 0.5,-0.2,-0.5);	//Bottom Right Vertex
 			glPopMatrix();
 				
@@ -79,9 +94,13 @@ void Tile::draw()
 			glPushMatrix();
 				//(Top Side)
 				glNormal3f(0.0, 1.0, 0.0);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f( 0.5, 0.0,-0.5);	//Top Right Vertex
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f(-0.5, 0.0,-0.5);	//Top Left Vertex
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(-0.5, 0.0, 0.5);	//Bottom Left Vertex
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f( 0.5, 0.0, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
 

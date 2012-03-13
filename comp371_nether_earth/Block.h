@@ -9,18 +9,23 @@
 //This is the block header.
 
 #pragma once
+#include "imageloader.h"
+#include <GL/glut.h>
+#include <math.h>
+
 class Block
 {
+
 public:
 	Block(void);
 	~Block(void);
 
-	void drawPH(void);	//1
-	void drawPU(void);	//2
-	void drawHH(void);	//3
-	void drawHU(void);	//4
+	void drawPH(GLuint);	//1
+	void drawPU(GLuint);	//2
+	void drawHH(GLuint, GLuint);	//3
+	void drawHU(GLuint, GLuint);	//4
 
-	void drawHQ(void);	//5
+	void drawHQ(GLuint);	//5
 
 	void drawD(void);	//6
 };
