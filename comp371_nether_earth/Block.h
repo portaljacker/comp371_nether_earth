@@ -25,8 +25,9 @@ public:
 	void drawHH(GLuint, GLuint);	//3
 	void drawHU(GLuint, GLuint);	//4
 
-	void drawHQ(GLuint);	//5
-
 	void drawD(void);	//6
+
+	void drawHQ(GLuint);	//@
+	void drawF(GLuint);		//$
 };
 

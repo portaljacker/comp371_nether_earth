@@ -12,12 +12,17 @@
 
 #include <GL/glut.h>
 #include <math.h>
+#include "Enumerations.h"
+
 class Rubble
 {
+private:
+	void cone(Shade, GLdouble);
+
 public:
-	void drawSmall();
-	void drawMedium();
-	void drawLarge();
+	void drawSmall(Shade, GLuint);
+	void drawMedium(Shade, GLuint);
+	void drawLarge(Shade, GLuint);
 	Rubble(void);
 	~Rubble(void);
 };

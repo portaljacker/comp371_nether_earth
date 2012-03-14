@@ -9,7 +9,6 @@
 //This is the controller class. It creates the controller model.
 
 #include "Controller.h"
-#include <GL/glut.h>
 #include "Cube.h"
 
 Controller::Controller(void)
@@ -21,7 +20,7 @@ Controller::~Controller(void)
 {
 }
 
-void Controller::draw(Shade shade) {
+void Controller::draw(Shade shade, GLuint tex) {
 	
 	glPushMatrix();
 		/*float matAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
@@ -30,6 +29,12 @@ void Controller::draw(Shade shade) {
 		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient);
 		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, matSpecular);
 		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, matShininess);*/
+
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 		glColor3f(0.7, 0.7, 0.7);
 		glPushMatrix();	// middle block
 			glTranslatef (0.0, 0.2, 0.0);   
@@ -83,5 +88,6 @@ void Controller::draw(Shade shade) {
 			}
 			gluCylinder(GL_Quadric, 0.02, 0.02, 0.8, 20, 20);
 		glPopMatrix();
+		glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }

@@ -324,6 +324,9 @@ void display ()
 			//Draw standard tile and small rubble pile.
 			else if(m1.getChar(i, j, 0) == 's')
 			{
+				Image* image = loadBMP("debris.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				t1.draw();
@@ -332,7 +335,7 @@ void display ()
 
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				r1.drawSmall();
+				r1.drawSmall(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -340,6 +343,9 @@ void display ()
 			//Draw standard tile and medium rubble pile.
 			else if(m1.getChar(i, j, 0) == 'm')
 			{
+				Image* image = loadBMP("debris.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				t1.draw();
@@ -348,7 +354,7 @@ void display ()
 
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				r1.drawMedium();
+				r1.drawMedium(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -356,6 +362,9 @@ void display ()
 			//Draw standard tile and large rubble pile.
 			else if(m1.getChar(i, j, 0) == 'l')
 			{
+				Image* image = loadBMP("debris.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				t1.draw();
@@ -364,7 +373,7 @@ void display ()
 
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				r1.drawLarge();
+				r1.drawLarge(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -514,12 +523,24 @@ void display ()
 
 			//Draw HQ block
 			else if(m1.getChar(i,j,1) == '@') {
-				Image* image = loadBMP("wood.bmp");
+				Image* image = loadBMP("camo1.bmp");
 				blockTexId2 = loadTexture(image);
 				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				b1.drawHQ(blockTexId2);
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw Factory
+			else if(m1.getChar(i,j,1) == '$') {
+				Image* image = loadBMP("camo2.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				b1.drawF(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -654,9 +675,12 @@ void display ()
 			}
 
 			if (m1.getChar(i,j,2) == '1') {
+				Image* image = loadBMP("cgold.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				c1.draw(shade);
+				c1.draw(shade,blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}

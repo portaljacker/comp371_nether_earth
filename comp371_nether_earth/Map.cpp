@@ -146,27 +146,27 @@ char Map::getChar(int i, int j, int k)
 
 void Map::drawHQ(int i, int j)
 {
-	grid[i-1][j-2][1] = '2';
-	grid[i+1][j-2][1] = '2';
+	grid[i-1][j-2][1] = '0';
+	grid[i+1][j-2][1] = '0';
 
-	grid[i-2][j-1][1] = '2';
-	grid[i-1][j-1][1] = '2';
-	grid[i][j-1][1] = '2';
-	grid[i+1][j-1][1] = '2';
-	grid[i+2][j-1][1] = '2';
+	grid[i-2][j-1][1] = '0';
+	grid[i-1][j-1][1] = '0';
+	grid[i][j-1][1] = '0';
+	grid[i+1][j-1][1] = '0';
+	grid[i+2][j-1][1] = '0';
 
-	grid[i-2][j][1] = '2';
-	grid[i-1][j][1] = '1';
+	grid[i-2][j][1] = '0';
+	grid[i-1][j][1] = '0';
 	grid[i][j][1] = '@';	// center/drawing point
-	grid[i+1][j][1] = '1';
-	grid[i+2][j][1] = '2';
+	grid[i+1][j][1] = '0';
+	grid[i+2][j][1] = '0';
 
-	grid[i-1][j+1][1] = '1';
-	grid[i][j+1][1] = '1';
-	grid[i+1][j+1][1] = '1';
+	grid[i-1][j+1][1] = '0';
+	grid[i][j+1][1] = '0';
+	grid[i+1][j+1][1] = '0';
 
-	grid[i-1][j+2][1] = '1';
-	grid[i+1][j+2][1] = '1';
+	grid[i-1][j+2][1] = '0';
+	grid[i+1][j+2][1] = '0';
 }
 
 void Map::drawF(int i, int j)

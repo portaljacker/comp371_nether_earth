@@ -50,11 +50,16 @@
     <ClInclude Include="Tracks.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="camo1.bmp" />
+    <None Include="camo2.bmp" />
+    <None Include="cgold.bmp" />
+    <None Include="debris.bmp" />
     <None Include="gold.bmp" />
     <None Include="hole2.bmp" />
     <None Include="ice.bmp" />
     <None Include="mud.bmp" />
     <None Include="stone.bmp" />
+    <None Include="trust.bmp" />
     <None Include="wood.bmp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

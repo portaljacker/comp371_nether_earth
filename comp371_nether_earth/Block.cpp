@@ -143,6 +143,29 @@ void Block::drawHU(GLuint tex, GLuint hole) {	// holed full-block
 	glPopMatrix();
 }
 
+void Block::drawD() {
+	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+		glColor3ub(105, 105, 105);
+		glPushMatrix();
+			glTranslatef(0.0, 0.25, 0.0);
+			glScalef(0.5, 0.5, 0.5);
+			pj::cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0.0, 0.75, 0.0);
+			glScalef(0.25, 0.5, 0.25);
+			pj::cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0.0, 1.25, 0.0);
+			glScalef(0.125, 0.5, 0.125);
+			pj::cube();
+		glPopMatrix();
+	glPopMatrix();
+}
+
 void Block::drawHQ(GLuint tex) {	// plain half-block
 	glPushMatrix();
 		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
@@ -157,7 +180,73 @@ void Block::drawHQ(GLuint tex) {	// plain half-block
 		glPushMatrix();
 			glTranslatef(0.0, 0.5, 0.0);
 			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
-			pj::cube();
+			glPushMatrix();
+				glTranslatef(-1,0,-1.5);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(1,0,-1.5);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(-2,0,-1);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(-1,0,-.5);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(0,0,-1);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(1,0,-.5);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(2,0,-1);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(-2,0,0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(-1,0,0.5);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(0,0,0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(1,0,0.5);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(2,0,0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(-1,0,.5);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(0,0,1);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(1,0,.5);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
 			glDisable(GL_TEXTURE_2D);
 		glPopMatrix();
 
@@ -188,25 +277,43 @@ void Block::drawHQ(GLuint tex) {	// plain half-block
 	glPopMatrix();
 }
 
-void Block::drawD() {
+void Block::drawF(GLuint tex) {
 	glPushMatrix();
 		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
-		glColor3ub(105, 105, 105);
+		//glColor3ub(139, 50, 0); Color disabled for textures.
+
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 		glPushMatrix();
-			glTranslatef(0.0, 0.25, 0.0);
-			glScalef(0.5, 0.5, 0.5);
-			pj::cube();
-		glPopMatrix();
-		glPushMatrix();
-			glTranslatef(0.0, 0.75, 0.0);
-			glScalef(0.25, 0.5, 0.25);
-			pj::cube();
-		glPopMatrix();
-		glPushMatrix();
-			glTranslatef(0.0, 1.25, 0.0);
-			glScalef(0.125, 0.5, 0.125);
-			pj::cube();
+			glTranslatef(0.0, 0.5, 0.0);
+			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
+			glPushMatrix();
+				glTranslatef(-1,0,0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(0,0,0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(1,0,0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(-1,0,1);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(1,0,1);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glDisable(GL_TEXTURE_2D);
 		glPopMatrix();
 	glPopMatrix();
 }
