@@ -20,7 +20,7 @@ Tile::Tile()
 Tile::~Tile(void)
 {
 }
-void Tile::draw()
+void Tile::draw(GLuint tex)
 {
 	//Add ambient light
 	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
@@ -31,7 +31,12 @@ void Tile::draw()
 		glPushMatrix();
 			float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
-			glColor3f(0.5f,0.5f,0.5f);
+			//glColor3f(0.5f,0.5f,0.5f);
+
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, tex);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 			glBegin(GL_QUADS);
 			glPushMatrix();
@@ -109,26 +114,27 @@ void Tile::draw()
 			glPopMatrix();
 
 			glPushMatrix();
-				glColor3f(1.0,1.0,1.0);	//White (Team Number On Top)
+				glColor3b(255,255,255);
+				glPushMatrix();
+					glVertex3f( 0.25, 0.001,-0.25); //Long vetical bar.
+					glVertex3f( 0.15, 0.001,-0.25);
+					glVertex3f( 0.15, 0.001, 0.35);
+					glVertex3f( 0.25, 0.001, 0.35);
+				glPopMatrix();
 
-				glVertex3f( 0.25, 0.001,-0.25); //Long vetical bar.
-				glVertex3f( 0.15, 0.001,-0.25);
-				glVertex3f( 0.15, 0.001, 0.35);
-				glVertex3f( 0.25, 0.001, 0.35);
-			glPopMatrix();
+				glPushMatrix();
+					glVertex3f(-0.15, 0.001,-0.25); //Short vertical bar.
+					glVertex3f(-0.25, 0.001,-0.25);
+					glVertex3f(-0.25, 0.001, 0.0);
+					glVertex3f(-0.15, 0.001, 0.0);
+				glPopMatrix();
 
-			glPushMatrix();
-				glVertex3f(-0.15, 0.001,-0.25); //Short vertical bar.
-				glVertex3f(-0.25, 0.001,-0.25);
-				glVertex3f(-0.25, 0.001, 0.0);
-				glVertex3f(-0.15, 0.001, 0.0);
-			glPopMatrix();
-
-			glPushMatrix();
-				glVertex3f( 0.25, 0.001, 0.0); //Horizontal bar.
-				glVertex3f(-0.25, 0.001, 0.0);
-				glVertex3f(-0.25, 0.001, 0.1);
-				glVertex3f( 0.25, 0.001, 0.1);
+				glPushMatrix();
+					glVertex3f( 0.25, 0.001, 0.0); //Horizontal bar.
+					glVertex3f(-0.25, 0.001, 0.0);
+					glVertex3f(-0.25, 0.001, 0.1);
+					glVertex3f( 0.25, 0.001, 0.1);
+				glPopMatrix();
 			glPopMatrix();
 			glEnd();
 		glPopMatrix();

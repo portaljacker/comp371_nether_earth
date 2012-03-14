@@ -17,22 +17,23 @@ Rubble::Rubble(void)
 void Rubble::drawSmall(Shade shade, GLuint tex)
 {  
 	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
-		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(-0.2, 0.0, 0.2);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(0.2, 0.0, -0.2);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.2);
@@ -44,43 +45,44 @@ void Rubble::drawSmall(Shade shade, GLuint tex)
 void Rubble::drawMedium(Shade shade, GLuint tex)
 {  
 	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
-		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(-0.2, 0.0, 0.2);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(0.2, 0.0, -0.2);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.4, 0.4, 0.4);
+		//glColor3f(0.4, 0.4, 0.4);
 		glTranslatef(-0.35, 0.0, -0.2);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.1);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.4, 0.4, 0.4);
+		//glColor3f(0.4, 0.4, 0.4);
 		glTranslatef(0.35, 0.0, 0.2);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.1);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.4, 0.4, 0.4);
+		//glColor3f(0.4, 0.4, 0.4);
 		glTranslatef(0.05, 0.0, 0.3);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.1);
@@ -92,50 +94,51 @@ void Rubble::drawMedium(Shade shade, GLuint tex)
 void Rubble::drawLarge(Shade shade, GLuint tex)
 {  
 	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
-		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(-0.2, 0.0, 0.2);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(0.2, 0.0, -0.2);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(-0.2, 0.0, -0.3);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(0.28, 0.0, 0.30);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.4, 0.4, 0.4);
+		//glColor3f(0.4, 0.4, 0.4);
 		glTranslatef(-0.35, 0.0, -0.05);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.1);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.4, 0.4, 0.4);
+		//glColor3f(0.4, 0.4, 0.4);
 		glTranslatef(0.35, 0.0, 0.05);
 		glRotatef(-90, 1, 0, 0);
 		cone(shade, 0.1);

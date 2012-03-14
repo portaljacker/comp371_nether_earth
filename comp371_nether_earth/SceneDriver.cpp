@@ -33,6 +33,8 @@
 #include "imageLoader.h"
 using namespace std;
 
+GLuint loadTexture(Image* image);
+
 // Initial size of graphics window.
 const int WIDTH  = 600;
 const int HEIGHT = 600;
@@ -106,6 +108,8 @@ GLuint blockTexId3;
 GLuint blockTexId4;
 GLuint blockTexId5;
 GLuint hole; //Hole texture stored here.
+Image* im = loadBMP("trust.bmp");
+GLuint tileTex = loadTexture(im);
 
 void setCamera()
 {
@@ -316,7 +320,7 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t1.draw();
+				t1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -324,15 +328,15 @@ void display ()
 			//Draw standard tile and small rubble pile.
 			else if(m1.getChar(i, j, 0) == 's')
 			{
-				Image* image = loadBMP("debris.bmp");
-				blockTexId2 = loadTexture(image);
-				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t1.draw();
+				t1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 
+				Image* image = loadBMP("debris.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				r1.drawSmall(shade, blockTexId2);
@@ -343,15 +347,15 @@ void display ()
 			//Draw standard tile and medium rubble pile.
 			else if(m1.getChar(i, j, 0) == 'm')
 			{
-				Image* image = loadBMP("debris.bmp");
-				blockTexId2 = loadTexture(image);
-				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t1.draw();
+				t1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 
+				Image* image = loadBMP("debris.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				r1.drawMedium(shade, blockTexId2);
@@ -362,15 +366,15 @@ void display ()
 			//Draw standard tile and large rubble pile.
 			else if(m1.getChar(i, j, 0) == 'l')
 			{
-				Image* image = loadBMP("debris.bmp");
-				blockTexId2 = loadTexture(image);
-				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t1.draw();
+				t1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 
+				Image* image = loadBMP("debris.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				r1.drawLarge(shade, blockTexId2);
@@ -690,6 +694,10 @@ void display ()
 	
 	glEnable(GL_DEPTH_TEST);
 	
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHT2);
 
 	glutSwapBuffers();
 }
