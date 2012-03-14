@@ -8,6 +8,10 @@
 //Sebastien S. 9500782
 //This is the Tracks header. This class makes tracks chassis.
 
+#include "imageloader.h"
+#include <GL/glut.h>
+#include <math.h>
+
 #pragma once
 class Tracks
 {
@@ -15,6 +19,6 @@ public:
 	Tracks(void);
 	~Tracks(void);
 
-	void draw(void);
+	void draw(GLuint);
 };
 

@@ -8,6 +8,10 @@
 //Sebastien S. 9500782
 //This is the Cannon header. It makes a robot cannon.
 
+#include "imageloader.h"
+#include <GL/glut.h>
+#include <math.h>
+
 #pragma once
 class Cannon
 {
@@ -15,6 +19,6 @@ public:
 	Cannon(void);
 	~Cannon(void);
 
-	void draw();
+	void draw(GLuint);
 };
 

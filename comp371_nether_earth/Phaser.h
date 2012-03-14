@@ -9,6 +9,9 @@
 //This is the phaser class specification
 
 #include "Enumerations.h"
+#include "imageloader.h"
+#include <GL/glut.h>
+#include <math.h>
 
 #pragma once
 
@@ -18,6 +21,6 @@ public:
 
 	Phaser(void);
 	~Phaser(void);
-	void draw(Shade shade);
+	void draw(Shade shade, GLuint);
 	
 };

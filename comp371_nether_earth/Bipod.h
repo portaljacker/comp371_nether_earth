@@ -8,6 +8,9 @@
 //Sebastien S. 9500782
 //This is the Bipod header. This class makes bipod leg parts.
 
+#include "imageloader.h"
+#include <GL/glut.h>
+#include <math.h>
 
 #pragma once
 class Bipod
@@ -16,6 +19,6 @@ public:
 	Bipod(void);
 	~Bipod(void);
 
-	void draw(void);
+	void draw(GLuint);
 };
 

@@ -157,6 +157,12 @@
     <None Include="cgold.bmp">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="metal.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="steel.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="vtr.bmp">
