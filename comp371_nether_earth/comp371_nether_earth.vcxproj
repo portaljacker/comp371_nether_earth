@@ -15,8 +15,10 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="eBrain.cpp" />
     <ClCompile Include="Grav.cpp" />
+    <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="lightPostConstruct.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Missiles.cpp" />
@@ -33,9 +35,11 @@
     <ClInclude Include="Block.h" />
     <ClInclude Include="Cannon.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="eBrain.h" />
     <ClInclude Include="Enumerations.h" />
     <ClInclude Include="Grav.h" />
+    <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="lightPostConstruct.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Missiles.h" />
@@ -46,7 +50,18 @@
     <ClInclude Include="Tracks.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="camo1.bmp" />
+    <None Include="camo2.bmp" />
+    <None Include="cgold.bmp" />
+    <None Include="debris.bmp" />
+    <None Include="gold.bmp" />
+    <None Include="hole2.bmp" />
+    <None Include="ice.bmp" />
+    <None Include="mud.bmp" />
+    <None Include="stone.bmp" />
+    <None Include="trust.bmp" />
     <None Include="vtr.bmp" />
+    <None Include="wood.bmp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{44C2FB9F-9DD1-4A1E-BCF6-C735A036ECDD}</ProjectGuid>

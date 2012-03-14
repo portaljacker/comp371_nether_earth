@@ -63,6 +63,12 @@
     <ClCompile Include="lightPostConstruct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ImageLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -110,6 +116,47 @@
     <ClInclude Include="lightPostConstruct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ImageLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wood.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="stone.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="mud.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ice.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="gold.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="hole2.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="debris.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="trust.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="camo1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="camo2.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cgold.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="vtr.bmp">

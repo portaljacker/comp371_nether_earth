@@ -30,6 +30,7 @@
 #include "Missiles.h"
 #include "Phaser.h"
 #include "lightPostConstruct.h"
+#include "imageLoader.h"
 using namespace std;
 
 // Initial size of graphics window.
@@ -98,6 +99,13 @@ bool cameraReset = false;
 // Constant look at point of the lightpost's light and the camera 
 const GLfloat lookAtPoint = 3.0 * sqrt(2.0); 
 
+//Variables for storing textures.
+GLuint blockTexId1;
+GLuint blockTexId2;
+GLuint blockTexId3;
+GLuint blockTexId4;
+GLuint blockTexId5;
+GLuint hole; //Hole texture stored here.
 
 void setCamera()
 {
@@ -120,8 +128,8 @@ void setCamera()
 	{
 		glOrtho(viewWindowLeft, viewWindowRight, viewWindowBottom, viewWindowTop, nearPlane, farPlane); //Useful for question 9.
 	}
-	
-}
+}	
+
 //Displays controls in console window.
 void dispKeys()
 {
@@ -178,6 +186,22 @@ void resetCam()
 	cameraReset = true;
 }
 
+//Makes the image into a texture, and returns the id of the texture
+GLuint loadTexture(Image* image)
+{
+	GLuint tempTexture;
+	glGenTextures(1, &tempTexture);
+	glBindTexture(GL_TEXTURE_2D, tempTexture);
+	glTexImage2D(GL_TEXTURE_2D,
+				 0,
+				 GL_RGB,
+				 image->width, image->height,
+				 0,
+				 GL_RGB,
+				 GL_UNSIGNED_BYTE,
+				 image->pixels);
+	return tempTexture;
+}
 
 void display ()
 {
@@ -300,6 +324,9 @@ void display ()
 			//Draw standard tile and small rubble pile.
 			else if(m1.getChar(i, j, 0) == 's')
 			{
+				Image* image = loadBMP("debris.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				t1.draw();
@@ -308,7 +335,7 @@ void display ()
 
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				r1.drawSmall();
+				r1.drawSmall(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -316,6 +343,9 @@ void display ()
 			//Draw standard tile and medium rubble pile.
 			else if(m1.getChar(i, j, 0) == 'm')
 			{
+				Image* image = loadBMP("debris.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				t1.draw();
@@ -324,7 +354,7 @@ void display ()
 
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				r1.drawMedium();
+				r1.drawMedium(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -332,6 +362,9 @@ void display ()
 			//Draw standard tile and large rubble pile.
 			else if(m1.getChar(i, j, 0) == 'l')
 			{
+				Image* image = loadBMP("debris.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				t1.draw();
@@ -340,7 +373,7 @@ void display ()
 
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				r1.drawLarge();
+				r1.drawLarge(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -411,45 +444,70 @@ void display ()
 
 			//Draw plain half-block
 			if(m1.getChar(i,j,1) == '1') {
+				Image* image = loadBMP("mud.bmp"); //Create Image object with the .bmp
+				blockTexId1 = loadTexture(image); //Store the texture from the object in texture variable.
+				delete image; //Delete Image object.
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				b1.drawPH();
+				b1.drawPH(blockTexId1);
 				glFlush();
 				glPopMatrix();
 			}
 
 			//Draw plain full-block
 			else if(m1.getChar(i,j,1) == '2') {
+				Image* image = loadBMP("ice.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				b1.drawPU();
+				b1.drawPU(blockTexId2);
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw plain full-block (alternate texture)
+			else if(m1.getChar(i,j,1) == '7') {
+				Image* image = loadBMP("gold.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				b1.drawPU(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 			
 			//Draw holed half-block
 			else if(m1.getChar(i,j,1) == '3'){
+				Image* image = loadBMP("stone.bmp");
+				blockTexId3 = loadTexture(image);
+				delete image;
+
+				Image* image2 = loadBMP("hole2.bmp");
+				hole = loadTexture(image);
+				delete image2;
+
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				b1.drawHH();
+				b1.drawHH(blockTexId3, hole);
 				glFlush();
 				glPopMatrix();
 			}
 			
 			//Draw holed full-block
 			else if(m1.getChar(i,j,1) == '4') {
+				Image* image = loadBMP("wood.bmp");
+				blockTexId4 = loadTexture(image);
+				delete image;
+
+				Image* image2 = loadBMP("hole2.bmp");
+				hole = loadTexture(image);
+				delete image2;
+
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				b1.drawHU();
-				glFlush();
-				glPopMatrix();
-			}
-			
-			//Draw HQ block
-			else if(m1.getChar(i,j,1) == '5') {
-				glPushMatrix();
-				glTranslatef(i, 0, j);
-				b1.drawHQ();
+				b1.drawHU(blockTexId4, hole);
 				glFlush();
 				glPopMatrix();
 			}
@@ -459,6 +517,30 @@ void display ()
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				b1.drawD();
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw HQ block
+			else if(m1.getChar(i,j,1) == '@') {
+				Image* image = loadBMP("camo1.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				b1.drawHQ(blockTexId2);
+				glFlush();
+				glPopMatrix();
+			}
+
+			//Draw Factory
+			else if(m1.getChar(i,j,1) == '$') {
+				Image* image = loadBMP("camo2.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				b1.drawF(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -593,9 +675,12 @@ void display ()
 			}
 
 			if (m1.getChar(i,j,2) == '1') {
+				Image* image = loadBMP("cgold.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				c1.draw(shade);
+				c1.draw(shade,blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}

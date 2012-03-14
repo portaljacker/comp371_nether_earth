@@ -9,6 +9,7 @@
 //This is the controller header.
 
 #include "Enumerations.h"
+#include <GL/glut.h>
 
 #pragma once
 class Controller
@@ -17,6 +18,6 @@ public:
 	Controller(void);
 	~Controller(void);
 	
-	void draw(Shade shade);
+	void draw(Shade shade, GLuint);
 };
 

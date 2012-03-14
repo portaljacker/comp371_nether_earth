@@ -13,11 +13,14 @@
 
 Map::Map(void) //Various tiles and objects are preset here for testing.
 {
+	// Zero out the grid and place default tiles
 	for(int i = 0; i < 50; i++)
 	{
 		for(int j = 0; j < 50; j++)
 		{
 			grid[i][j][0] = 't';
+			grid[i][j][1] = '0';
+			grid[i][j][2] = '0';
 		}
 	}
 
@@ -69,6 +72,7 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	grid[8][4][1] = '4';
 	
 	//HQ
+	/*	shouldn't be necessary due to dedicated function
 	grid[6][15][1] = '2';
 	grid[8][15][1] = '2';
 	grid[5][16][1] = '2';
@@ -85,7 +89,7 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	grid[7][18][1] = '1';
 	grid[8][18][1] = '1';
 	grid[6][19][1] = '1';
-	grid[8][19][1] = '1';
+	grid[8][19][1] = '1';*/
 
 	//Controller
 	grid[10][10][2] = '1';
@@ -107,21 +111,26 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	grid[49][49][1] = '*';
 
 	// Robot tests (with buildings for comparison)
-	grid[38][3][1] = '2';
+	grid[38][3][1] = '7';
 	grid[38][7][1] = 'b';
-	grid[42][3][1] = '2';
+	grid[42][3][1] = '7';
 	grid[42][7][1] = 'g';
-	grid[46][3][1] = '2';
+	grid[46][3][1] = '7';
 	grid[46][7][1] = 't';
-	grid[35][3][1] = '2';
+	grid[35][3][1] = '7';
 	grid[35][7][1] = 'e';
-	grid[32][3][1] = '2';
+	grid[32][3][1] = '7';
 	grid[32][7][1] = 'c';
 	grid[32][10][1] = 'p';
 	grid[35][10][1] = 'n';
 	grid[39][9][1] = 'm';
 
 	grid[33][20][1] = 'r';
+
+	//HQ
+	drawHQ(7,17);
+	//Factory
+	drawF(15,17);
 }
 
 //Methods to read contents of a particular index. in array.
@@ -133,6 +142,41 @@ char Map::getChar(int i, int j)
 char Map::getChar(int i, int j, int k)
 {
 	return grid[i][j][k];
+}
+
+void Map::drawHQ(int i, int j)
+{
+	grid[i-1][j-2][1] = '0';
+	grid[i+1][j-2][1] = '0';
+
+	grid[i-2][j-1][1] = '0';
+	grid[i-1][j-1][1] = '0';
+	grid[i][j-1][1] = '0';
+	grid[i+1][j-1][1] = '0';
+	grid[i+2][j-1][1] = '0';
+
+	grid[i-2][j][1] = '0';
+	grid[i-1][j][1] = '0';
+	grid[i][j][1] = '@';	// center/drawing point
+	grid[i+1][j][1] = '0';
+	grid[i+2][j][1] = '0';
+
+	grid[i-1][j+1][1] = '0';
+	grid[i][j+1][1] = '0';
+	grid[i+1][j+1][1] = '0';
+
+	grid[i-1][j+2][1] = '0';
+	grid[i+1][j+2][1] = '0';
+}
+
+void Map::drawF(int i, int j)
+{
+	grid[i-1][j][1] = '0';
+	grid[i][j][1] = '$';	// center/drawing point
+	grid[i+1][j][1] = '0';
+
+	grid[i-1][j+1][1] = '0';
+	grid[i+1][j+1][1] = '0';
 }
 
 Map::~Map(void)
