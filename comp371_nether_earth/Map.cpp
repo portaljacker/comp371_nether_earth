@@ -13,11 +13,14 @@
 
 Map::Map(void) //Various tiles and objects are preset here for testing.
 {
+	// Zero out the grid and place default tiles
 	for(int i = 0; i < 50; i++)
 	{
 		for(int j = 0; j < 50; j++)
 		{
 			grid[i][j][0] = 't';
+			grid[i][j][1] = '0';
+			grid[i][j][2] = '0';
 		}
 	}
 
@@ -69,7 +72,6 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	grid[8][4][1] = '4';
 	
 	//HQ
-	drawHQ(7,17);
 	/*	shouldn't be necessary due to dedicated function
 	grid[6][15][1] = '2';
 	grid[8][15][1] = '2';
@@ -124,6 +126,11 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	grid[39][9][1] = 'm';
 
 	grid[33][20][1] = 'r';
+
+	//HQ
+	drawHQ(7,17);
+	//Factory
+	drawF(15,17);
 }
 
 //Methods to read contents of a particular index. in array.

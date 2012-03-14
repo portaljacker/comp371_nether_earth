@@ -10,6 +10,7 @@
 
 #include "Controller.h"
 #include <GL/glut.h>
+#include "Cube.h"
 
 Controller::Controller(void)
 {
@@ -23,42 +24,42 @@ Controller::~Controller(void)
 void Controller::draw(Shade shade) {
 	
 	glPushMatrix();
-		float matAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+		/*float matAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
 		float matSpecular[] = { 0.1f, 0.1f, 0.0f, 0.1f };
 		float matShininess = 60;
 		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient);
 		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, matSpecular);
-		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, matShininess);
-		glColor3f(0.5, 0.5, 0.5);
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, matShininess);*/
+		glColor3f(0.7, 0.7, 0.7);
 		glPushMatrix();	// middle block
 			glTranslatef (0.0, 0.2, 0.0);   
 			glScalef (0.4, 0.4, 0.4);
-			glutSolidCube(1.0);
+			pj::cube();
 		glPopMatrix();
 		glPushMatrix();	// top left block
 			glTranslatef (-0.3, 0.2, 0.3);
 			glScalef (0.4, 0.4, 0.4);
-			glutSolidCube(1.0);
+			pj::cube();
 		glPopMatrix();
 		glPushMatrix();	// top right block
 			glTranslatef (0.3, 0.2, 0.3);
 			glScalef (0.4, 0.4, 0.4);
-			glutSolidCube(1.0);
+			pj::cube();
 		glPopMatrix();
 		glPushMatrix();	// bottom left block
 			glTranslatef (-0.3, 0.2, -0.3);
 			glScalef (0.4, 0.4, 0.4);
-			glutSolidCube(1.0);
+			pj::cube();
 		glPopMatrix();
 		glPushMatrix();	// bottom right block
 			glTranslatef (0.3, 0.2, -0.3);
 			glScalef (0.4, 0.4, 0.4);
-			glutSolidCube(1.0);
+			pj::cube();
 		glPopMatrix();
 		glPushMatrix();	// raised block
 			glTranslatef (0.0, 0.4, 0.0);
 			glScalef (0.2, 0.2, 0.2);
-			glutSolidCube(1.0);
+			pj::cube();
 		glPopMatrix();
 		glPushMatrix();
 			GLUquadricObj* GL_Quadric = 0;
@@ -78,6 +79,7 @@ void Controller::draw(Shade shade) {
 					gluQuadricNormals(GL_Quadric, GL_SMOOTH);
 					break;
 				}
+				gluQuadricTexture(GL_Quadric, GL_TRUE);
 			}
 			gluCylinder(GL_Quadric, 0.02, 0.02, 0.8, 20, 20);
 		glPopMatrix();
