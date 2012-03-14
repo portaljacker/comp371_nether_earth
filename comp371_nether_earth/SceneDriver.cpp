@@ -492,23 +492,23 @@ void display ()
 				glPopMatrix();
 			}
 			
+			//Draw delimiter
+			else if(m1.getChar(i,j,1) == '6') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				b1.drawD();
+				glFlush();
+				glPopMatrix();
+			}
+
 			//Draw HQ block
-			else if(m1.getChar(i,j,1) == '5') {
+			else if(m1.getChar(i,j,1) == '@') {
 				Image* image = loadBMP("wood.bmp");
 				blockTexId2 = loadTexture(image);
 				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				b1.drawHQ(blockTexId2);
-				glFlush();
-				glPopMatrix();
-			}
-			
-			//Draw delimiter
-			else if(m1.getChar(i,j,1) == '6') {
-				glPushMatrix();
-				glTranslatef(i, 0, j);
-				b1.drawD();
 				glFlush();
 				glPopMatrix();
 			}

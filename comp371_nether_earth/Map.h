@@ -19,5 +19,8 @@ public:
 	~Map(void);
 	char getChar(int i, int j); //Checks specific array index.
 	char getChar(int i, int j,int k);
+
+	void drawHQ(int i, int j);
+	void drawF(int i, int j);
 };
 

@@ -69,6 +69,8 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	grid[8][4][1] = '4';
 	
 	//HQ
+	drawHQ(7,17);
+	/*	shouldn't be necessary due to dedicated function
 	grid[6][15][1] = '2';
 	grid[8][15][1] = '2';
 	grid[5][16][1] = '2';
@@ -85,7 +87,7 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	grid[7][18][1] = '1';
 	grid[8][18][1] = '1';
 	grid[6][19][1] = '1';
-	grid[8][19][1] = '1';
+	grid[8][19][1] = '1';*/
 
 	//Controller
 	grid[10][10][2] = '1';
@@ -133,6 +135,41 @@ char Map::getChar(int i, int j)
 char Map::getChar(int i, int j, int k)
 {
 	return grid[i][j][k];
+}
+
+void Map::drawHQ(int i, int j)
+{
+	grid[i-1][j-2][1] = '2';
+	grid[i+1][j-2][1] = '2';
+
+	grid[i-2][j-1][1] = '2';
+	grid[i-1][j-1][1] = '2';
+	grid[i][j-1][1] = '2';
+	grid[i+1][j-1][1] = '2';
+	grid[i+2][j-1][1] = '2';
+
+	grid[i-2][j][1] = '2';
+	grid[i-1][j][1] = '1';
+	grid[i][j][1] = '@';	// center/drawing point
+	grid[i+1][j][1] = '1';
+	grid[i+2][j][1] = '2';
+
+	grid[i-1][j+1][1] = '1';
+	grid[i][j+1][1] = '1';
+	grid[i+1][j+1][1] = '1';
+
+	grid[i-1][j+2][1] = '1';
+	grid[i+1][j+2][1] = '1';
+}
+
+void Map::drawF(int i, int j)
+{
+	grid[i-1][j][1] = '0';
+	grid[i][j][1] = '$';	// center/drawing point
+	grid[i+1][j][1] = '0';
+
+	grid[i-1][j+1][1] = '0';
+	grid[i+1][j+1][1] = '0';
 }
 
 Map::~Map(void)
