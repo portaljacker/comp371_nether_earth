@@ -31,6 +31,68 @@ h/H: Display list of controls in console window.
 esc: Close the program.
 
 
+Directory Tree of Project:
+
+comp371_nether_earth
+|   .gitignore
+|   tree.txt
+|   comp371_nether_earth.sln
+|   README.md
+|   
+----comp371_nether_earth
+	    Bipod.cpp
+		Bipod.h
+		Block.cpp
+		Block.h
+		camo1.bmp
+		camo2.bmp
+		Cannon.cpp
+		Cannon.h
+		cgold.bmp
+		comp371_nether_earth.vcxproj
+		comp371_nether_earth.vcxproj.filters
+		comp371_nether_earth.vcxproj.user	
+		Controller.cpp
+		Controller.h
+		Cube.cpp
+		Cube.h
+		debris.bmp
+		eBrain.cpp
+		eBrain.h
+		Enumerations.h
+		gold.bmp
+		Grav.cpp
+		Grav.h
+		hole2.bmp
+		ice.bmp
+		ImageLoader.cpp
+		ImageLoader.h
+		lightPostConstruct.cpp
+		lightPostConstruct.h
+		Map.cpp
+		Map.h
+		metal.bmp
+		Missiles.cpp
+		Missiles.h
+		mud.bmp
+		Nuke.cpp
+		Nuke.h
+		Phaser.cpp
+		Phaser.h
+		Rubble.cpp
+		Rubble.h
+		SceneDriver.cpp
+		skeleton.cpp
+		steel.bmp
+		stone.bmp
+		Tile.cpp
+		Tile.h
+		Tracks.cpp
+		Tracks.h
+		trust.bmp
+		wood.bmp
+
+
 Texture resources:
 
 http://www.cgtextures.com used for:
