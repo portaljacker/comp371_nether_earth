@@ -22,8 +22,8 @@ public:
 
 	void drawPH(GLuint);	//1
 	void drawPU(GLuint);	//2
-	void drawHH(GLuint);	//3
-	void drawHU(GLuint);	//4
+	void drawHH(GLuint, GLuint);	//3
+	void drawHU(GLuint, GLuint);	//4
 
 	void drawHQ(GLuint);	//5
 

@@ -105,6 +105,7 @@ GLuint blockTexId2;
 GLuint blockTexId3;
 GLuint blockTexId4;
 GLuint blockTexId5;
+GLuint hole; //Hole texture stored here.
 
 void setCamera()
 {
@@ -434,9 +435,9 @@ void display ()
 
 			//Draw plain half-block
 			if(m1.getChar(i,j,1) == '1') {
-				Image* image = loadBMP("mud.bmp");
-				blockTexId1 = loadTexture(image);
-				delete image;
+				Image* image = loadBMP("mud.bmp"); //Create Image object with the .bmp
+				blockTexId1 = loadTexture(image); //Store the texture from the object in texture variable.
+				delete image; //Delete Image object.
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				b1.drawPH(blockTexId1);
@@ -473,9 +474,14 @@ void display ()
 				Image* image = loadBMP("stone.bmp");
 				blockTexId3 = loadTexture(image);
 				delete image;
+
+				Image* image2 = loadBMP("hole2.bmp");
+				hole = loadTexture(image);
+				delete image2;
+
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				b1.drawHH(blockTexId3);
+				b1.drawHH(blockTexId3, hole);
 				glFlush();
 				glPopMatrix();
 			}
@@ -485,9 +491,14 @@ void display ()
 				Image* image = loadBMP("wood.bmp");
 				blockTexId4 = loadTexture(image);
 				delete image;
+
+				Image* image2 = loadBMP("hole2.bmp");
+				hole = loadTexture(image);
+				delete image2;
+
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				b1.drawHU(blockTexId4);
+				b1.drawHU(blockTexId4, hole);
 				glFlush();
 				glPopMatrix();
 			}

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="gold.bmp" />
+    <None Include="hole2.bmp" />
     <None Include="ice.bmp" />
     <None Include="mud.bmp" />
     <None Include="stone.bmp" />

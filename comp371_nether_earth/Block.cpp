@@ -200,7 +200,7 @@ void Block::drawPU(GLuint tex) {	// plain full-block
 		glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
-void Block::drawHH(GLuint tex) {	// holed half-block
+void Block::drawHH(GLuint tex, GLuint hole) {	// holed half-block
 	glPushMatrix();
 		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
@@ -288,19 +288,30 @@ void Block::drawHH(GLuint tex) {	// holed half-block
 			glPopMatrix();
 		glPopMatrix();
 		glPushMatrix();
-			glColor3f(0.0, 0.0, 0.0);
+			//glColor3f(0.0, 0.0, 0.0); //Color disabled for textures.
 			glTranslatef(0.0, 0.501, 0.0);
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, hole);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 			glBegin(GL_QUADS);
+				glNormal3f(0.0, 1.0, 0.0);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f(0.3, 0.0, 0.3);
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f(0.3, 0.0, -0.3);
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(-0.3, 0.0, -0.3);
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(-0.3, 0.0, 0.3);
 			glEnd();
+
 		glPopMatrix();
 		glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
-void Block::drawHU(GLuint tex) {	// holed full-block
+void Block::drawHU(GLuint tex, GLuint hole) {	// holed full-block
 	glPushMatrix();
 		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
@@ -387,14 +398,25 @@ void Block::drawHU(GLuint tex) {	// holed full-block
 			glPopMatrix();
 		glPopMatrix();
 		glPushMatrix();
-			glColor3f(0.0, 0.0, 0.0);
+			//glColor3f(0.0, 0.0, 0.0); //Color disabled for textures.
 			glTranslatef(0.0, 1.001, 0.0);
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, hole);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 			glBegin(GL_QUADS);
+				glNormal3f(0.0, 1.0, 0.0);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f(0.3, 0.0, 0.3);
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f(0.3, 0.0, -0.3);
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(-0.3, 0.0, -0.3);
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(-0.3, 0.0, 0.3);
 			glEnd();
+
 		glPopMatrix();
 		glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
