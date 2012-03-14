@@ -23,26 +23,26 @@ Cannon::~Cannon(void)
 
 void Cannon::draw(GLuint tex)
 {
-	glEnable(GL_LIGHTING); //Enable lighting
-	glEnable(GL_LIGHT0); //Enable light #0
-	glEnable(GL_LIGHT1); //Enable light #1
+	glPushMatrix();
+	//glEnable(GL_LIGHTING); //Enable lighting
+	//glEnable(GL_LIGHT0); //Enable light #0
+	//glEnable(GL_LIGHT1); //Enable light #1
 	
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
-	//Add ambient light
-	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+	////Add ambient light
+	//GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
+	////glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+	//
+	////Add directed light
+	//GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
+	//GLfloat lightPos1[] = {0.0f, 2.0f, -3.0f, 0.0f};
+	//glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor1);
+	//glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
 	
-	//Add directed light
-	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
-	GLfloat lightPos1[] = {0.0f, 2.0f, -3.0f, 0.0f};
-	glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor1);
-	glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
-	
-	glPushMatrix();
 		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 		
@@ -129,16 +129,18 @@ void Cannon::draw(GLuint tex)
 		GLUquadricObj *quadObj = gluNewQuadric();
 		gluCylinder(quadObj, 0.05, 0.05, 0.5, 8.0, 8.0);
 		glTranslatef(-0.15, -0.5, -0.25);
+		gluQuadricTexture(quadObj, GL_TRUE);
 
 		glTranslatef(-0.15, 0.5, 0.25);
 		GLUquadricObj *quadObj2 = gluNewQuadric();
 		gluCylinder(quadObj2, 0.05, 0.05, 0.5, 8.0, 8.0);
 		glTranslatef(0.15, -0.5, -0.25);
+		gluQuadricTexture(quadObj2, GL_TRUE);
 
 		//4
 		glBegin(GL_QUADS);
 
-		//glColor3f(0.0f, 1.0f, 0.0f);
+		glColor3d(1,1,1);
 		glVertex3f(-0.1f, 1.01f, 0.1f);
 		glVertex3f(-0.1f, 1.01f, 0.2f);
 		glVertex3f(0.1f, 1.01f, 0.2f);
@@ -160,7 +162,7 @@ void Cannon::draw(GLuint tex)
 
 
 		glDisable(GL_TEXTURE_2D);
-		glDisable(GL_LIGHTING);
+		//glDisable(GL_LIGHTING);
 		/*
 		glBegin(GL_QUADS);
 	

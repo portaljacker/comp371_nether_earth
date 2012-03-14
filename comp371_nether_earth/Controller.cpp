@@ -22,19 +22,19 @@ Controller::~Controller(void)
 
 void Controller::draw(Shade shade, GLuint tex) {
 	
-	glEnable(GL_LIGHTING); //Enable lighting
-	glEnable(GL_LIGHT0); //Enable light #0
-	glEnable(GL_LIGHT1); //Enable light #1
-	
-	//Add ambient light
-	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
-	
-	//Add directed light
-	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
-	GLfloat lightPos1[] = {0.0f, 2.0f, -3.0f, 0.0f};
-	glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor1);
-	glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
+	//glEnable(GL_LIGHTING); //Enable lighting
+	//glEnable(GL_LIGHT0); //Enable light #0
+	//glEnable(GL_LIGHT1); //Enable light #1
+	//
+	////Add ambient light
+	//GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
+	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+	//
+	////Add directed light
+	//GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
+	//GLfloat lightPos1[] = {0.0f, 2.0f, -3.0f, 0.0f};
+	//glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor1);
+	//glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
 	
 	glPushMatrix();
 		/*float matAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
@@ -103,6 +103,6 @@ void Controller::draw(Shade shade, GLuint tex) {
 			gluCylinder(GL_Quadric, 0.02, 0.02, 0.8, 20, 20);
 		glPopMatrix();
 		glDisable(GL_TEXTURE_2D);
-	glDisable(GL_LIGHTING);
+	//glDisable(GL_LIGHTING);
 	glPopMatrix();
 }

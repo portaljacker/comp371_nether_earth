@@ -9,6 +9,7 @@
 //This is the phaser constructing class
 
 #include "Phaser.h" 
+#include "Cube.h"
 #include <GL/glut.h> 
 
 Phaser::Phaser(void)
@@ -22,24 +23,25 @@ Phaser::~Phaser(void)
 // This function is called to display the scene.
 void Phaser::draw(Shade shade, GLuint tex)
 {
-	glEnable(GL_LIGHTING); //Enable lighting
-	glEnable(GL_LIGHT0); //Enable light #0
-	glEnable(GL_LIGHT1); //Enable light #1
+	glPushMatrix();
+	//glEnable(GL_LIGHTING); //Enable lighting
+	//glEnable(GL_LIGHT0); //Enable light #0
+	//glEnable(GL_LIGHT1); //Enable light #1
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
-	//Add ambient light
-	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
-	
-	//Add directed light
-	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
-	GLfloat lightPos1[] = {0.0f, 2.0f, -3.0f, 0.0f};
-	glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor1);
-	glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
+	////Add ambient light
+	//GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
+	////glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+	//
+	////Add directed light
+	//GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
+	//GLfloat lightPos1[] = {0.0f, 2.0f, -3.0f, 0.0f};
+	//glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor1);
+	//glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
 	
 	GLUquadricObj *disk;
 
@@ -57,13 +59,11 @@ void Phaser::draw(Shade shade, GLuint tex)
 		gluQuadricNormals(disk, GL_SMOOTH);
 		break;
 	}
-
+	gluQuadricTexture(disk, GL_TRUE);
 	// Situate the robot weapon at the right Y location
 	glTranslatef(0,1,0);
 	glScalef(1.5,1.5,1.5);
 
-	// Push the entire object
-	glPushMatrix();
 		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 
@@ -73,7 +73,8 @@ void Phaser::draw(Shade shade, GLuint tex)
 			//glColor3f(1,0,0);
 			glTranslatef(0,0.25,0.1);
 			glScalef(1,.5,.5);
-			glutSolidCube(.6);
+			glScalef(.6,.6,.6);
+			pj::cube();
 		
 		glPopMatrix();
 		
@@ -94,7 +95,7 @@ void Phaser::draw(Shade shade, GLuint tex)
 					glScalef(0.5, 0.5, 0.5);
 					glBegin(GL_QUADS);
 
-					//glColor3f(0.0f, 1.0f, 0.0f);
+					glColor3d(1,1,1);
 					glTexCoord2f(0.0f, 0.0f);
 					glVertex3f(-0.1f, 0.12f, 0.1f);
 					glTexCoord2f(0.0f, 1.0f);
@@ -155,10 +156,9 @@ void Phaser::draw(Shade shade, GLuint tex)
 
 		glPopMatrix();
 
-	// Pop the entire project
-	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_LIGHTING);
+	//glDisable(GL_LIGHTING);
+	glPopMatrix();
 }
 
 // Drawing the team number

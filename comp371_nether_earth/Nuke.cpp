@@ -24,9 +24,10 @@ Nuke::~Nuke(void)
 // The draw function for the nuke weapon
 void Nuke::draw(Shade shade, GLuint tex)
 {
-	glEnable(GL_LIGHTING); //Enable lighting
-	glEnable(GL_LIGHT0); //Enable light #0
-	glEnable(GL_LIGHT1); //Enable light #1
+	glPushMatrix();
+	//glEnable(GL_LIGHTING); //Enable lighting
+	//glEnable(GL_LIGHT0); //Enable light #0
+	//glEnable(GL_LIGHT1); //Enable light #1
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex);
@@ -35,7 +36,7 @@ void Nuke::draw(Shade shade, GLuint tex)
 	
 	//Add ambient light
 	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 	
 	//Add directed light
 	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
@@ -59,15 +60,13 @@ void Nuke::draw(Shade shade, GLuint tex)
 		gluQuadricNormals(cylinder, GL_SMOOTH);
 		break;
 	}
-
+	gluQuadricTexture(cylinder, GL_TRUE);
 	// Situate the robot weapon at the right Y location
 	glTranslatef(0,2,0);
 
 	glRotatef(90,1,0,0);
 
 	// Nuke Body
-	glPushMatrix();
-
 		// Drawing the top disk
 		glPushMatrix();
 			//glColor3f( 1, 0.0, 0.0 );	
@@ -105,7 +104,7 @@ void Nuke::draw(Shade shade, GLuint tex)
 			glRotatef(-90, 1, 0, 0);
 			glBegin(GL_QUADS);
 
-			//glColor3f(0.0f, 1.0f, 0.0f);
+			glColor3d(1,1,1);
 			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(-0.1f, 0.12f, 0.1f);
 			glTexCoord2f(0.0f, 1.0f);
@@ -138,9 +137,9 @@ void Nuke::draw(Shade shade, GLuint tex)
 			glEnd();
 		glPopMatrix();
 
-	glPopMatrix();
-
 	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_LIGHTING);	
+	//glDisable(GL_LIGHTING);	
+
+	glPopMatrix();
 }
 

@@ -117,7 +117,7 @@ void Tile::draw(GLuint tex)
 			glPopMatrix();
 
 			glPushMatrix();
-				glColor3b(255,255,255);
+				glColor3f(1.0,1.0,1.0);
 				glPushMatrix();
 					glVertex3f( 0.25, 0.001,-0.25); //Long vetical bar.
 					glVertex3f( 0.15, 0.001,-0.25);

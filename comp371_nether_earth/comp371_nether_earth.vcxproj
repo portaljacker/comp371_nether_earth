@@ -62,7 +62,6 @@
     <None Include="steel.bmp" />
     <None Include="stone.bmp" />
     <None Include="trust.bmp" />
-    <None Include="vtr.bmp" />
     <None Include="wood.bmp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -108,8 +108,8 @@ GLuint blockTexId3;
 GLuint blockTexId4;
 GLuint blockTexId5;
 GLuint hole; //Hole texture stored here.
-Image* im = loadBMP("trust.bmp");
-GLuint tileTex = loadTexture(im);
+Image* im;
+GLuint tileTex;
 
 void setCamera()
 {
@@ -217,10 +217,10 @@ void display ()
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_COLOR_MATERIAL);
-	glEnable(GL_LIGHTING); //Enable lighting
-	glEnable(GL_LIGHT0); //Enable light #0
-	glEnable(GL_LIGHT1); //Enable light #1
-	glEnable(GL_LIGHT2); //Enable light #2	
+	//glEnable(GL_LIGHTING); //Enable lighting
+	//glEnable(GL_LIGHT0); //Enable light #0
+	//glEnable(GL_LIGHT1); //Enable light #1
+	//glEnable(GL_LIGHT2); //Enable light #2	
 	//glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 20);
 	//glEnable(GL_NORMALIZE); //Automatically normalize normals
 
@@ -320,7 +320,7 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t1.draw(blockTexId2);
+				t1.draw(tileTex);
 				glFlush();
 				glPopMatrix();
 			}
@@ -330,7 +330,7 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t1.draw(blockTexId2);
+				t1.draw(tileTex);
 				glFlush();
 				glPopMatrix();
 
@@ -349,7 +349,7 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t1.draw(blockTexId2);
+				t1.draw(tileTex);
 				glFlush();
 				glPopMatrix();
 
@@ -368,7 +368,7 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t1.draw(blockTexId2);
+				t1.draw(tileTex);
 				glFlush();
 				glPopMatrix();
 
@@ -555,7 +555,7 @@ void display ()
 				glTranslatef(i, 0, j);
 				glRotatef(45,0,1,0);
 				l1.draw();
-				l1.createLight();
+				//l1.createLight();
 				glFlush();
 				glPopMatrix();
 			}
@@ -566,7 +566,7 @@ void display ()
 				glTranslatef(i, 0, j);
 				glRotatef(135,0,1,0);
 				l1.draw();
-				l1.createLight();
+				//l1.createLight();
 				glFlush();
 				glPopMatrix();
 			}
@@ -577,7 +577,7 @@ void display ()
 				glTranslatef(i, 0, j);
 				glRotatef(-45,0,1,0);
 				l1.draw();
-				l1.createLight();
+				//l1.createLight();
 				glFlush();
 				glPopMatrix();
 			}
@@ -588,7 +588,7 @@ void display ()
 				glTranslatef(i, 0, j);
 				glRotatef(-135,0,1,0);
 				l1.draw();
-				l1.createLight();
+				//l1.createLight();
 				glFlush();
 				glPopMatrix();
 			}
@@ -721,10 +721,10 @@ void display ()
 	
 	glEnable(GL_DEPTH_TEST);
 	
-	glDisable(GL_LIGHTING);
+	/*glDisable(GL_LIGHTING);
 	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHT1);
-	glDisable(GL_LIGHT2);
+	glDisable(GL_LIGHT2);*/
 
 	glutSwapBuffers();
 }
@@ -992,6 +992,9 @@ int main(int argc, char** argv)
 
 	glShadeModel(GL_FLAT);
 	
+	im = loadBMP("trust.bmp");
+	tileTex = loadTexture(im);
+
 	glutMainLoop();
 	return 0;
 }

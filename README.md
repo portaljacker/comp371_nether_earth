@@ -39,3 +39,9 @@ camo2.bmp
 cgold.bmp
 debris.bmp
 trust.bmp
+
+http://www.jbdesign.it/idesignpro/images/metal/steel%20steel_sheetmetal_rpost.jpg for:
+steel.bmp
+
+http://designm.ag/images/0409/metal/41.jpg for:
+metal.bmp
