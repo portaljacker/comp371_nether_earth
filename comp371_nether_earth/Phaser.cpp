@@ -20,8 +20,17 @@ Phaser::~Phaser(void)
 }
 
 // This function is called to display the scene.
-void Phaser::draw(Shade shade)
+void Phaser::draw(Shade shade, GLuint tex)
 {
+	glEnable(GL_LIGHTING); //Enable lighting
+	glEnable(GL_LIGHT0); //Enable light #0
+	glEnable(GL_LIGHT1); //Enable light #1
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	
 	//Add ambient light
 	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
@@ -61,7 +70,7 @@ void Phaser::draw(Shade shade)
 		// The cube
 		glPushMatrix();
 
-			glColor3f(1,0,0);
+			//glColor3f(1,0,0);
 			glTranslatef(0,0.25,0.1);
 			glScalef(1,.5,.5);
 			glutSolidCube(.6);
@@ -73,7 +82,7 @@ void Phaser::draw(Shade shade)
 
 			// Drawing the top cap
 			glPushMatrix();
-				glColor3f( 0, 0, 1 );	
+				//glColor3f( 0, 0, 1 );	
 
 				glTranslatef(0.0,0,0.15);
 				// Parameters: quadObj, 
@@ -85,7 +94,7 @@ void Phaser::draw(Shade shade)
 					glScalef(0.5, 0.5, 0.5);
 					glBegin(GL_QUADS);
 
-					glColor3f(0.0f, 1.0f, 0.0f);
+					//glColor3f(0.0f, 1.0f, 0.0f);
 					glTexCoord2f(0.0f, 0.0f);
 					glVertex3f(-0.1f, 0.12f, 0.1f);
 					glTexCoord2f(0.0f, 1.0f);
@@ -95,7 +104,7 @@ void Phaser::draw(Shade shade)
 					glTexCoord2f(1.0f, 0.0f);
 					glVertex3f(0.1f, 0.12f, 0.1f);
 
-					glColor3f(0.0f, 1.0f, 0.0f);
+					//glColor3f(0.0f, 1.0f, 0.0f);
 					glTexCoord2f(0.0f, 0.0f);
 					glVertex3f(-0.0f, 0.12f, -0.15f);
 					glTexCoord2f(0.0f, 1.0f);
@@ -105,7 +114,7 @@ void Phaser::draw(Shade shade)
 					glTexCoord2f(1.0f, 0.0f);
 					glVertex3f(0.1f, 0.12f, -0.15f);
 
-					glColor3f(0.0f, 1.0f, 0.0f);
+					//glColor3f(0.0f, 1.0f, 0.0f);
 					glTexCoord2f(0.0f, 0.0f);
 					glVertex3f(-0.25f, 0.12f, -0.15f);
 					glTexCoord2f(0.0f, 1.0f);
@@ -121,14 +130,14 @@ void Phaser::draw(Shade shade)
 
 			// The Main cylinder
 			glPushMatrix();
-				glColor3f( 0.0, 0, 0.80 );					
+				//glColor3f( 0.0, 0, 0.80 );					
 				// Parameters: height, radius, slices, stacks
 				gluCylinder(disk, .5, .5, .15, 15, 20);
 			glPopMatrix();
 
 			// The Barrel
 			glPushMatrix();
-				glColor3f( .8, 0, 0 );	
+				//glColor3f( .8, 0, 0 );	
 				glRotatef(90,1,0,0);
 				glTranslatef(0,0.25,-.25);
 				// Parameters: height, radius, slices, stacks
@@ -137,7 +146,7 @@ void Phaser::draw(Shade shade)
 
 			// Drawing the bottom cap
 			glPushMatrix();
-				glColor3f( 0, 0, 1 );	
+				//glColor3f( 0, 0, 1 );	
 
 				// Parameters: quadObj,
 				glTranslatef(0.0,0,0.01);
@@ -148,6 +157,8 @@ void Phaser::draw(Shade shade)
 
 	// Pop the entire project
 	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_LIGHTING);
 }
 
 // Drawing the team number

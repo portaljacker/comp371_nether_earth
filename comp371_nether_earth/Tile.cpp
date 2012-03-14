@@ -22,6 +22,9 @@ Tile::~Tile(void)
 }
 void Tile::draw(GLuint tex)
 {
+	glEnable(GL_LIGHTING); //Enable lighting
+	glEnable(GL_LIGHT0); //Enable light #0
+	glEnable(GL_LIGHT1); //Enable light #1
 	//Add ambient light
 	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
@@ -141,6 +144,7 @@ void Tile::draw(GLuint tex)
 	//glEnd();
 	//glFlush();
 	//glEnable(GL_DEPTH_TEST); //Enables depth.
+		glDisable(GL_LIGHTING);
 }
 
 void Tile::drawHole()

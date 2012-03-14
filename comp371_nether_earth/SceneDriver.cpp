@@ -594,86 +594,113 @@ void display ()
 			}
 
 			else if(m1.getChar(i,j,1) == 'b') {
+				Image* image = loadBMP("steel.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				b2.draw();
+				b2.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'g') {
+				Image* image = loadBMP("steel.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				g1.draw();
+				g1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 't') {
+				Image* image = loadBMP("steel.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t2.draw();
+				t2.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'e') {
+				Image* image = loadBMP("metal.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				e1.draw();
+				e1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'c') {
+				Image* image = loadBMP("metal.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				c2.draw();
+				c2.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'p') {
+				Image* image = loadBMP("metal.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				glRotatef(-90,1,0,0);
-				p1.draw(shade);
+				p1.draw(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'n') {
+				Image* image = loadBMP("metal.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				n1.draw(shade);
+				n1.draw(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'm') {
+				Image* image = loadBMP("metal.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				m2.draw(shade);
+				m2.draw(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'r') {
+				Image* image = loadBMP("metal.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0.5, j + 0.60);
-				g1.draw();
+				g1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 
 				glPushMatrix();
 				glTranslatef(i, 1.0, j);
-				c2.draw();
+				c2.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 
 				glPushMatrix();
 				glTranslatef(i, 2.0, j);
-				e1.draw();
+				e1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}

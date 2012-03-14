@@ -57,7 +57,9 @@
     <None Include="gold.bmp" />
     <None Include="hole2.bmp" />
     <None Include="ice.bmp" />
+    <None Include="metal.bmp" />
     <None Include="mud.bmp" />
+    <None Include="steel.bmp" />
     <None Include="stone.bmp" />
     <None Include="trust.bmp" />
     <None Include="vtr.bmp" />

@@ -22,8 +22,16 @@ Tracks::~Tracks(void)
 }
 
 
-void Tracks::draw(void)
+void Tracks::draw(GLuint tex)
 {
+	glEnable(GL_LIGHTING); //Enable lighting
+	glEnable(GL_LIGHT0); //Enable light #0
+	glEnable(GL_LIGHT1); //Enable light #1
+	
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	//Add ambient light
 	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
@@ -40,7 +48,7 @@ void Tracks::draw(void)
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
 
 	//top
-	glColor3f(1.0f, 0.0f, 0.0f);
+	//glColor3f(1.0f, 0.0f, 0.0f);
 	glNormal3f(0.0, 1.0f, 0.0f);
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.45f);
@@ -167,7 +175,7 @@ void Tracks::draw(void)
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
 
 	//top
-	glColor3f(1.0f, 0.0f, 0.0f);
+	//glColor3f(1.0f, 0.0f, 0.0f);
 	glNormal3f(0.0, 1.0f, 0.0f);
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.45f);
@@ -293,7 +301,7 @@ void Tracks::draw(void)
 	glBegin(GL_QUADS);
 
 	//bottom
-	glColor3f(0.5f, 0.0f, 0.0f);
+	//glColor3f(0.5f, 0.0f, 0.0f);
 	glNormal3f(0.0, -1.0f, 0.0f);
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.35f, 0.15f, -0.35f);
@@ -387,4 +395,7 @@ void Tracks::draw(void)
 
 	
 	glPopMatrix();
+
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_LIGHTING);
 }

@@ -8,6 +8,10 @@
 //Sebastien S. 9500782
 //This is the Grav header. This class makes anti-gravity chassis.
 
+#include "imageloader.h"
+#include <GL/glut.h>
+#include <math.h>
+
 #pragma once
 class Grav
 {
@@ -15,6 +19,6 @@ public:
 	Grav(void);
 	~Grav(void);
 
-	void draw(void);
+	void draw(GLuint);
 };
 

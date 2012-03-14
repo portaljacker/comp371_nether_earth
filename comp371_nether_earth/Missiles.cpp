@@ -19,8 +19,17 @@ Missiles::~Missiles(void)
 {
 }
 
-void Missiles::draw(Shade shade)
+void Missiles::draw(Shade shade, GLuint tex)
 {
+	glEnable(GL_LIGHTING); //Enable lighting
+	glEnable(GL_LIGHT0); //Enable light #0
+	glEnable(GL_LIGHT1); //Enable light #1
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	
 	//Add ambient light
 	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
@@ -63,7 +72,7 @@ void Missiles::draw(Shade shade)
 		// The base cube
 		glPushMatrix();
 
-			glColor3f(0,0,1);
+			//glColor3f(0,0,1);
 			glTranslatef(0,0.01,0);
 			glScalef(.8,.2,.8);
 			glutSolidCube(.75);
@@ -73,7 +82,7 @@ void Missiles::draw(Shade shade)
 		// The gunnery turret
 		glPushMatrix();
 
-			glColor3f(0,1,1);
+			//glColor3f(0,1,1);
 			glTranslatef(0,0.2,0);
 		
 			glutSolidCube(.25);
@@ -83,7 +92,7 @@ void Missiles::draw(Shade shade)
 				glScalef(0.5, 0.5, 0.5);
 				glBegin(GL_QUADS);
 
-				glColor3f(0.0f, 0.0f, 0.0f);
+			//	glColor3f(0.0f, 0.0f, 0.0f);
 				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(-0.1f, 0.12f, 0.1f);
 				glTexCoord2f(0.0f, 1.0f);
@@ -93,7 +102,7 @@ void Missiles::draw(Shade shade)
 				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(0.1f, 0.12f, 0.1f);
 
-				glColor3f(0.0f, 0.0f, 0.0f);
+				//glColor3f(0.0f, 0.0f, 0.0f);
 				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(-0.0f, 0.12f, -0.15f);
 				glTexCoord2f(0.0f, 1.0f);
@@ -103,7 +112,7 @@ void Missiles::draw(Shade shade)
 				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(0.1f, 0.12f, -0.15f);
 
-				glColor3f(0.0f, 0.0f, 0.0f);
+				//glColor3f(0.0f, 0.0f, 0.0f);
 				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(-0.25f, 0.12f, -0.15f);
 				glTexCoord2f(0.0f, 1.0f);
@@ -122,7 +131,7 @@ void Missiles::draw(Shade shade)
 
 				// The Barrel 1
 				glPushMatrix();
-					glColor3f( .8, 0, 0 );	
+					//glColor3f( .8, 0, 0 );	
 					glTranslatef(-.14,.2,0);
 					// Parameters: height, radius, slices, stacks
 					gluCylinder(disk, .04, .04, .3, 15, 20);
@@ -130,7 +139,7 @@ void Missiles::draw(Shade shade)
 
 				// The Barrel 2 
 				glPushMatrix();
-					glColor3f( 1, 0, 0 );	
+					//glColor3f( 1, 0, 0 );	
 					glTranslatef(.14,0.2,0);
 					// Parameters: height, radius, slices, stacks
 					gluCylinder(disk, .04, .04, .3, 15, 20);
@@ -140,4 +149,7 @@ void Missiles::draw(Shade shade)
 
 	// Pop entire object
 	glPopMatrix();
+
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_LIGHTING);
 }

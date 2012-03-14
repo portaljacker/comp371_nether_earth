@@ -22,6 +22,10 @@ Controller::~Controller(void)
 
 void Controller::draw(Shade shade, GLuint tex) {
 	
+	glEnable(GL_LIGHTING); //Enable lighting
+	glEnable(GL_LIGHT0); //Enable light #0
+	glEnable(GL_LIGHT1); //Enable light #1
+	
 	//Add ambient light
 	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
@@ -99,5 +103,6 @@ void Controller::draw(Shade shade, GLuint tex) {
 			gluCylinder(GL_Quadric, 0.02, 0.02, 0.8, 20, 20);
 		glPopMatrix();
 		glDisable(GL_TEXTURE_2D);
+	glDisable(GL_LIGHTING);
 	glPopMatrix();
 }
