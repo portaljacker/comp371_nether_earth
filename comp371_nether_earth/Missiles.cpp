@@ -21,12 +21,16 @@ Missiles::~Missiles(void)
 
 void Missiles::draw(Shade shade)
 {
-	/*//Add directed light
+	//Add ambient light
+	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+	
+	//Add directed light
 	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
-	GLfloat lightPos1[] = {0.0f, 1.0f, -1.0f, 0.0f};
-	glLightfv(GL_LIGHT2, GL_DIFFUSE, lightColor1);
-	glLightfv(GL_LIGHT2, GL_POSITION, lightPos1);
-	*/
+	GLfloat lightPos1[] = {0.0f, 2.0f, -3.0f, 0.0f};
+	glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor1);
+	glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
+	
 	GLUquadricObj *disk;
 
 	disk = gluNewQuadric ( );
@@ -80,21 +84,33 @@ void Missiles::draw(Shade shade)
 				glBegin(GL_QUADS);
 
 				glColor3f(0.0f, 0.0f, 0.0f);
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(-0.1f, 0.12f, 0.1f);
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f(-0.1f, 0.12f, 0.2f);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f(0.1f, 0.12f, 0.2f);
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(0.1f, 0.12f, 0.1f);
 
 				glColor3f(0.0f, 0.0f, 0.0f);
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(-0.0f, 0.12f, -0.15f);
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f(-0.0f, 0.12f, 0.3f);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f(0.1f, 0.12f, 0.3f);
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(0.1f, 0.12f, -0.15f);
 
 				glColor3f(0.0f, 0.0f, 0.0f);
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(-0.25f, 0.12f, -0.15f);
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f(-0.25f, 0.12f, 0.2f);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f(-0.1f, 0.12f, 0.2f);
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(-0.1f, 0.12f, -0.15f);
 
 				glEnd();

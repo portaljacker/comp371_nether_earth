@@ -98,6 +98,7 @@ bool cameraReset = false;
 // Constant look at point of the lightpost's light and the camera 
 const GLfloat lookAtPoint = 3.0 * sqrt(2.0); 
 
+
 void setCamera()
 {
 	// Must set it up in Projection Matrix
@@ -176,6 +177,7 @@ void resetCam()
 	viewWindowTop  = 100;
 	cameraReset = true;
 }
+
 
 void display ()
 {

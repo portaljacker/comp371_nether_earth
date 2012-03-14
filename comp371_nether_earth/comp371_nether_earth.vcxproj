@@ -45,6 +45,9 @@
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Tracks.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="vtr.bmp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{44C2FB9F-9DD1-4A1E-BCF6-C735A036ECDD}</ProjectGuid>
     <RootNamespace>comp371_nether_earth</RootNamespace>

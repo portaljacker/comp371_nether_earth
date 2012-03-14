@@ -22,6 +22,16 @@ Controller::~Controller(void)
 
 void Controller::draw(Shade shade) {
 	
+	//Add ambient light
+	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+	
+	//Add directed light
+	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
+	GLfloat lightPos1[] = {0.0f, 2.0f, -3.0f, 0.0f};
+	glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor1);
+	glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
+	
 	glPushMatrix();
 		float matAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
 		float matSpecular[] = { 0.1f, 0.1f, 0.0f, 0.1f };

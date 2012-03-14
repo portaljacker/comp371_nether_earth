@@ -9,6 +9,7 @@
 //This is the Tracks implementation file.
 
 #include "Tracks.h"
+#include "imageloader.h"
 #include <GL\glut.h>
 
 Tracks::Tracks(void)
@@ -24,12 +25,16 @@ Tracks::~Tracks(void)
 void Tracks::draw(void)
 {
 
-	/*//Add directed light
+	//Add ambient light
+	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+	
+	//Add directed light
 	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
-	GLfloat lightPos1[] = {0.0f, 1.0f, -1.0f, 0.0f};
-	glLightfv(GL_LIGHT2, GL_DIFFUSE, lightColor1);
-	glLightfv(GL_LIGHT2, GL_POSITION, lightPos1);
-	*/
+	GLfloat lightPos1[] = {0.0f, 2.0f, -3.0f, 0.0f};
+	glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor1);
+	glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
+	
 	glPushMatrix();
 
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
@@ -37,81 +42,121 @@ void Tracks::draw(void)
 	//top
 	glColor3f(1.0f, 0.0f, 0.0f);
 	glNormal3f(0.0, 1.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, -0.45f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.15f, 0.45f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.15f, 0.45f);
 
 	//bottom
 	//glColor3f(1.0f, 0.0f, 0.0f);
 	glNormal3f(0.0, -1.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.0f, -0.25f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, 0.25f);
 
 	//back
 	//glColor3f(1.0f, 0.5f, 0.0f);
 	glNormal3f(0.0, 0.0f, -1.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, -0.45f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, -0.25f);
 
 	//front
 	//glColor3f(1.0f, 0.0f, 0.5f);
 	glNormal3f(0.0, 0.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, 0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, 0.45f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, 0.25f);
 
 	//right 1
 	//glColor3f(1.0f, 0.5f, 0.5f);
 	glNormal3f(1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, -0.25f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, 0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
 
 	//right 2
 	//glColor3f(1.0f, 0.5f, 0.5f);
 	glNormal3f(1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, 0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, -0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.25f);
 
 	//right 3
 	//glColor3f(1.0f, 0.5f, 0.5f);
 	glNormal3f(1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, -0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, -0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
 
 	//left 1
 	//glColor3f(0.5f, 0.5f, 1.0f);
 	glNormal3f(-1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.25f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, 0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, 0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, -0.25f);
 
 	//left 2
 	//glColor3f(0.5f, 0.5f, 1.0f);
 	glNormal3f(-1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, 0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, -0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, 0.25f);
 
 	//left 3
 	//glColor3f(0.5f, 0.5f, 1.0f);
 	glNormal3f(-1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, -0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, -0.25f);
 
 	
@@ -122,83 +167,123 @@ void Tracks::draw(void)
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
 
 	//top
-	//glColor3f(0.5f, 0.5f, 0.5f);
+	glColor3f(1.0f, 0.0f, 0.0f);
 	glNormal3f(0.0, 1.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, -0.45f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.15f, 0.45f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.15f, 0.45f);
 
 	//bottom
 	//glColor3f(1.0f, 0.0f, 0.0f);
 	glNormal3f(0.0, -1.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.0f, -0.25f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, 0.25f);
 
 	//back
 	//glColor3f(1.0f, 0.5f, 0.0f);
 	glNormal3f(0.0, 0.0f, -1.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, -0.45f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, -0.25f);
 
 	//front
 	//glColor3f(1.0f, 0.0f, 0.5f);
 	glNormal3f(0.0, 0.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, 0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, 0.45f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, 0.25f);
 
 	//right 1
 	//glColor3f(1.0f, 0.5f, 0.5f);
 	glNormal3f(1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, -0.25f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, 0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
 
 	//right 2
 	//glColor3f(1.0f, 0.5f, 0.5f);
 	glNormal3f(1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, 0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, -0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, 0.25f);
 
 	//right 3
 	//glColor3f(1.0f, 0.5f, 0.5f);
 	glNormal3f(1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, -0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.25f, 0.15f, -0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.25f, 0.0f, -0.25f);
 
 	//left 1
 	//glColor3f(0.5f, 0.5f, 1.0f);
 	glNormal3f(-1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.25f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, 0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, 0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, -0.25f);
 
 	//left 2
 	//glColor3f(0.5f, 0.5f, 1.0f);
 	glNormal3f(-1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, 0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, -0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, 0.25f);
 
 	//left 3
 	//glColor3f(0.5f, 0.5f, 1.0f);
 	glNormal3f(-1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.45f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.45f, 0.15f, -0.25f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, -0.25f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.45f, 0.0f, -0.25f);
 
 	glEnd(); //End quadrilateral coordinates
@@ -210,41 +295,61 @@ void Tracks::draw(void)
 	//bottom
 	glColor3f(0.5f, 0.0f, 0.0f);
 	glNormal3f(0.0, -1.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.35f, 0.15f, -0.35f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.35f, 0.15f, -0.35f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.35f, 0.15f, 0.35f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.35f, 0.15f, 0.35f);
 
 	//top                    
 	//glColor3f(1.0f, 0.0f, 1.0f);
 	glNormal3f(0.0, 1.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.35f, 1.0f, -0.35f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.35f, 1.0f, -0.35f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.35f, 1.0f, 0.35f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.35f, 1.0f, 0.35f);
 
 	//back
 	//glColor3f(1.0f, 0.5f, 0.0f);
 	glNormal3f(0.0, 0.0f, -1.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.35f, 0.15f, -0.35f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.35f, 0.15f, -0.35f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.35f, 1.0f, -0.35f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.35f, 1.0f, -0.35f);
 
 	//front
 	//glColor3f(1.0f, 0.0f, 0.5f);
 	glNormal3f(0.0, 0.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.35f, 0.15f, 0.35f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.35f, 0.15f, 0.35f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.35f, 1.0f, 0.35f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.35f, 1.0f, 0.35f);
 
 	//right
 	//glColor3f(1.0f, 0.5f, 0.5f);
 	glNormal3f(1.0, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0.35f, 1.0f, -0.35f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.35f, 1.0f, 0.35f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.35f, 0.15f, 0.35f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0.35f, 0.15f, -0.35f);
 
 	//left
@@ -279,6 +384,7 @@ void Tracks::draw(void)
 	glVertex3f(-0.1f, 1.01f, -0.15f);
 
 	glEnd();
+
 	
 	glPopMatrix();
 }

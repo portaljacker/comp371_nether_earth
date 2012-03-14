@@ -23,6 +23,10 @@ Tile::~Tile(void)
 }
 void Tile::draw()
 {
+	//Add ambient light
+	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+	
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//glBegin(GL_QUADS);
 		glPushMatrix();
