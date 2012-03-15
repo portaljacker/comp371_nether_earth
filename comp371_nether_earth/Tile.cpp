@@ -137,9 +137,10 @@ void Tile::draw(GLuint tex)
 					glVertex3f(-0.25, 0.001, 0.0);
 					glVertex3f(-0.25, 0.001, 0.1);
 					glVertex3f( 0.25, 0.001, 0.1);
-				glPopMatrix();
+				glPopMatrix();	
 			glPopMatrix();
 			glEnd();
+			glDisable(GL_TEXTURE_2D);
 		glPopMatrix();
 	//glEnd();
 	//glFlush();

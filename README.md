@@ -107,3 +107,10 @@ steel.bmp
 
 http://designm.ag/images/0409/metal/41.jpg for:
 metal.bmp
+
+http:://wikipedia.org for:
+moon.bmp
+ngc281.bmp
+star1.bmp
+star2.bmp
+sun.bmp

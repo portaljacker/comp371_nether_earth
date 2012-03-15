@@ -30,7 +30,8 @@
 #include "Missiles.h"
 #include "Phaser.h"
 #include "lightPostConstruct.h"
-#include "imageLoader.h"
+#include "ImageLoader.h"
+#include "SkyBox.h"
 using namespace std;
 
 GLuint loadTexture(Image* image);
@@ -110,6 +111,8 @@ GLuint blockTexId5;
 GLuint hole; //Hole texture stored here.
 Image* im;
 GLuint tileTex;
+
+SkyBox sky = SkyBox();
 
 void setCamera()
 {
@@ -309,6 +312,13 @@ void display ()
 	Missiles m2 = Missiles();
 	Phaser p1 = Phaser();
 	lightPostConstruct l1 = lightPostConstruct();
+
+	// Draw Skybox
+	glPushMatrix();
+		glTranslatef(25,0,25);
+		glScalef(75,75,75);
+		sky.draw();
+	glPopMatrix();
 
 	//Main rendering loop.
 	for(int i = 0; i < 50; i++)
