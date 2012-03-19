@@ -8,6 +8,7 @@
 //Sebastien S. 9500782
 //This is the block class. It creates buildings and building components.
 
+#include "Cube.h"
 #include "Block.h"
 
 Block::Block(void)
@@ -33,78 +34,8 @@ void Block::drawPH(GLuint tex) {	// plain half-block
 		glPushMatrix();
 			glTranslatef(0.0, 0.25, 0.0);
 			glScalef(1.0, 0.5, 1.0);
-			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
-			glPushMatrix();
-				glBegin(GL_QUADS);
-				glPushMatrix();
-					glNormal3f(0.0, 0.0, 1.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5, 0.5); //Top Right
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5, 0.5); //Top Left
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5,-0.5, 0.5); //Bottom Left
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5,-0.5, 0.5); //Bottom Right
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, 0.0, -1.0);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f( 0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(-1.0, 0.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f(-0.5, 0.5, 0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f(-0.5,-0.5, 0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(1.0, 0.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f( 0.5, 0.5, 0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f( 0.5,-0.5, 0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5,-0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, -1.0, 0.0);
-					glVertex3f( 0.5,-0.5, 0.5);
-					glVertex3f(-0.5,-0.5, 0.5);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glVertex3f( 0.5,-0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, 1.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5, 0.5, 0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5, 0.5, 0.5);
-				glPopMatrix();
-				glEnd();
-			glPopMatrix();
+			//glutSolidCube(1.0); //Initial render, now replaced with QUADS. Which is now replaced with pj::cube()
+			pj::cube();
 		glPopMatrix();
 		glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
@@ -125,77 +56,7 @@ void Block::drawPU(GLuint tex) {	// plain full-block
 		glPushMatrix();
 			glTranslatef(0.0, 0.5, 0.0);
 			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
-			glPushMatrix();
-				glBegin(GL_QUADS);
-				glPushMatrix();
-					glNormal3f(0.0, 0.0, 1.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5, 0.5); //Top Right
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5, 0.5); //Top Left
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5,-0.5, 0.5); //Bottom Left
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5,-0.5, 0.5); //Bottom Right
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, 0.0, -1.0);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f( 0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(-1.0, 0.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f(-0.5, 0.5, 0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f(-0.5,-0.5, 0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(1.0, 0.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f( 0.5, 0.5, 0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f( 0.5,-0.5, 0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5,-0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, -1.0, 0.0);
-					glVertex3f( 0.5,-0.5, 0.5);
-					glVertex3f(-0.5,-0.5, 0.5);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glVertex3f( 0.5,-0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, 1.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5, 0.5, 0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5, 0.5, 0.5);
-				glPopMatrix();
-				glEnd();
-			glPopMatrix();
+			pj::cube();
 		glPopMatrix();
 		glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
@@ -215,77 +76,7 @@ void Block::drawHH(GLuint tex, GLuint hole) {	// holed half-block
 			glTranslatef(0.0, 0.25, 0.0);
 			glScalef(1.0, 0.5, 1.0);
 			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
-			glPushMatrix();
-				glBegin(GL_QUADS);
-				glPushMatrix();
-					glNormal3f(0.0, 0.0, 1.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5, 0.5); //Top Right
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5, 0.5); //Top Left
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5,-0.5, 0.5); //Bottom Left
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5,-0.5, 0.5); //Bottom Right
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, 0.0, -1.0);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f( 0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(-1.0, 0.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f(-0.5, 0.5, 0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f(-0.5,-0.5, 0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(1.0, 0.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f( 0.5, 0.5, 0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f( 0.5,-0.5, 0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5,-0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, -1.0, 0.0);
-					glVertex3f( 0.5,-0.5, 0.5);
-					glVertex3f(-0.5,-0.5, 0.5);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glVertex3f( 0.5,-0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, 1.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5, 0.5, 0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5, 0.5, 0.5);
-				glPopMatrix();
-				glEnd();
-			glPopMatrix();
+			pj::cube();
 		glPopMatrix();
 		glPushMatrix();
 			//glColor3f(0.0, 0.0, 0.0); //Color disabled for textures.
@@ -325,77 +116,7 @@ void Block::drawHU(GLuint tex, GLuint hole) {	// holed full-block
 		glPushMatrix();
 			glTranslatef(0.0, 0.5, 0.0);
 			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
-			glPushMatrix();
-				glBegin(GL_QUADS);
-				glPushMatrix();
-					glNormal3f(0.0, 0.0, 1.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5, 0.5); //Top Right
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5, 0.5); //Top Left
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5,-0.5, 0.5); //Bottom Left
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5,-0.5, 0.5); //Bottom Right
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, 0.0, -1.0);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f( 0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(-1.0, 0.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f(-0.5, 0.5, 0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f(-0.5,-0.5, 0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(1.0, 0.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f( 0.5, 0.5, 0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f( 0.5,-0.5, 0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5,-0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, -1.0, 0.0);
-					glVertex3f( 0.5,-0.5, 0.5);
-					glVertex3f(-0.5,-0.5, 0.5);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glVertex3f( 0.5,-0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, 1.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5, 0.5, 0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5, 0.5, 0.5);
-				glPopMatrix();
-				glEnd();
-			glPopMatrix();
+			pj::cube();
 		glPopMatrix();
 		glPushMatrix();
 			//glColor3f(0.0, 0.0, 0.0); //Color disabled for textures.
@@ -422,6 +143,29 @@ void Block::drawHU(GLuint tex, GLuint hole) {	// holed full-block
 	glPopMatrix();
 }
 
+void Block::drawD() {
+	glPushMatrix();
+		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+		glColor3ub(105, 105, 105);
+		glPushMatrix();
+			glTranslatef(0.0, 0.25, 0.0);
+			glScalef(0.5, 0.5, 0.5);
+			pj::cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0.0, 0.75, 0.0);
+			glScalef(0.25, 0.5, 0.25);
+			pj::cube();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0.0, 1.25, 0.0);
+			glScalef(0.125, 0.5, 0.125);
+			pj::cube();
+		glPopMatrix();
+	glPopMatrix();
+}
+
 void Block::drawHQ(GLuint tex) {	// plain half-block
 	glPushMatrix();
 		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
@@ -437,75 +181,71 @@ void Block::drawHQ(GLuint tex) {	// plain half-block
 			glTranslatef(0.0, 0.5, 0.0);
 			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
 			glPushMatrix();
-				glBegin(GL_QUADS);
-				glPushMatrix();
-					glNormal3f(0.0, 0.0, 1.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5, 0.5); //Top Right
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5, 0.5); //Top Left
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5,-0.5, 0.5); //Bottom Left
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5,-0.5, 0.5); //Bottom Right
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, 0.0, -1.0);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f( 0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(-1.0, 0.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f(-0.5, 0.5, 0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f(-0.5,-0.5, 0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(1.0, 0.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f( 0.5, 0.5, 0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f( 0.5,-0.5, 0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5,-0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, -1.0, 0.0);
-					glVertex3f( 0.5,-0.5, 0.5);
-					glVertex3f(-0.5,-0.5, 0.5);
-					glVertex3f(-0.5,-0.5,-0.5);
-					glVertex3f( 0.5,-0.5,-0.5);
-				glPopMatrix();
-				
-				glPushMatrix();
-					glNormal3f(0.0, 1.0, 0.0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3f( 0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex3f(-0.5, 0.5,-0.5);
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex3f(-0.5, 0.5, 0.5);
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex3f( 0.5, 0.5, 0.5);
-				glPopMatrix();
-				glEnd();
+				glTranslatef(-1,0,-1.5);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(1,0,-1.5);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(-2,0,-1);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(-1,0,-.5);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(0,0,-1);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(1,0,-.5);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(2,0,-1);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(-2,0,0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(-1,0,0.5);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(0,0,0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(1,0,0.5);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(2,0,0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(-1,0,.5);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(0,0,1);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(1,0,.5);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
 			glPopMatrix();
 			glDisable(GL_TEXTURE_2D);
 		glPopMatrix();
@@ -537,25 +277,43 @@ void Block::drawHQ(GLuint tex) {	// plain half-block
 	glPopMatrix();
 }
 
-void Block::drawD() {
+void Block::drawF(GLuint tex) {
 	glPushMatrix();
 		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
-		glColor3ub(105, 105, 105);
+		//glColor3ub(139, 50, 0); Color disabled for textures.
+
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 		glPushMatrix();
-			glTranslatef(0.0, 0.25, 0.0);
-			glScalef(0.5, 0.5, 0.5);
-			glutSolidCube(1.0);
-		glPopMatrix();
-		glPushMatrix();
-			glTranslatef(0.0, 0.75, 0.0);
-			glScalef(0.25, 0.5, 0.25);
-			glutSolidCube(1.0);
-		glPopMatrix();
-		glPushMatrix();
-			glTranslatef(0.0, 1.25, 0.0);
-			glScalef(0.125, 0.5, 0.125);
-			glutSolidCube(1.0);
+			glTranslatef(0.0, 0.5, 0.0);
+			//glutSolidCube(1.0); //Initial render, now replaced with QUADS.
+			glPushMatrix();
+				glTranslatef(-1,0,0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(0,0,0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(1,0,0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(-1,0,1);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(1,0,1);
+				glScalef(1.0, 0.5, 1.0);
+				pj::cube();
+			glPopMatrix();
+			glDisable(GL_TEXTURE_2D);
 		glPopMatrix();
 	glPopMatrix();
 }

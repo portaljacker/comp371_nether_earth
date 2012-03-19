@@ -14,7 +14,7 @@
 class Tile
 {
 public:
-	void draw();
+	void draw(GLuint);
 	void drawHole();
 	void drawHoleEdge();
 	Tile();

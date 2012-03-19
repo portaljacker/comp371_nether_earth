@@ -8,6 +8,7 @@
 //Sebastien S. 9500782
 //This is the Nuke constructing class
 
+#include "Cube.h"
 #include "Missiles.h"
 #include <GL/glut.h>
 
@@ -19,14 +20,29 @@ Missiles::~Missiles(void)
 {
 }
 
-void Missiles::draw(Shade shade)
+void Missiles::draw(Shade shade, GLuint tex)
 {
-	/*//Add directed light
-	GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
-	GLfloat lightPos1[] = {0.0f, 1.0f, -1.0f, 0.0f};
-	glLightfv(GL_LIGHT2, GL_DIFFUSE, lightColor1);
-	glLightfv(GL_LIGHT2, GL_POSITION, lightPos1);
-	*/
+	//Push entire object
+	glPushMatrix();
+	//glEnable(GL_LIGHTING); //Enable lighting
+	//glEnable(GL_LIGHT0); //Enable light #0
+	//glEnable(GL_LIGHT1); //Enable light #1
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	
+	////Add ambient light
+	//GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
+	////glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+	//
+	////Add directed light
+	//GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
+	//GLfloat lightPos1[] = {0.0f, 2.0f, -3.0f, 0.0f};
+	//glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor1);
+	//glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
+	
 	GLUquadricObj *disk;
 
 	disk = gluNewQuadric ( );
@@ -43,7 +59,7 @@ void Missiles::draw(Shade shade)
 		gluQuadricNormals(disk, GL_SMOOTH);
 		break;
 	}
-
+	gluQuadricTexture(disk, GL_TRUE);
 	// Situate the robot weapon at the right Y location
 	//glTranslatef(0,1,0);
 
@@ -51,47 +67,48 @@ void Missiles::draw(Shade shade)
 	glTranslatef(0,0.1,0);
 	glScalef(1.5,1.5,1.5);
 
-	//Push entire object
-	glPushMatrix();
 		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
 
 		// The base cube
 		glPushMatrix();
 
-			glColor3f(0,0,1);
+			//glColor3f(0,0,1);
 			glTranslatef(0,0.01,0);
 			glScalef(.8,.2,.8);
-			glutSolidCube(.75);
+			glScalef(0.75,.75,.75);
+			pj::cube();
 
 		glPopMatrix();
 
 		// The gunnery turret
 		glPushMatrix();
 
-			glColor3f(0,1,1);
+			//glColor3f(0,1,1);
 			glTranslatef(0,0.2,0);
 		
-			glutSolidCube(.25);
+			glScalef(.25,.25,.25);
+			pj::cube();
 
 			glPushMatrix();
 				glTranslatef(0.0, 0.1, 0.0);
 				glScalef(0.5, 0.5, 0.5);
 				glBegin(GL_QUADS);
 
-				glColor3f(0.0f, 0.0f, 0.0f);
+				glColor3d(1,1,1);
 				glVertex3f(-0.1f, 0.12f, 0.1f);
 				glVertex3f(-0.1f, 0.12f, 0.2f);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f(0.1f, 0.12f, 0.2f);
 				glVertex3f(0.1f, 0.12f, 0.1f);
 
-				glColor3f(0.0f, 0.0f, 0.0f);
+				//glColor3f(0.0f, 0.0f, 0.0f);
 				glVertex3f(-0.0f, 0.12f, -0.15f);
 				glVertex3f(-0.0f, 0.12f, 0.3f);
 				glVertex3f(0.1f, 0.12f, 0.3f);
 				glVertex3f(0.1f, 0.12f, -0.15f);
 
-				glColor3f(0.0f, 0.0f, 0.0f);
+				//glColor3f(0.0f, 0.0f, 0.0f);
 				glVertex3f(-0.25f, 0.12f, -0.15f);
 				glVertex3f(-0.25f, 0.12f, 0.2f);
 				glVertex3f(-0.1f, 0.12f, 0.2f);
@@ -106,7 +123,7 @@ void Missiles::draw(Shade shade)
 
 				// The Barrel 1
 				glPushMatrix();
-					glColor3f( .8, 0, 0 );	
+					//glColor3f( .8, 0, 0 );	
 					glTranslatef(-.14,.2,0);
 					// Parameters: height, radius, slices, stacks
 					gluCylinder(disk, .04, .04, .3, 15, 20);
@@ -114,7 +131,7 @@ void Missiles::draw(Shade shade)
 
 				// The Barrel 2 
 				glPushMatrix();
-					glColor3f( 1, 0, 0 );	
+					//glColor3f( 1, 0, 0 );	
 					glTranslatef(.14,0.2,0);
 					// Parameters: height, radius, slices, stacks
 					gluCylinder(disk, .04, .04, .3, 15, 20);
@@ -122,6 +139,7 @@ void Missiles::draw(Shade shade)
 
 		glPopMatrix();
 
-	// Pop entire object
+	glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_LIGHTING);
 	glPopMatrix();
 }

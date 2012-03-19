@@ -9,6 +9,9 @@
 //This is the Nuke header file
 
 #include "Enumerations.h"
+#include "imageloader.h"
+#include <GL/glut.h>
+#include <math.h>
 
 #pragma once
 
@@ -18,6 +21,6 @@ public:
 
 	Nuke(void);
 	~Nuke(void);
-	void draw(Shade shade);
+	void draw(Shade shade, GLuint);
 
 };

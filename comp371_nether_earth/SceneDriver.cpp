@@ -30,8 +30,11 @@
 #include "Missiles.h"
 #include "Phaser.h"
 #include "lightPostConstruct.h"
-#include "imageLoader.h"
+#include "ImageLoader.h"
+#include "SkyBox.h"
 using namespace std;
+
+GLuint loadTexture(Image* image);
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -106,6 +109,10 @@ GLuint blockTexId3;
 GLuint blockTexId4;
 GLuint blockTexId5;
 GLuint hole; //Hole texture stored here.
+Image* im;
+GLuint tileTex;
+
+SkyBox sky = SkyBox();
 
 void setCamera()
 {
@@ -128,8 +135,8 @@ void setCamera()
 	{
 		glOrtho(viewWindowLeft, viewWindowRight, viewWindowBottom, viewWindowTop, nearPlane, farPlane); //Useful for question 9.
 	}
-	
-}
+}	
+
 //Displays controls in console window.
 void dispKeys()
 {
@@ -213,10 +220,10 @@ void display ()
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_COLOR_MATERIAL);
-	glEnable(GL_LIGHTING); //Enable lighting
-	glEnable(GL_LIGHT0); //Enable light #0
-	glEnable(GL_LIGHT1); //Enable light #1
-	glEnable(GL_LIGHT2); //Enable light #2	
+	//glEnable(GL_LIGHTING); //Enable lighting
+	//glEnable(GL_LIGHT0); //Enable light #0
+	//glEnable(GL_LIGHT1); //Enable light #1
+	//glEnable(GL_LIGHT2); //Enable light #2	
 	//glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 20);
 	//glEnable(GL_NORMALIZE); //Automatically normalize normals
 
@@ -306,6 +313,13 @@ void display ()
 	Phaser p1 = Phaser();
 	lightPostConstruct l1 = lightPostConstruct();
 
+	// Draw Skybox
+	glPushMatrix();
+		glTranslatef(25,0,25);
+		glScalef(75,75,75);
+		sky.draw();
+	glPopMatrix();
+
 	//Main rendering loop.
 	for(int i = 0; i < 50; i++)
 	{
@@ -316,7 +330,7 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t1.draw();
+				t1.draw(tileTex);
 				glFlush();
 				glPopMatrix();
 			}
@@ -326,13 +340,16 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t1.draw();
+				t1.draw(tileTex);
 				glFlush();
 				glPopMatrix();
 
+				Image* image = loadBMP("debris.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				r1.drawSmall();
+				r1.drawSmall(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -342,13 +359,16 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t1.draw();
+				t1.draw(tileTex);
 				glFlush();
 				glPopMatrix();
 
+				Image* image = loadBMP("debris.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				r1.drawMedium();
+				r1.drawMedium(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -358,13 +378,16 @@ void display ()
 			{
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t1.draw();
+				t1.draw(tileTex);
 				glFlush();
 				glPopMatrix();
 
+				Image* image = loadBMP("debris.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				r1.drawLarge();
+				r1.drawLarge(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -503,9 +526,18 @@ void display ()
 				glPopMatrix();
 			}
 			
+			//Draw delimiter
+			else if(m1.getChar(i,j,1) == '6') {
+				glPushMatrix();
+				glTranslatef(i, 0, j);
+				b1.drawD();
+				glFlush();
+				glPopMatrix();
+			}
+
 			//Draw HQ block
-			else if(m1.getChar(i,j,1) == '5') {
-				Image* image = loadBMP("wood.bmp");
+			else if(m1.getChar(i,j,1) == '@') {
+				Image* image = loadBMP("camo1.bmp");
 				blockTexId2 = loadTexture(image);
 				delete image;
 				glPushMatrix();
@@ -514,12 +546,15 @@ void display ()
 				glFlush();
 				glPopMatrix();
 			}
-			
-			//Draw delimiter
-			else if(m1.getChar(i,j,1) == '6') {
+
+			//Draw Factory
+			else if(m1.getChar(i,j,1) == '$') {
+				Image* image = loadBMP("camo2.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				b1.drawD();
+				b1.drawF(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -530,7 +565,7 @@ void display ()
 				glTranslatef(i, 0, j);
 				glRotatef(45,0,1,0);
 				l1.draw();
-				l1.createLight();
+				//l1.createLight();
 				glFlush();
 				glPopMatrix();
 			}
@@ -541,7 +576,7 @@ void display ()
 				glTranslatef(i, 0, j);
 				glRotatef(135,0,1,0);
 				l1.draw();
-				l1.createLight();
+				//l1.createLight();
 				glFlush();
 				glPopMatrix();
 			}
@@ -552,7 +587,7 @@ void display ()
 				glTranslatef(i, 0, j);
 				glRotatef(-45,0,1,0);
 				l1.draw();
-				l1.createLight();
+				//l1.createLight();
 				glFlush();
 				glPopMatrix();
 			}
@@ -563,100 +598,130 @@ void display ()
 				glTranslatef(i, 0, j);
 				glRotatef(-135,0,1,0);
 				l1.draw();
-				l1.createLight();
+				//l1.createLight();
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'b') {
+				Image* image = loadBMP("steel.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				b2.draw();
+				b2.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'g') {
+				Image* image = loadBMP("steel.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				g1.draw();
+				g1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 't') {
+				Image* image = loadBMP("steel.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				t2.draw();
+				t2.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'e') {
+				Image* image = loadBMP("metal.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				e1.draw();
+				e1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'c') {
+				Image* image = loadBMP("metal.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				c2.draw();
+				c2.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'p') {
+				Image* image = loadBMP("metal.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
 				glRotatef(-90,1,0,0);
-				p1.draw(shade);
+				p1.draw(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'n') {
+				Image* image = loadBMP("metal.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				n1.draw(shade);
+				n1.draw(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'm') {
+				Image* image = loadBMP("metal.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				m2.draw(shade);
+				m2.draw(shade, blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			else if(m1.getChar(i,j,1) == 'r') {
+				Image* image = loadBMP("metal.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0.5, j + 0.60);
-				g1.draw();
+				g1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 
 				glPushMatrix();
 				glTranslatef(i, 1.0, j);
-				c2.draw();
+				c2.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 
 				glPushMatrix();
 				glTranslatef(i, 2.0, j);
-				e1.draw();
+				e1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
 
 			if (m1.getChar(i,j,2) == '1') {
+				Image* image = loadBMP("cgold.bmp");
+				blockTexId2 = loadTexture(image);
+				delete image;
 				glPushMatrix();
 				glTranslatef(i, 0, j);
-				c1.draw(shade);
+				c1.draw(shade,blockTexId2);
 				glFlush();
 				glPopMatrix();
 			}
@@ -666,6 +731,10 @@ void display ()
 	
 	glEnable(GL_DEPTH_TEST);
 	
+	/*glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHT2);*/
 
 	glutSwapBuffers();
 }
@@ -933,6 +1002,9 @@ int main(int argc, char** argv)
 
 	glShadeModel(GL_FLAT);
 	
+	im = loadBMP("trust.bmp");
+	tileTex = loadTexture(im);
+
 	glutMainLoop();
 	return 0;
 }

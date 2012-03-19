@@ -8,6 +8,10 @@
 //Sebastien S. 9500782
 //This is the eBrain header. It makes an electronic robot brain.
 
+#include "imageloader.h"
+#include <GL/glut.h>
+#include <math.h>
+
 #pragma once
 class eBrain
 {
@@ -15,6 +19,6 @@ public:
 	eBrain(void);
 	~eBrain(void);
 
-	void draw();
+	void draw(GLuint);
 };
 

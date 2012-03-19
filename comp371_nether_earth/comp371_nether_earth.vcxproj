@@ -15,6 +15,7 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="eBrain.cpp" />
     <ClCompile Include="Grav.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
@@ -26,6 +27,7 @@
     <ClCompile Include="Rubble.cpp" />
     <ClCompile Include="SceneDriver.cpp" />
     <ClCompile Include="skeleton.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Tracks.cpp" />
   </ItemGroup>
@@ -34,6 +36,7 @@
     <ClInclude Include="Block.h" />
     <ClInclude Include="Cannon.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="eBrain.h" />
     <ClInclude Include="Enumerations.h" />
     <ClInclude Include="Grav.h" />
@@ -44,15 +47,28 @@
     <ClInclude Include="Nuke.h" />
     <ClInclude Include="Phaser.h" />
     <ClInclude Include="Rubble.h" />
+    <ClInclude Include="SkyBox.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Tracks.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="camo1.bmp" />
+    <None Include="camo2.bmp" />
+    <None Include="cgold.bmp" />
+    <None Include="debris.bmp" />
     <None Include="gold.bmp" />
     <None Include="hole2.bmp" />
     <None Include="ice.bmp" />
+    <None Include="metal.bmp" />
+    <None Include="moon.bmp" />
     <None Include="mud.bmp" />
+    <None Include="ngc281.bmp" />
+    <None Include="star2.bmp" />
+    <None Include="stars1.bmp" />
+    <None Include="steel.bmp" />
     <None Include="stone.bmp" />
+    <None Include="sun.bmp" />
+    <None Include="trust.bmp" />
     <None Include="wood.bmp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

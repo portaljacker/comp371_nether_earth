@@ -10,123 +10,165 @@
 
 #include "Rubble.h"
 
-
 Rubble::Rubble(void)
 {
 }
 
-void Rubble::drawSmall()
+void Rubble::drawSmall(Shade shade, GLuint tex)
 {  
 	glPushMatrix();
 		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(-0.2, 0.0, 0.2);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.2f, 0.2f, 4, 4);
+		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(0.2, 0.0, -0.2);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.2f, 0.2f, 4, 4);
+		cone(shade, 0.2);
 		glPopMatrix();
+		glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
 
-void Rubble::drawMedium()
+void Rubble::drawMedium(Shade shade, GLuint tex)
 {  
 	glPushMatrix();
 		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(-0.2, 0.0, 0.2);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.2f, 0.2f, 4, 4);
+		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(0.2, 0.0, -0.2);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.2f, 0.2f, 4, 4);
+		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.4, 0.4, 0.4);
+		//glColor3f(0.4, 0.4, 0.4);
 		glTranslatef(-0.35, 0.0, -0.2);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.1f, 0.1f, 4, 4);
+		cone(shade, 0.1);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.4, 0.4, 0.4);
+		//glColor3f(0.4, 0.4, 0.4);
 		glTranslatef(0.35, 0.0, 0.2);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.1f, 0.1f, 4, 4);
+		cone(shade, 0.1);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.4, 0.4, 0.4);
+		//glColor3f(0.4, 0.4, 0.4);
 		glTranslatef(0.05, 0.0, 0.3);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.1f, 0.1f, 4, 4);
+		cone(shade, 0.1);
 		glPopMatrix();
+		glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
 
-void Rubble::drawLarge()
+void Rubble::drawLarge(Shade shade, GLuint tex)
 {  
 	glPushMatrix();
 		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(-0.2, 0.0, 0.2);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.2f, 0.2f, 4, 4);
+		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(0.2, 0.0, -0.2);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.2f, 0.2f, 4, 4);
+		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(-0.2, 0.0, -0.3);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.2f, 0.2f, 4, 4);
+		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.3, 0.3, 0.3);
+		//glColor3f(0.3, 0.3, 0.3);
 		glTranslatef(0.28, 0.0, 0.30);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.2f, 0.2f, 4, 4);
+		cone(shade, 0.2);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.4, 0.4, 0.4);
+		//glColor3f(0.4, 0.4, 0.4);
 		glTranslatef(-0.35, 0.0, -0.05);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.1f, 0.1f, 4, 4);
+		cone(shade, 0.1);
 		glPopMatrix();
 
 		glPushMatrix();
-		glColor3f(0.4, 0.4, 0.4);
+		//glColor3f(0.4, 0.4, 0.4);
 		glTranslatef(0.35, 0.0, 0.05);
 		glRotatef(-90, 1, 0, 0);
-		glutSolidCone(0.1f, 0.1f, 4, 4);
+		cone(shade, 0.1);
 		glPopMatrix();
+		glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
 
+void Rubble::cone(Shade shade, GLdouble x) {
+	glPushMatrix();
+		GLUquadricObj* GL_Quadric = 0;
+		if (!GL_Quadric)
+		{
+			GL_Quadric = gluNewQuadric();
+			switch (shade) {
+			case FLAT:
+				gluQuadricNormals(GL_Quadric, GL_FLAT);
+				break;
+			case WIRE:
+				gluQuadricNormals(GL_Quadric, GL_TRUE);
+				break;
+			case SMOOTH:
+				gluQuadricNormals(GL_Quadric, GL_SMOOTH);
+				break;
+			}
+			gluQuadricTexture(GL_Quadric, GL_TRUE);
+		}
+		gluCylinder(GL_Quadric, x, 0, x, 4, 4);
+	glPopMatrix();
+}
 
 Rubble::~Rubble(void)
 {
