@@ -87,12 +87,12 @@ double rotZ = 0;
 //Coordinates for Orbit Mode.
 double orbX = 0;
 double eyeX = 0;
-double eyeY = 50;
-double eyeZ = 50;
+double eyeY = 35;
+double eyeZ = 35;
 double upX= 0;
 double upY= 1;
 double upZ= 0;
-double r = 70; //Orbit Radius
+double r = 44; //Orbit Radius
 
 Shade shade = FLAT;	//For wireframe mode.
 
@@ -112,7 +112,7 @@ GLuint hole; //Hole texture stored here.
 Image* im;
 GLuint tileTex;
 
-SkyBox sky = SkyBox();
+SkyBox sky;
 
 void setCamera()
 {
@@ -181,8 +181,8 @@ void resetCam()
 	rotZ = 0;
 	orbX = 0;
 	eyeX = 0;
-	eyeY = 50;
-	eyeZ = 50;
+	eyeY = 35;
+	eyeZ = 35;
 	upX= 0;
 	upY= 1;
 	upZ= 0;
@@ -231,18 +231,18 @@ void display ()
 	{
 		if(cameraReset)//Reset camera to starting point.
 		{
-			gluLookAt(0.00, 50.00, 50.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
+			gluLookAt(0.00, 35.00, 35.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
 			cameraReset = false;
 		}
 		else
-			gluLookAt(movX, movY + 50.00, movZ +50.00, movX + rotX, movY + rotY, movZ + rotZ, 0.00, 1.00, 0.00);
+			gluLookAt(movX, movY +35.00, movZ +35.00, movX + rotX, movY + rotY, movZ + rotZ, 0.00, 1.00, 0.00);
 	}
 
 	else if(cameraMode == 2) //For Orbit mode.
 	{
 		if(cameraReset)//Reset camera to starting point.
 		{
-			gluLookAt(0.00, 50.00, 50.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
+			gluLookAt(0.00, 35.00, 35.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
 			cameraReset = false;
 		}
 		else
@@ -760,7 +760,7 @@ void zoom(unsigned char direction)
 void orbit()
 {
 // Coordinate to angle conversion
-  double theta = (360.0/HEIGHT)*50*3.0;
+  double theta = (360.0/HEIGHT)*40*3.0;
   double phi = (360.0/WIDTH)*orbX*3.0;
 
 // Convert spherical coordinates to eye coordinates.
@@ -1002,6 +1002,7 @@ int main(int argc, char** argv)
 
 	glShadeModel(GL_FLAT);
 	
+	sky = SkyBox();
 	im = loadBMP("trust.bmp");
 	tileTex = loadTexture(im);
 

@@ -63,8 +63,8 @@
     <None Include="moon.bmp" />
     <None Include="mud.bmp" />
     <None Include="ngc281.bmp" />
+    <None Include="star1.bmp" />
     <None Include="star2.bmp" />
-    <None Include="stars1.bmp" />
     <None Include="steel.bmp" />
     <None Include="stone.bmp" />
     <None Include="sun.bmp" />

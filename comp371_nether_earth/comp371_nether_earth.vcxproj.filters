@@ -169,19 +169,19 @@
     <None Include="steel.bmp">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="star1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="star2.bmp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="stars1.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="ngc281.bmp">
+    <None Include="moon.bmp">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="sun.bmp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="moon.bmp">
+    <None Include="ngc281.bmp">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
