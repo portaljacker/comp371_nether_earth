@@ -1,12 +1,13 @@
 //Comp371_w12 Section R
 //Prof. S. Mokhov
-//Programming Assignment 3
+//Programming Assignment Final Build
 //Team 4
 //Jordan V. 1300520
 //Taras K. 6901204
 //Gianni T. 1938878
 //Sebastien S. 9500782
 //This is the main driver. It uses some functions from the sample skeleton.cpp and sampleprogram.cpp files from class, such as camera control and related variables.
+//Orbit camera function based on code by H. Shirokawa. (Link in comments.)
 
 #include <iostream>
 #include <GL/glut.h>
@@ -48,9 +49,9 @@ const double STEP = 2; //Used in Perspective and Orthogonal camera modes.
 const double ORBSTEP = 0.01; //Used to lessen rotation during Orbit Mode.
 const double ALL_ROUND = 360;
 
-// Mouse positions, normalized to [0,1].
-double xMouse = 0.5;
-double yMouse = 0.5;
+// Mouse origin variables. (Used in Perspective mode with mouse controls.)
+double originX = 0.0;
+double originY = 0.0;
 
 // Bounds of viewing frustum.
 double viewWindowLeft =  -100;
@@ -79,24 +80,25 @@ double movX = 0;
 double movY = 0;
 double movZ = 0;
 
-//Tilt (Orthogonal Mode).
+//Tilt variables (Perspective mode).
 double rotX = 0;
 double rotY = 0;
 double rotZ = 0;
+double upX = 0;
+double upY = 0;
+double upZ = 0;
 
 //Coordinates for Orbit Mode.
 double orbX = 0;
 double eyeX = 0;
 double eyeY = 35;
 double eyeZ = 35;
-double upX= 0;
-double upY= 1;
-double upZ= 0;
 double r = 44; //Orbit Radius
 
 Shade shade = FLAT;	//For wireframe mode.
 
 int cameraMode = 1; //For camera modes.
+int mouseControls = 0; //For mouse controls in camera mode 1 (Perspective mode).
 bool cameraReset = false;
 
 // Constant look at point of the lightpost's light and the camera 
@@ -133,7 +135,7 @@ void setCamera()
 	}
 	else
 	{
-		glOrtho(viewWindowLeft, viewWindowRight, viewWindowBottom, viewWindowTop, nearPlane, farPlane); //Useful for question 9.
+		glOrtho(viewWindowLeft, viewWindowRight, viewWindowBottom, viewWindowTop, nearPlane, farPlane);
 	}
 }	
 
@@ -146,6 +148,8 @@ void dispKeys()
 	cout << "q, e: Move the camera up or down.(Closer or farther from the \"ground\".)" << endl;
 	cout << "left & right arrow keys: Rotate camera horizontally." << endl;
 	cout << "up & down arrow keys: Rotate camera vertically.(Look up or down.)" << endl;
+	cout << "mouse: If mouse controls are enabled, hold down left mouse button" << endl;
+	cout << " and move the mouse to tilt the camera (same function as arrow keys)." << endl;
 	cout << endl;
 	cout << "Orbit mode:" << endl;
 	cout << "a, d: Make camera orbit left or right." << endl;
@@ -157,7 +161,9 @@ void dispKeys()
 	cout << "Controls common to all modes:" << endl;
 	cout << "1, 2: Zoom in and out." << endl;
 	cout << "F1, F2: Rotate around Z axis.(May get clippy in Perspective mode.)" << endl;
-	cout << "c: Toggle Perspective / Orbit / Orthogonal mode / First Person Robot View / Light Post Views" << endl;
+	cout << "c: Toggle Perspective / Orbit / Orthogonal mode / First Person Robot View /" << endl;
+	cout << " Light Post Views" << endl;
+	cout << "m: Toggle mouse controls for Perspective mode." << endl;
 	cout << "r: Reset camera." << endl;
 	cout << endl;
 	cout << "Other controls:" << endl;
@@ -183,9 +189,11 @@ void resetCam()
 	eyeX = 0;
 	eyeY = 35;
 	eyeZ = 35;
-	upX= 0;
-	upY= 1;
-	upZ= 0;
+	upX = 0;
+	upY = 0;
+	upZ = 0;
+	originX = 0.0;
+	originY = 0.0;
 	viewWindowLeft =  -100;
 	viewWindowRight  = 100;
 	viewWindowBottom =  -100;
@@ -227,7 +235,19 @@ void display ()
 	//glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 20);
 	//glEnable(GL_NORMALIZE); //Automatically normalize normals
 
-	if(cameraMode == 0 || cameraMode == 1) //For Perspective and Orthogonal modes.
+	if(cameraMode == 0) //For Orthogonal mode.
+	{
+		if(cameraReset)//Reset camera to starting point.
+		{
+			gluLookAt(0.00, 35.00, 35.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
+			cameraReset = false;
+		}
+		else
+			gluLookAt(0.00, 35.00, 35.00, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
+	}
+
+
+	else if(cameraMode == 1) //For Perspective mode.
 	{
 		if(cameraReset)//Reset camera to starting point.
 		{
@@ -247,7 +267,7 @@ void display ()
 		}
 		else
 		{
-			gluLookAt(eyeX, eyeY, eyeZ, 0.00, 0.00, 0.00, upX, upY, upZ);
+			gluLookAt(eyeX, eyeY, eyeZ, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00);
 		}
 	}
 
@@ -768,16 +788,35 @@ void orbit()
    eyeY = r * cos(theta*ORBSTEP);
    eyeZ = r * sin(theta*ORBSTEP)* cos(phi*ORBSTEP);
 
-// Calculate the coordinates of another point on the same plane as the first.
-   double diff = 1.0; //Subtracted from old theta to get new theta.
-   double eyeXtemp = r * sin(theta*ORBSTEP-diff)* sin(phi*ORBSTEP);
-   double eyeYtemp = r * cos(theta*ORBSTEP-diff);
-   double eyeZtemp = r * sin(theta*ORBSTEP-diff)* cos(phi*ORBSTEP);
+	glutPostRedisplay();
+}
 
-// Connect these two points to obtain the camera's up vector.
-   upX=eyeXtemp-eyeX;
-   upY=eyeYtemp-eyeY;
-   upZ=eyeZtemp-eyeZ;
+void mouseCam(int x, int y)
+{
+	if(cameraMode == 1 && mouseControls != 0)
+	{
+		if(x > originX) //Mouse moves to the 'right' of origin.
+		{
+			rotX += STEP; //Rotate camera right.
+			originX = x; //Update origin.
+		}
+		else
+		{
+			rotX -= STEP; //Rotate camera left.
+			originX = x; //Update origin.
+		}
+
+		if(y < originY) //Mouse moves 'below' origin
+		{
+			rotY += STEP; //Rotate camera downwards.
+			originY = y; //Update origin.
+		}
+		else
+		{
+			rotY -= STEP; //Rotate camera upwards.
+			originY = y; //Update origin.
+		}
+	}
 
 	glutPostRedisplay();
 }
@@ -846,6 +885,13 @@ void handleKeypress(unsigned char key, int x, int y)
 			cameraMode++;
 		else
 			cameraMode = 0;
+		break;
+
+	case 'm':
+		if(mouseControls == 0)
+			mouseControls++;
+		else
+			mouseControls = 0;
 		break;
 
 	case 'r'://Reset camera.
@@ -998,6 +1044,7 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);
 	glutKeyboardFunc(handleKeypress);
 	glutSpecialFunc(functionKeys);
+	glutMotionFunc(mouseCam);
 	glutReshapeFunc(handleResize);
 
 	glShadeModel(GL_FLAT);
