@@ -310,9 +310,7 @@ void display ()
 			
 	}
 
-	//Add ambient light
-	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+
 	
 	//Centers map aroundt he origin for viewing.
 	glTranslatef(-25, 0, -25);
