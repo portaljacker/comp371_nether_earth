@@ -35,7 +35,27 @@
 #include "SkyBox.h"
 using namespace std;
 
+enum Dir {NORTH, SOUTH, EAST, WEST};
+
+struct point {	// Defines a 2D point for use in collision detection
+	GLfloat x;
+	GLfloat z;
+};
+
 GLuint loadTexture(Image* image);
+bool willCollide(point point, GLfloat deltaX, GLfloat deltaZ);
+
+// positions of the center of moving objects
+point robot1;
+point robot2;
+point control;
+
+// direction of moving objects
+Dir dRobot1 = EAST;
+Dir dRobot2 = SOUTH;
+
+// counters for movement
+int robot1Count = 0;
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -113,8 +133,15 @@ GLuint blockTexId5;
 GLuint hole; //Hole texture stored here.
 Image* im;
 GLuint tileTex;
+GLuint tex1;
+GLuint tex2;
+GLuint tex3;
 
 SkyBox sky;
+
+bool fEquals(float a, float b) {
+	return fabs(a - b) < .001;
+}
 
 void setCamera()
 {
@@ -218,6 +245,10 @@ GLuint loadTexture(Image* image)
 	return tempTexture;
 }
 
+bool willCollide(point point, GLfloat deltaX, GLfloat deltaZ) {
+	return true;
+}
+
 void display ()
 {
 	setCamera();
@@ -310,9 +341,7 @@ void display ()
 			
 	}
 
-	//Add ambient light
-	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+
 	
 	//Centers map aroundt he origin for viewing.
 	glTranslatef(-25, 0, -25);
@@ -717,7 +746,7 @@ void display ()
 				blockTexId2 = loadTexture(image);
 				delete image;
 				glPushMatrix();
-				glTranslatef(i, 0.5, j + 0.60);
+				glTranslatef(i, 0.5, j);
 				g1.draw(blockTexId2);
 				glFlush();
 				glPopMatrix();
@@ -748,7 +777,99 @@ void display ()
 
 		}
 	}
-	
+
+	// moving object section
+	glPushMatrix();
+		switch(dRobot1) {
+		case NORTH:
+			glPushMatrix();
+				glTranslatef(robot1.x, 0, robot1.z);
+				glPushMatrix();
+					glTranslatef(0, 0.5,0);
+					g1.draw(tex1);
+					glFlush();
+				glPopMatrix();
+				glPushMatrix();
+					glTranslatef(0, 1.0, 0);
+					glRotatef(180,0,1,0);
+					c2.draw(tex1);
+					glFlush();
+				glPopMatrix();
+				glPushMatrix();
+					glTranslatef(0, 2.0, 0);
+					glRotatef(180,0,1,0);
+					e1.draw(tex1);
+					glFlush();
+				glPopMatrix();
+			glPopMatrix();
+			break;
+		case SOUTH:
+			glPushMatrix();
+				glTranslatef(robot1.x, 0, robot1.z);
+				glPushMatrix();
+					glTranslatef(0, 0.5, 0);
+					g1.draw(tex1);
+					glFlush();
+				glPopMatrix();
+				glPushMatrix();
+					glTranslatef(0, 1.0, 0);
+					c2.draw(tex1);
+					glFlush();
+				glPopMatrix();
+				glPushMatrix();
+					glTranslatef(0, 2.0, 0);
+					e1.draw(tex1);
+					glFlush();
+				glPopMatrix();
+			glPopMatrix();
+			break;
+		case EAST:
+			glTranslatef(robot1.x, 0, robot1.z);
+			glPushMatrix();
+				glPushMatrix();
+					glTranslatef(0, 0.5, 0);
+					b2.draw(tex1);
+					glFlush();
+				glPopMatrix();
+				glPushMatrix();
+					glTranslatef(0, 1.0, 0);
+					glRotatef(90,0,1,0);
+					c2.draw(tex1);
+					glFlush();
+				glPopMatrix();
+				glPushMatrix();
+					glTranslatef(0, 2.0, 0);
+					glRotatef(90,0,1,0);
+					e1.draw(tex1);
+					glFlush();
+				glPopMatrix();
+			glPopMatrix();
+			break;
+		case WEST:
+			glPushMatrix();
+				glTranslatef(robot1.x, 0, robot1.z);
+				glPushMatrix();
+					glTranslatef(0, 0.5,0);
+					g1.draw(tex1);
+					glFlush();
+				glPopMatrix();
+				glPushMatrix();
+					glTranslatef(0, 1.0, 0);
+					glRotatef(-90,0,1,0);
+					c2.draw(tex1);
+					glFlush();
+				glPopMatrix();
+				glPushMatrix();
+					glTranslatef(0, 2.0, 0);
+					glRotatef(-90,0,1,0);
+					e1.draw(tex1);
+					glFlush();
+				glPopMatrix();
+			glPopMatrix();
+			break;
+		}
+	glPopMatrix();
+
 	glEnable(GL_DEPTH_TEST);
 	
 	/*glDisable(GL_LIGHTING);
@@ -1029,6 +1150,36 @@ void handleResize(int w, int h) {
 	gluPerspective(45.0, (double)w / (double)h, 1.0, 200.0);
 }
 
+void idle() {
+	if(robot1Count < 12) {
+		dRobot1 = SOUTH;
+		robot1.z += .25;
+		robot1Count++;
+		glutPostRedisplay;
+	}
+	else if(robot1Count < 24) {
+		dRobot1 = EAST;
+		robot1.x += .25;
+		robot1Count++;
+		glutPostRedisplay;
+	}
+	else if(robot1Count < 36) {
+		dRobot1 = NORTH;
+		robot1.z -= .25;
+		robot1Count++;
+		glutPostRedisplay;
+	}
+	else if(robot1Count < 48) {
+		dRobot1 = WEST;
+		robot1.x -= .25;
+		robot1Count++;
+		glutPostRedisplay;
+	}
+	else {
+		robot1Count = 0;
+	}
+}
+
 
 int main(int argc, char** argv)
 {
@@ -1046,12 +1197,24 @@ int main(int argc, char** argv)
 	glutSpecialFunc(functionKeys);
 	glutMotionFunc(mouseCam);
 	glutReshapeFunc(handleResize);
+	glutIdleFunc(idle);
 
 	glShadeModel(GL_FLAT);
 	
 	sky = SkyBox();
 	im = loadBMP("trust.bmp");
 	tileTex = loadTexture(im);
+	im = loadBMP("steel.bmp");
+	tex1 = loadTexture(im);
+	im = loadBMP("metal.bmp");
+	tex2 = loadTexture(im);
+	im = loadBMP("cgold.bmp");
+	tex3 = loadTexture(im);
+	delete im;
+
+	robot1.x = 15.000; robot1.z = 30.000;
+	robot2.x = 25.000; robot2.z = 30.000;
+	control.x = 30.000; control.z = 30.000;
 
 	glutMainLoop();
 	return 0;

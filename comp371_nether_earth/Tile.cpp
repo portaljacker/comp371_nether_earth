@@ -24,9 +24,9 @@ void Tile::draw(GLuint tex)
 {
 	glEnable(GL_LIGHTING); //Enable lighting
 	glEnable(GL_LIGHT0); //Enable light #0
-	glEnable(GL_LIGHT1); //Enable light #1
+
 	//Add ambient light
-	GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
+	GLfloat ambientColor[] = {0.75f, 0.75f, 0.75f, 0.5f}; 
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 	
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

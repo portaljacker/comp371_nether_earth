@@ -24,9 +24,22 @@ eBrain::~eBrain(void)
 void eBrain::draw(GLuint tex)
 {
 	glPushMatrix();
-	//glEnable(GL_LIGHTING); //Enable lighting
-	//glEnable(GL_LIGHT0); //Enable light #0
-	//glEnable(GL_LIGHT1); //Enable light #1
+	
+	glEnable(GL_LIGHTING); //Enable lighting
+	glEnable(GL_LIGHT0); //Enable light #0
+
+	//Add ambient light
+	GLfloat ambientColor[] = {0.75f, 0.75f, 0.75f, 0.5f}; 
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+
+	//Add positioned light
+	GLfloat lightColor0[] = {1.0f, 1.0f, 1.0f, 1.0f};
+	GLfloat lightPos0[] = {0.0f, 3.0f, 0.0f, 1.0f}; 
+	GLfloat spot_direction[] = { 0.0, -1.0, 0.0 };
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
+	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 20.0);
+	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spot_direction);
 	
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex);
@@ -148,6 +161,6 @@ void eBrain::draw(GLuint tex)
 	glEnd();
 	
 	glDisable(GL_TEXTURE_2D);
-	//glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHTING);
 	glPopMatrix();
 }
