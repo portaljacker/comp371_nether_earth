@@ -42,6 +42,8 @@ void Grav::draw(GLuint tex)
 	//glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor1);
 	//glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
 
+	glTranslatef(0,0,.7);
+
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
 	
 	//front
