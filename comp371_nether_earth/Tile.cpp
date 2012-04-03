@@ -31,6 +31,7 @@ void Tile::draw(GLuint tex)
 	
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//glBegin(GL_QUADS);
+	glPushMatrix();
 		glPushMatrix();
 			float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
 			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
@@ -115,8 +116,12 @@ void Tile::draw(GLuint tex)
 				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f( 0.5, 0.0, 0.5);	//Bottom Right Vertex
 			glPopMatrix();
+			glEnd();
+			glDisable(GL_TEXTURE_2D);
+		glPopMatrix();
 
-			glPushMatrix();
+		glPushMatrix();
+				glBegin(GL_QUADS);
 				glColor3f(1.0,1.0,1.0);
 				glPushMatrix();
 					glVertex3f( 0.25, 0.001,-0.25); //Long vetical bar.
@@ -137,11 +142,10 @@ void Tile::draw(GLuint tex)
 					glVertex3f(-0.25, 0.001, 0.0);
 					glVertex3f(-0.25, 0.001, 0.1);
 					glVertex3f( 0.25, 0.001, 0.1);
-				glPopMatrix();	
-			glPopMatrix();
-			glEnd();
-			glDisable(GL_TEXTURE_2D);
+				glPopMatrix();
+				glEnd();
 		glPopMatrix();
+	glPopMatrix();
 	//glEnd();
 	//glFlush();
 	//glEnable(GL_DEPTH_TEST); //Enables depth.

@@ -126,6 +126,7 @@ Map::Map(void) //Various tiles and objects are preset here for testing.
 	grid[39][9][1] = 'm';
 
 	grid[33][20][1] = 'r';
+	grid[34][20][1] = '2';
 
 	//HQ
 	drawHQ(7,17);
