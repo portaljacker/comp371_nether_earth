@@ -24,28 +24,32 @@ Cannon::~Cannon(void)
 void Cannon::draw(GLuint tex)
 {
 	glPushMatrix();
-	//glEnable(GL_LIGHTING); //Enable lighting
-	//glEnable(GL_LIGHT0); //Enable light #0
+	glEnable(GL_LIGHTING); //Enable lighting
+	glEnable(GL_LIGHT0); //Enable light #0
 	//glEnable(GL_LIGHT1); //Enable light #1
-	
+
+	//Add ambient light
+	GLfloat ambientColor[] = {0.75f, 0.75f, 0.75f, 0.5f}; 
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+
+	//Add positioned light
+	GLfloat lightColor0[] = {1.0f, 1.0f, 1.0f, 1.0f};
+	GLfloat lightPos0[] = {0.0f, 3.0f, 0.0f, 1.0f}; 
+	GLfloat spot_direction[] = { 0.0, -1.0, 0.0 };
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
+	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 30.0);
+	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spot_direction);
+
+	float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
+		
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
-	////Add ambient light
-	//GLfloat ambientColor[] = {1.0f, 1.0f, 1.0f, 0.5f}; 
-	////glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
-	//
-	////Add directed light
-	//GLfloat lightColor1[] = {0.85f, 0.85f, 0.85f, 1.0f}; 
-	//GLfloat lightPos1[] = {0.0f, 2.0f, -3.0f, 0.0f};
-	//glLightfv(GL_LIGHT1, GL_SPECULAR, lightColor1);
-	//glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
 	
-		float matDiffuse[] = { 1.0, 1.0f, 1.0f, 1.0f };
-		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, matDiffuse);
-		
 	glBegin(GL_QUADS); //Begin quadrilateral coordinates
 
 		//front
@@ -164,7 +168,7 @@ void Cannon::draw(GLuint tex)
 
 
 		glDisable(GL_TEXTURE_2D);
-		//glDisable(GL_LIGHTING);
+		glDisable(GL_LIGHTING);
 		/*
 		glBegin(GL_QUADS);
 	

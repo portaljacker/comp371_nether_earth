@@ -37,12 +37,29 @@ void Controller::draw(Shade shade, GLuint tex) {
 	//glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
 	
 	glPushMatrix();
-		/*float matAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+	
+	glEnable(GL_LIGHTING); //Enable lighting
+	glEnable(GL_LIGHT0); //Enable light #0
+
+	//Add ambient light
+	GLfloat ambientColor[] = {0.75f, 0.75f, 0.75f, 0.5f}; 
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);	
+
+	//Add positioned light
+	GLfloat lightColor0[] = {1.0f, 1.0f, 1.0f, 1.0f};
+	GLfloat lightPos0[] = {0.0f, 3.0f, 0.0f, 1.0f}; 
+	GLfloat spot_direction[] = { 0.0, -2.0, 0.0 };
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
+	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 30.0);
+	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spot_direction);
+
+		float matAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
 		float matSpecular[] = { 0.1f, 0.1f, 0.0f, 0.1f };
 		float matShininess = 60;
 		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, matAmbient);
 		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, matSpecular);
-		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, matShininess);*/
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, matShininess);
 
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, tex);
