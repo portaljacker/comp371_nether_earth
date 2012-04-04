@@ -43,19 +43,31 @@ struct point {	// Defines a 2D point for use in collision detection
 };
 
 GLuint loadTexture(Image* image);
-bool willCollide(point point, GLfloat deltaX, GLfloat deltaZ);
+bool willCollide(int object, point point, GLfloat deltaX, GLfloat deltaZ);
+bool pewCollide(point pew, point robot1);
 
 // positions of the center of moving objects
 point robot1;
 point robot2;
 point control;
+point pew;
 
 // direction of moving objects
-Dir dRobot1 = EAST;
+Dir dRobot1 = SOUTH;
 Dir dRobot2 = SOUTH;
+Dir dPew;
 
 // counters for movement
 int robot1Count = 0;
+
+bool docked = false;	// is controller docked
+bool pewpew = false;	// has a shot been fired
+bool destroyed = false;	// has robot1 been destroyed
+int health = 2;	// health of robot 1
+int spin = 0;	// spin of pew
+GLfloat pewD = .25;
+GLfloat tempX;
+GLfloat tempZ;
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -245,8 +257,12 @@ GLuint loadTexture(Image* image)
 	return tempTexture;
 }
 
-bool willCollide(point point, GLfloat deltaX, GLfloat deltaZ) {
-	return true;
+bool willCollide(int object, point point, GLfloat deltaX, GLfloat deltaZ) {
+	return false;
+}
+
+bool pewCollide(point pew, point robot1) {
+	return false;
 }
 
 void display ()
@@ -335,10 +351,18 @@ void display ()
 			
 	}
 
-	else //First person lightpost 4 view
+	else if(cameraMode == 7) //First person lightpost 4 view
 	{
 		gluLookAt(-23, 6.0, -23, 0, 0, 0, 0.00, 1.00, 0.00);
 			
+	}
+
+	else if(cameraMode == 8) //Controller 3rd-person view
+	{
+		if(docked)
+			gluLookAt(control.x - 25, 6, control.z + 10 - 25, control.x -25, 3.5, control.z - 25, 0.00, 1.00, 0.00);
+		else
+			gluLookAt(control.x - 25, 7, control.z + 10 - 25, control.x -25, 3.5, control.z - 25, 0.00, 1.00, 0.00);
 	}
 
 
@@ -778,97 +802,204 @@ void display ()
 		}
 	}
 
+	
 	// moving object section
+	
+	// NPC robot
+	if(!destroyed) {
+		glPushMatrix();
+			switch(dRobot1) {
+			case NORTH:
+				glPushMatrix();
+					glTranslatef(robot1.x, 0, robot1.z);
+					glRotatef(180,0,1,0);
+					glPushMatrix();
+						glTranslatef(0, 0.5,0);
+						g1.draw(tex1);
+						glFlush();
+					glPopMatrix();
+					glPushMatrix();
+						glTranslatef(0, 1.0, 0);
+						c2.draw(tex1);
+						glFlush();
+					glPopMatrix();
+					glPushMatrix();
+						glTranslatef(0, 2.0, 0);
+						e1.draw(tex1);
+						glFlush();
+					glPopMatrix();
+				glPopMatrix();
+				break;
+			case SOUTH:
+				glPushMatrix();
+					glTranslatef(robot1.x, 0, robot1.z);
+					glPushMatrix();
+						glTranslatef(0, 0.5, 0);
+						g1.draw(tex1);
+						glFlush();
+					glPopMatrix();
+					glPushMatrix();
+						glTranslatef(0, 1.0, 0);
+						c2.draw(tex1);
+						glFlush();
+					glPopMatrix();
+					glPushMatrix();
+						glTranslatef(0, 2.0, 0);
+						e1.draw(tex1);
+						glFlush();
+					glPopMatrix();
+				glPopMatrix();
+				break;
+			case EAST:
+				glTranslatef(robot1.x, 0, robot1.z);
+				glRotatef(90,0,1,0);
+				glPushMatrix();
+					glPushMatrix();
+						glTranslatef(0, 0.5, 0);
+						b2.draw(tex1);
+						glFlush();
+					glPopMatrix();
+					glPushMatrix();
+						glTranslatef(0, 1.0, 0);
+						c2.draw(tex1);
+						glFlush();
+					glPopMatrix();
+					glPushMatrix();
+						glTranslatef(0, 2.0, 0);
+						e1.draw(tex1);
+						glFlush();
+					glPopMatrix();
+				glPopMatrix();
+				break;
+			case WEST:
+				glPushMatrix();
+					glTranslatef(robot1.x, 0, robot1.z);
+					glRotatef(-90,0,1,0);
+					glPushMatrix();
+						glTranslatef(0, 0.5,0);
+						g1.draw(tex1);
+						glFlush();
+					glPopMatrix();
+					glPushMatrix();
+						glTranslatef(0, 1.0, 0);
+						c2.draw(tex1);
+						glFlush();
+					glPopMatrix();
+					glPushMatrix();
+						glTranslatef(0, 2.0, 0);
+						e1.draw(tex1);
+						glFlush();
+					glPopMatrix();
+				glPopMatrix();
+				break;
+			}
+		glPopMatrix();
+	}
+	else {
+		Image* image = loadBMP("debris.bmp");
+		blockTexId2 = loadTexture(image);
+		delete image;
+		glPushMatrix();
+		glTranslatef(robot1.x, 0, robot1.z);
+		r1.drawLarge(shade, blockTexId2);
+		glFlush();
+		glPopMatrix();
+	}
+	
+	// Player-controlled Controller
 	glPushMatrix();
-		switch(dRobot1) {
-		case NORTH:
-			glPushMatrix();
-				glTranslatef(robot1.x, 0, robot1.z);
-				glPushMatrix();
-					glTranslatef(0, 0.5,0);
-					g1.draw(tex1);
-					glFlush();
-				glPopMatrix();
-				glPushMatrix();
-					glTranslatef(0, 1.0, 0);
-					glRotatef(180,0,1,0);
-					c2.draw(tex1);
-					glFlush();
-				glPopMatrix();
-				glPushMatrix();
-					glTranslatef(0, 2.0, 0);
-					glRotatef(180,0,1,0);
-					e1.draw(tex1);
-					glFlush();
-				glPopMatrix();
-			glPopMatrix();
-			break;
-		case SOUTH:
-			glPushMatrix();
-				glTranslatef(robot1.x, 0, robot1.z);
-				glPushMatrix();
-					glTranslatef(0, 0.5, 0);
-					g1.draw(tex1);
-					glFlush();
-				glPopMatrix();
-				glPushMatrix();
-					glTranslatef(0, 1.0, 0);
-					c2.draw(tex1);
-					glFlush();
-				glPopMatrix();
-				glPushMatrix();
-					glTranslatef(0, 2.0, 0);
-					e1.draw(tex1);
-					glFlush();
-				glPopMatrix();
-			glPopMatrix();
-			break;
-		case EAST:
-			glTranslatef(robot1.x, 0, robot1.z);
-			glPushMatrix();
-				glPushMatrix();
-					glTranslatef(0, 0.5, 0);
-					b2.draw(tex1);
-					glFlush();
-				glPopMatrix();
-				glPushMatrix();
-					glTranslatef(0, 1.0, 0);
-					glRotatef(90,0,1,0);
-					c2.draw(tex1);
-					glFlush();
-				glPopMatrix();
-				glPushMatrix();
-					glTranslatef(0, 2.0, 0);
-					glRotatef(90,0,1,0);
-					e1.draw(tex1);
-					glFlush();
-				glPopMatrix();
-			glPopMatrix();
-			break;
-		case WEST:
-			glPushMatrix();
-				glTranslatef(robot1.x, 0, robot1.z);
-				glPushMatrix();
-					glTranslatef(0, 0.5,0);
-					g1.draw(tex1);
-					glFlush();
-				glPopMatrix();
-				glPushMatrix();
-					glTranslatef(0, 1.0, 0);
-					glRotatef(-90,0,1,0);
-					c2.draw(tex1);
-					glFlush();
-				glPopMatrix();
-				glPushMatrix();
-					glTranslatef(0, 2.0, 0);
-					glRotatef(-90,0,1,0);
-					e1.draw(tex1);
-					glFlush();
-				glPopMatrix();
-			glPopMatrix();
-			break;
-		}
+		if(docked)
+			glTranslatef(control.x, 2, control.z);
+		else
+			glTranslatef(control.x, 3, control.z);
+		c1.draw(shade, tex3);
+		glFlush();
 	glPopMatrix();
+
+	// Player-controllable robot
+	if(docked) {
+		robot2.x = control.x;
+		robot2.z = control.z;
+	}
+
+	switch(dRobot2) {
+	case NORTH:
+		glPushMatrix();
+			glTranslatef(robot2.x, 0, robot2.z);
+			glRotatef(180,0,1,0);
+			glPushMatrix();
+				glTranslatef(0,0,0);
+				b2.draw(tex2);
+				glFlush();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0, 1.0, 0);
+				c2.draw(tex2);
+				glFlush();
+			glPopMatrix();
+		glPopMatrix();
+		break;
+
+	case SOUTH:
+		glPushMatrix();
+			glTranslatef(robot2.x, 0, robot2.z);
+			glPushMatrix();
+				glTranslatef(0,0,0);
+				b2.draw(tex2);
+				glFlush();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0, 1.0, 0);
+				c2.draw(tex2);
+				glFlush();
+			glPopMatrix();
+		glPopMatrix();
+		break;
+
+	case EAST:
+		glPushMatrix();
+			glTranslatef(robot2.x, 0, robot2.z);
+			glRotatef(90,0,1,0);
+			glPushMatrix();
+				glTranslatef(0,0,0);
+				b2.draw(tex2);
+				glFlush();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0, 1.0, 0);
+				c2.draw(tex2);
+				glFlush();
+			glPopMatrix();
+		glPopMatrix();
+		break;
+
+	case WEST:
+		glPushMatrix();
+			glTranslatef(robot2.x, 0, robot2.z);
+			glRotatef(-90,0,1,0);
+			glPushMatrix();
+				glTranslatef(0,0,0);
+				b2.draw(tex2);
+				glFlush();
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(0, 1.0, 0);
+				c2.draw(tex2);
+				glFlush();
+			glPopMatrix();
+		glPopMatrix();
+		break;
+	}
+
+	// Pew
+	if(pewpew) {
+		glPushMatrix();
+			glTranslatef(pew.x, 1.5, pew.z);
+			glRotated(spin, 1, 0, 0);
+			glScalef(.25,.25,.25);
+			glutSolidIcosahedron();
+		glPopMatrix();
+	}
 
 	glEnable(GL_DEPTH_TEST);
 	
@@ -896,7 +1027,7 @@ void zoom(unsigned char direction)
 
 }
 
-//Based on Mouse Coordinates function by H. Shirokawa.
+//orbit() - Based on Mouse Coordinates function by H. Shirokawa.
 //http://homepages.ius.edu/rwisman/b481/html/notes/FlyAround.htm
 void orbit()
 {
@@ -952,34 +1083,110 @@ void handleKeypress(unsigned char key, int x, int y)
 	case 27: //Escape key
 		exit(0);
 		//These controls only work in Perspective Mode (a and d also work in Orbit Mode).
+	case 13: //Enter key
+		if(docked == false) {
+			if(robot2.x == control.x && robot2.z == control.z)
+				docked = true;
+		}
+		else
+			docked = false;
+		break;
+	case 32: //Space key
+		if(docked) {
+			switch(dRobot2) {
+			case NORTH:
+				pew.x = control.x;
+				pew.z = control.z - 1;
+				dPew = NORTH;
+				break;
+
+			case SOUTH:
+				pew.x = control.x;
+				pew.z = control.z + 1;
+				dPew = SOUTH;
+				break;
+
+			case EAST:
+				pew.x = control.x + 1;
+				pew.z = control.z;
+				dPew = EAST;
+				break;
+
+			case WEST:
+				pew.x = control.x - 1;
+				pew.z = control.z;
+				dPew = WEST;
+				break;
+			}
+			tempX = pew.x;
+			tempZ = pew.z;
+		}
+		pewpew = true;
+		break;
 	case 'a':
 		if(cameraMode == 1)
 			movX -= STEP;
-		if(cameraMode == 2)
+		else if(cameraMode == 2)
 		{
 			orbX -= STEP;
 			orbit();
+		}
+		else if(cameraMode == 8) {
+			if(docked) {
+				dRobot2 = WEST;
+				if(willCollide(1, control, -.25, 0) == false)
+					control.x -= .25;
+			}
+			else
+				control.x -= .5;
 		}
 		break;
 
 	case 'd':
 		if(cameraMode == 1)
 			movX += STEP;
-		if(cameraMode == 2)
+		else if(cameraMode == 2)
 		{
 			orbX += STEP;
 			orbit();
+		}
+		else if(cameraMode == 8) {
+			if(docked) {
+				dRobot2 = EAST;
+				if(willCollide(1, control, .25, 0) == false)
+					control.x += .25;
+			}
+			else
+				control.x += .5;
 		}
 		break;
 
 	case 'w':
 		if(cameraMode == 1)
 			movZ -= STEP;
+		else if(cameraMode == 8) {
+			if(docked) {
+				dRobot2 = NORTH;
+				if(willCollide(1, control, 0, -.25) == false)
+					control.z -= .25;
+			}
+			else
+				control.z -= .5;
+		}
 		break;
 
 	case 's':
 		if(cameraMode == 1)
 			movZ += STEP;
+		else if(cameraMode == 8) {
+			if(docked) {
+				dRobot2 = SOUTH;
+				if(willCollide(1, control, 0, .25) == false)
+					control.z += .25;
+			}
+			else
+				control.z += .5;
+		}
 		break;
 
 	case 'q':
@@ -993,21 +1200,47 @@ void handleKeypress(unsigned char key, int x, int y)
 		break;
 
 		//These keys work in all camera modes.
-	case '1':
+	case '=':
 		zoom('+');
 		break;
 
-	case '2':
+	case '-':
 		zoom('-');
 		break;
 
 	case 'c':
-		if(cameraMode != 7)
+		if(cameraMode != 8)
 			cameraMode++;
 		else
 			cameraMode = 0;
 		break;
-
+	case '0':
+		cameraMode = 0;
+		break;
+	case '1':
+		cameraMode = 1;
+		break;
+	case '2':
+		cameraMode = 2;
+		break;
+	case '3':
+		cameraMode = 3;
+		break;
+	case '4':
+		cameraMode = 4;
+		break;
+	case '5':
+		cameraMode = 5;
+		break;
+	case '6':
+		cameraMode = 6;
+		break;
+	case '7':
+		cameraMode = 7;
+		break;
+	case '8':
+		cameraMode = 8;
+		break;
 	case 'm':
 		if(mouseControls == 0)
 			mouseControls++;
@@ -1070,7 +1303,7 @@ void functionKeys (int key, int x, int y)
 					rotX -= STEP;
 				}
 
-				if(cameraMode == 0)//Orthogonal Mode
+				else if(cameraMode == 0)//Orthogonal Mode
 				{
 					alpha -= STEP;
 					if (alpha > ALL_ROUND)
@@ -1084,7 +1317,7 @@ void functionKeys (int key, int x, int y)
 					rotX += STEP;
 				}
 
-				if(cameraMode == 0)
+				else if(cameraMode == 0)
 				{
 					alpha += STEP;
 					if (alpha > ALL_ROUND)
@@ -1098,7 +1331,7 @@ void functionKeys (int key, int x, int y)
 					rotY += STEP;
 				}
 
-				if(cameraMode == 0)
+				else if(cameraMode == 0)
 				{
 					beta += STEP;
 					if (beta > ALL_ROUND)
@@ -1112,7 +1345,7 @@ void functionKeys (int key, int x, int y)
 					rotY -= STEP;
 				}
 
-				if(cameraMode == 0)
+				else if(cameraMode == 0)
 				{
 					beta -= STEP;
 					if (beta > ALL_ROUND)
@@ -1150,34 +1383,119 @@ void handleResize(int w, int h) {
 	gluPerspective(45.0, (double)w / (double)h, 1.0, 200.0);
 }
 
-void idle() {
-	if(robot1Count < 12) {
-		dRobot1 = SOUTH;
-		robot1.z += .25;
-		robot1Count++;
-		glutPostRedisplay;
+void timedStuff(int value) {
+	// NPC robot movement
+	if(!destroyed) {
+		if(robot1Count < 12) {
+			dRobot1 = SOUTH;
+			if (willCollide(0, robot1, 0, .25) == false) {
+				robot1.z += .25;
+				robot1Count++;
+			}
+		}
+		else if(robot1Count < 24) {
+			dRobot1 = EAST;
+			if (willCollide(0, robot1, .25, 0) == false) {
+				robot1.x += .25;
+				robot1Count++;
+			}
+		}
+		else if(robot1Count < 36) {
+			dRobot1 = NORTH;
+			if (willCollide(0, robot1, 0, -.25) == false) {
+				robot1.z -= .25;
+				robot1Count++;
+			}
+		}
+		else if(robot1Count < 48) {
+			dRobot1 = WEST;
+			if (willCollide(0, robot1, -.25, 0) == false) {
+				robot1.x -= .25;
+				robot1Count++;
+			}
+		}
+		else {
+			robot1Count = 0;
+		}
 	}
-	else if(robot1Count < 24) {
-		dRobot1 = EAST;
-		robot1.x += .25;
-		robot1Count++;
-		glutPostRedisplay;
+
+	if(pewpew) {
+		switch(dPew) {
+			case NORTH:
+				if(willCollide(2, pew, 0, -.25)) {
+					pewpew = false;
+					if(pewCollide(pew, robot1)) {
+						health--;
+						if(health <= 0)
+							destroyed = true;
+						pewD = .25;
+					}
+				}
+				else {
+					pewD += .25;
+					pew.z = tempZ - pewD;
+				}
+				break;
+
+			case SOUTH:
+				if(willCollide(2, pew, 0, .25)) {
+					pewpew = false;
+					if(pewCollide(pew, robot1)) {
+						health--;
+						if(health <= 0)
+							destroyed = true;
+						pewD = .25;
+					}
+				}
+				else {
+					pewD += .25;
+					pew.z = tempZ + pewD;
+				}
+				break;
+
+			case EAST:
+				if(willCollide(2, pew, .25, 0)) {
+					pewpew = false;
+					if(pewCollide(pew, robot1)) {
+						health--;
+						if(health <= 0)
+							destroyed = true;
+						pewD = .25;
+					}
+				}
+				else {
+					pewD += .25;
+					pew.x = tempX + pewD;
+				}
+				break;
+
+			case WEST:
+				if(willCollide(2, pew, -.25, 0)) {
+					pewpew = false;
+					if(pewCollide(pew, robot1)) {
+						health--;
+						if(health <= 0)
+							destroyed = true;
+						pewD = .25;
+					}
+				}
+				else {
+					pewD += .25;
+					pew.x = tempX - pewD;
+				}
+				break;
+			}
+		if((int)pewD == 3) {
+			pewpew = false;
+			pewD = .25;
+		}
+		spin += 10;
+		if(spin == 360)
+			spin = 0;
 	}
-	else if(robot1Count < 36) {
-		dRobot1 = NORTH;
-		robot1.z -= .25;
-		robot1Count++;
-		glutPostRedisplay;
-	}
-	else if(robot1Count < 48) {
-		dRobot1 = WEST;
-		robot1.x -= .25;
-		robot1Count++;
-		glutPostRedisplay;
-	}
-	else {
-		robot1Count = 0;
-	}
+
+	glutPostRedisplay();
+	glutTimerFunc(5, timedStuff, 0);
 }
 
 
@@ -1197,7 +1515,7 @@ int main(int argc, char** argv)
 	glutSpecialFunc(functionKeys);
 	glutMotionFunc(mouseCam);
 	glutReshapeFunc(handleResize);
-	glutIdleFunc(idle);
+	glutTimerFunc(0, timedStuff,0);
 
 	glShadeModel(GL_FLAT);
 	
