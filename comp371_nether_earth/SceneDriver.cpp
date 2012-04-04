@@ -73,6 +73,8 @@ GLfloat tempZ;
 const int WIDTH  = 600;
 const int HEIGHT = 600;
 
+bool fullscreen = false;
+
 // Current size of window.
 int width  = WIDTH;
 int height = HEIGHT;
@@ -1415,6 +1417,16 @@ void functionKeys (int key, int x, int y)
 						gamma -= ALL_ROUND;
 					break;
 				}
+			case GLUT_KEY_F11:
+				fullscreen = !fullscreen;
+				if (fullscreen)
+					glutFullScreen();
+				else
+				{
+					glutReshapeWindow(width, height);
+					glutPositionWindow(10,30);
+				}
+				break;
 	   }
 
    	glutPostRedisplay();
