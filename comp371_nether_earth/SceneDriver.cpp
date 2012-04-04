@@ -12,6 +12,7 @@
 #include <iostream>
 #include <GL/glut.h>
 #include <math.h>
+#include <Windows.h>
 
 
 #include <strstream>
@@ -43,8 +44,7 @@ struct point {	// Defines a 2D point for use in collision detection
 };
 
 GLuint loadTexture(Image* image);
-bool willCollide(int object, point point, GLfloat deltaX, GLfloat deltaZ);
-bool pewCollide(point pew, point robot1);
+bool willCollide(int object, GLfloat deltaX, GLfloat deltaZ);
 
 // positions of the center of moving objects
 point robot1;
@@ -257,11 +257,45 @@ GLuint loadTexture(Image* image)
 	return tempTexture;
 }
 
-bool willCollide(int object, point point, GLfloat deltaX, GLfloat deltaZ) {
-	return false;
-}
-
-bool pewCollide(point pew, point robot1) {
+bool willCollide(int object, GLfloat deltaX, GLfloat deltaZ) {
+	switch(object) {
+	case 0:	//robot
+		if(fabs(deltaX) > 0) {
+			if(fabs(robot1.z - robot2.z) < 1)
+				if(fabs((robot1.x + deltaX) - robot2.x) < 1)
+					return true;
+		}
+		else if(fabs(deltaZ) > 0) {
+			if(fabs(robot1.x - robot2.x) < 1)
+				if(fabs((robot1.z + deltaZ) - robot2.z) < 1)
+					return true;
+		}
+		break;
+	case 1:	//controlled robot
+		if(fabs(deltaX) > 0) {
+			if(fabs(robot1.z - robot2.z) < 1)
+				if(fabs((robot2.x + deltaX) - robot1.x) < 1)
+					return true;
+		}
+		else if(fabs(deltaZ) > 0) {
+			if(fabs(robot1.x - robot2.x) < 1)
+				if(fabs((robot2.z + deltaZ) - robot1.z) < 1)
+					return true;
+		}
+		break;
+	case 2:	//pew
+		if(fabs(deltaX) > 0) {
+			if(fabs(robot1.z - pew.z) < 1)
+				if(fabs((pew.x + deltaX) - robot1.x) < 1)
+					return true;
+		}
+		else if(fabs(deltaZ) > 0) {
+			if(fabs(robot1.x - pew.x) < 1)
+				if(fabs((pew.z + deltaZ) - robot1.z) < 1)
+					return true;
+		}
+		break;
+	}
 	return false;
 }
 
@@ -856,7 +890,7 @@ void display ()
 				glPushMatrix();
 					glPushMatrix();
 						glTranslatef(0, 0.5, 0);
-						b2.draw(tex1);
+						g1.draw(tex1);
 						glFlush();
 					glPopMatrix();
 					glPushMatrix();
@@ -1076,20 +1110,28 @@ void mouseCam(int x, int y)
 //Called when a key is pressed
 void handleKeypress(unsigned char key, int x, int y)
 {
-
+	GLuint temp;
 	switch (key)
 	{
 
 	case 27: //Escape key
 		exit(0);
-		//These controls only work in Perspective Mode (a and d also work in Orbit Mode).
+	case '/':
+		temp = tex1;
+		tex1 = tex2;
+		tex2 = temp;
+		//These controls only work in Perspective Mode (a and d also work in Orbit Mode & WASD switched to controller controls).
 	case 13: //Enter key
 		if(docked == false) {
-			if(robot2.x == control.x && robot2.z == control.z)
+			if(robot2.x == control.x && robot2.z == control.z) {
+				PlaySound("dock.wav",NULL,SND_FILENAME|SND_ASYNC);
 				docked = true;
+			}
 		}
-		else
+		else {
+			PlaySound("undock.wav",NULL,SND_FILENAME|SND_ASYNC);
 			docked = false;
+		}
 		break;
 	case 32: //Space key
 		if(docked) {
@@ -1121,6 +1163,8 @@ void handleKeypress(unsigned char key, int x, int y)
 			tempX = pew.x;
 			tempZ = pew.z;
 		}
+		if(!pewpew)
+			PlaySound("pew.wav",NULL,SND_FILENAME|SND_ASYNC);
 		pewpew = true;
 		break;
 	case 'a':
@@ -1134,7 +1178,7 @@ void handleKeypress(unsigned char key, int x, int y)
 		else if(cameraMode == 8) {
 			if(docked) {
 				dRobot2 = WEST;
-				if(willCollide(1, control, -.25, 0) == false)
+				if(willCollide(1, -fabs(.25), 0) == false)
 					control.x -= .25;
 			}
 			else
@@ -1153,7 +1197,7 @@ void handleKeypress(unsigned char key, int x, int y)
 		else if(cameraMode == 8) {
 			if(docked) {
 				dRobot2 = EAST;
-				if(willCollide(1, control, .25, 0) == false)
+				if(willCollide(1, fabs(.25), 0) == false)
 					control.x += .25;
 			}
 			else
@@ -1167,7 +1211,7 @@ void handleKeypress(unsigned char key, int x, int y)
 		else if(cameraMode == 8) {
 			if(docked) {
 				dRobot2 = NORTH;
-				if(willCollide(1, control, 0, -.25) == false)
+				if(willCollide(1, 0, -fabs(.25)) == false)
 					control.z -= .25;
 			}
 			else
@@ -1181,7 +1225,7 @@ void handleKeypress(unsigned char key, int x, int y)
 		else if(cameraMode == 8) {
 			if(docked) {
 				dRobot2 = SOUTH;
-				if(willCollide(1, control, 0, .25) == false)
+				if(willCollide(1, 0, fabs(.25)) == false)
 					control.z += .25;
 			}
 			else
@@ -1388,28 +1432,28 @@ void timedStuff(int value) {
 	if(!destroyed) {
 		if(robot1Count < 12) {
 			dRobot1 = SOUTH;
-			if (willCollide(0, robot1, 0, .25) == false) {
+			if (willCollide(0, 0, fabs(.25)) == false) {
 				robot1.z += .25;
 				robot1Count++;
 			}
 		}
 		else if(robot1Count < 24) {
 			dRobot1 = EAST;
-			if (willCollide(0, robot1, .25, 0) == false) {
+			if (willCollide(0, fabs(.25), 0) == false) {
 				robot1.x += .25;
 				robot1Count++;
 			}
 		}
 		else if(robot1Count < 36) {
 			dRobot1 = NORTH;
-			if (willCollide(0, robot1, 0, -.25) == false) {
+			if (willCollide(0, 0, -fabs(.25)) == false) {
 				robot1.z -= .25;
 				robot1Count++;
 			}
 		}
 		else if(robot1Count < 48) {
 			dRobot1 = WEST;
-			if (willCollide(0, robot1, -.25, 0) == false) {
+			if (willCollide(0, -fabs(.25), 0) == false) {
 				robot1.x -= .25;
 				robot1Count++;
 			}
@@ -1422,14 +1466,15 @@ void timedStuff(int value) {
 	if(pewpew) {
 		switch(dPew) {
 			case NORTH:
-				if(willCollide(2, pew, 0, -.25)) {
+				if(willCollide(2, 0, -fabs(.25))) {
 					pewpew = false;
-					if(pewCollide(pew, robot1)) {
-						health--;
-						if(health <= 0)
-							destroyed = true;
-						pewD = .25;
+					health--;
+					if(health <= 0) {
+						if(!destroyed)
+							PlaySound("explode.wav",NULL,SND_FILENAME|SND_ASYNC);
+						destroyed = true;
 					}
+					pewD = .25;
 				}
 				else {
 					pewD += .25;
@@ -1438,14 +1483,15 @@ void timedStuff(int value) {
 				break;
 
 			case SOUTH:
-				if(willCollide(2, pew, 0, .25)) {
+				if(willCollide(2, 0, fabs(.25))) {
 					pewpew = false;
-					if(pewCollide(pew, robot1)) {
-						health--;
-						if(health <= 0)
-							destroyed = true;
-						pewD = .25;
+					health--;
+					if(health <= 0) {
+						if(!destroyed)
+							PlaySound("explode.wav",NULL,SND_FILENAME|SND_ASYNC);
+						destroyed = true;
 					}
+					pewD = .25;
 				}
 				else {
 					pewD += .25;
@@ -1454,14 +1500,15 @@ void timedStuff(int value) {
 				break;
 
 			case EAST:
-				if(willCollide(2, pew, .25, 0)) {
+				if(willCollide(2, fabs(.25), 0)) {
 					pewpew = false;
-					if(pewCollide(pew, robot1)) {
-						health--;
-						if(health <= 0)
-							destroyed = true;
-						pewD = .25;
+					health--;
+					if(health <= 0) {
+						if(!destroyed)
+							PlaySound("explode.wav",NULL,SND_FILENAME|SND_ASYNC);
+						destroyed = true;
 					}
+					pewD = .25;
 				}
 				else {
 					pewD += .25;
@@ -1470,14 +1517,15 @@ void timedStuff(int value) {
 				break;
 
 			case WEST:
-				if(willCollide(2, pew, -.25, 0)) {
+				if(willCollide(2, -fabs(.25), 0)) {
 					pewpew = false;
-					if(pewCollide(pew, robot1)) {
-						health--;
-						if(health <= 0)
-							destroyed = true;
-						pewD = .25;
+					health--;
+					if(health <= 0) {
+						if(!destroyed)
+							PlaySound("explode.wav",NULL,SND_FILENAME|SND_ASYNC);
+						destroyed = true;
 					}
+					pewD = .25;
 				}
 				else {
 					pewD += .25;
